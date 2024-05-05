@@ -1,61 +1,59 @@
-// ItemTable3.tsx
 import React, { useState } from 'react';
-import { jsPDF } from "jspdf";
+import { jsPDF } from 'jspdf';
+import logo from '../assets/logo.png';
 
 const ItemTable3: React.FC = () => {
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
-    const [selectedDate, setSelectedDate] = useState<string>('');
 
-    const generatePDF = () => {
+    const loadImage = (url: string, callback: (base64Img: string) => void): void => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                if (typeof reader.result === 'string') {  // Ensure result is a string
+                    callback(reader.result);
+                }
+            };
+            reader.readAsDataURL(xhr.response);
+        };
+        xhr.open('GET', url);
+        xhr.responseType = 'blob';
+        xhr.send();
+    };
+
+    const generatePDF = (): void => {
         const doc = new jsPDF();
 
-        doc.text(`First Name: ${firstName}`, 10, 10);
-        doc.text(`Last Name: ${lastName}`, 10, 20);
-        doc.text(`Selected Date: ${selectedDate}`, 10, 30);
+        loadImage(logo, (base64Img: string) => {
+            doc.addImage(base64Img, 'PNG', 80, 10, 55, 20); // Logo positioned and scaled
 
-        // Generate PDF data URI string
-        const string = doc.output('datauristring');
+            doc.setFontSize(12);
+            // Corrected the arguments for text alignment
+            doc.text('Wellcare Insurance', 105, 55, { align: 'center' });
+            doc.text('200 Town Centre Blvd Unit 101, Markham, ON L3R 8G5', 105, 65, { align: 'center' });
 
-        // Attempt to open a new window
-        const x = window.open();
-        if (x) {
-            const iframe = "<iframe width='100%' height='100%' src='" + string + "'></iframe>";
-            x.document.open();
-            x.document.write(iframe);
-            x.document.close();
-        } else {
-            // Handle the case where the window couldn't be opened
-            alert("Unable to open new window. Please check your popup settings.");
-        }
+            doc.setFontSize(10);
+            doc.text(`First Name: ${firstName}`, 105, 80, { align: 'center' });
+            doc.text(`Last Name: ${lastName}`, 105, 90, { align: 'center' });
+
+            const pdfDataUri = doc.output('datauristring');
+            const iframe = `<iframe width='100%' height='100%' src='${pdfDataUri}'></iframe>`;
+            const windowRef = window.open();
+            if (windowRef) {
+                windowRef.document.open();
+                windowRef.document.write(iframe);
+                windowRef.document.close();
+            } else {
+                alert("Popup blocked. Please allow popups for this site.");
+            }
+        });
     };
 
     return (
         <div>
-            <div>
-                <label>First Name:</label>
-                <input
-                    type="text"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                />
-            </div>
-            <div>
-                <label>Last Name:</label>
-                <input
-                    type="text"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                />
-            </div>
-            <div>
-                <label>Date:</label>
-                <input
-                    type="date"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                />
-            </div>
+            <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="First Name" />
+            <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Last Name" />
             <button onClick={generatePDF}>Generate PDF</button>
         </div>
     );
