@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import ItemTable1 from './ItemTable1';
 import ItemTable2 from './ItemTable2';
+import ItemTable3 from './ItemTable3';
 import NotExist from './NotExist';
 import './Checkout.css';
 
@@ -34,6 +35,8 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
             return <div style={{paddingTop: '100px'}}><ItemTable1 itemId={itemId} /></div>;
         } else if (index == 1) {
             return <div style={{paddingTop: '100px'}}><ItemTable2 itemId={itemId} /></div> ;
+        } else if (index == 2) {
+            return <div style={{paddingTop: '100px'}}><ItemTable3 /></div>;
         } else {
             return <NotExist />;
         }
