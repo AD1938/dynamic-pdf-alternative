@@ -32,18 +32,19 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
     const renderTable = (itemId: string) => {
         const index = parseInt(itemId.split(' ')[1]) - 1;
         if (index == 0) {
-            return <div style={{paddingTop: '100px'}}><ItemTable1 itemId={itemId} /></div>;
+            return <div style={{paddingTop: '30px'}}><ItemTable1 itemId={itemId} /></div>;
         } else if (index == 1) {
-            return <div style={{paddingTop: '100px'}}><ItemTable2 itemId={itemId} /></div> ;
+            return <div style={{paddingTop: '30px'}}><ItemTable2 itemId={itemId} /></div> ;
         } else if (index == 2) {
-            return <div style={{paddingTop: '100px'}}><ItemTable3 /></div>;
+            return <div style={{paddingTop: '30px'}}><ItemTable3 /></div>;
         } else {
             return <NotExist />;
         }
     };
 
     return (
-        <div className="checkout-container">
+        <div className="wide-container">
+            <h1>Auto Policy Change</h1>
             <div className="items-row">
                 {items.map((item, index) => (
                     <div key={index} className="item">

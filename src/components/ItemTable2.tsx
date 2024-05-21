@@ -1,6 +1,6 @@
 // ItemTable2.tsx
 import React, { useEffect, useState } from 'react';
-import './ItemTable2.css'; // Ensure your CSS path is correct
+import './ItemTable2.css';
 
 interface ItemTableProps {
     itemId: string;

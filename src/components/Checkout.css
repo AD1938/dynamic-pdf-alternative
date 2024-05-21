@@ -7,12 +7,16 @@
   padding: 20px;
 }
 
+body {
+  font-family: Arial, sans-serif; /* This sets the font family */
+  font-size: 16px; /* This sets the font size */
+}
+
 .items-row {
-  display: flex;
-  flex-wrap: wrap; /* Allows items to wrap to the next line */
-  justify-content: flex-start; /* Align items to the start of the flex container */
-  width: 100%;
-  gap: 10px; /* Space between each item */
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* This creates two columns */
+  grid-auto-rows: auto; /* This makes the rows size to content */
+  grid-gap: 10px; /* This adds some gap between the grid items */
 }
 
 .item {
@@ -34,4 +38,46 @@
 .item button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.checkout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 50px; /* Adjust as needed */
+}
+
+.menu {
+  display: flex;
+  gap: 10px;
+}
+
+.menu-label {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+}
+.menu-button {
+  /* Style your buttons here */
+}
+
+.wide-container {
+    width: 800px;
+    margin: 0 auto; /* This centers the container */
+}
+
+.center-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
