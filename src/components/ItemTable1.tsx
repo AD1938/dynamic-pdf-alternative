@@ -6,10 +6,14 @@ interface ItemTableProps {
     itemId: string;
 }
 
+interface NewDriver {
+    name: string;
+    insuranceCarrier: string;
+    policyNumber: string;
+}
+
 const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
     const [displayName, setDisplayName] = useState('');
-    const [selectedDate, setSelectedDate] = useState('');
-    const [selectedTime, setSelectedTime] = useState('');
     const [selectedEffectiveDate, setSelectedEffectiveDate] = useState('');
     const [newAddress, setNewAddress] = useState('');
     const [selectAddressChangeEffect, setSelectAddressChangeEffect] = useState('');
@@ -17,7 +21,8 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
     const [selectAddressChangeDriverEffect, setSelectAddressChangeDriverEffect] = useState('');
     const [addressChangeDriverEffect, setAddressChangeDriverEffect] = useState('');
     const [additionalNotes, setAdditionalNotes] = useState('');
-    const [selectedOption, setSelectedOption] = useState('A');
+    const [newDrivers, setNewDrivers] = useState<NewDriver[]>([]);
+    const [newDriverAdded, setNewDriverAdded] = useState(false);
     const [message, setMessage] = useState('');
 
     const localStorageKey = `itemTable1-${itemId}`;
@@ -27,8 +32,6 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
         if (data) {
             const savedData = JSON.parse(data);
             setDisplayName(savedData.displayName || '');
-            setSelectedDate(savedData.selectedDate || '');
-            setSelectedTime(savedData.selectedTime || '');
             setSelectedEffectiveDate(savedData.selectedEffectiveDate || '');
             setNewAddress(savedData.newAddress || '');
             setSelectAddressChangeEffect(savedData.selectAddressChangeEffect || '');
@@ -36,15 +39,14 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
             setSelectAddressChangeDriverEffect(savedData.selectAddressChangeDriverEffect || '');
             setAddressChangeDriverEffect(savedData.addressChangeDriverEffect || '');
             setAdditionalNotes(savedData.additionalNotes || '');
-            setSelectedOption(savedData.selectedOption || 'ABC');
+            setNewDrivers(savedData.newDrivers || []);
+            setNewDriverAdded(savedData.newDrivers && savedData.newDrivers.length > 0);
         }
-    }, [itemId]);  // Load data when itemId changes
+    }, [itemId]);
 
     const saveData = () => {
         const dataToSave = {
             displayName,
-            selectedDate,
-            selectedTime,
             selectedEffectiveDate,
             newAddress,
             selectAddressChangeEffect,
@@ -52,80 +54,67 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
             selectAddressChangeDriverEffect,
             addressChangeDriverEffect,
             additionalNotes,
-            selectedOption
+            newDrivers
         };
         localStorage.setItem(localStorageKey, JSON.stringify(dataToSave));
-        console.log("Data saved:", dataToSave); // Optional: for debugging
     };
 
-    // const handleTodayDate = () => {
-    //     const today = new Date().toISOString().split('T')[0];
-    //     setSelectedDate(today);
-    //     const currentTime = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
-    //     setSelectedTime(currentTime);
-    // };
+    const handleAddDriver = () => {
+        setNewDrivers([...newDrivers, { name: '', insuranceCarrier: '', policyNumber: '' }]);
+        setNewDriverAdded(true);
+    };
 
-    // const setAddressChangeEffect = (value: string) => {
-    //     console.log('Address change effect:', value);
-    //     if (value == 'yes') {
-    //         // show the following fields
+    const handleRemoveDriver = (index: number) => {
+        const updatedDrivers = newDrivers.filter((_, i) => i !== index);
+        setNewDrivers(updatedDrivers);
+    };
 
-    //     } else {
-    //         // hide the following fields
-    //     }
-    // };
+    const handleDriverChange = (index: number, field: string, value: string) => {
+        const updatedDrivers = newDrivers.map((driver, i) => {
+            if (i === index) {
+                return { ...driver, [field]: value };
+            }
+            return driver;
+        });
+        setNewDrivers(updatedDrivers);
+    };
 
-    const handleGenerate = async () => {
-        // setMessage(`${displayName} ${lastName} selects ${selectedOption} at the date of ${selectedDate}`);
-        const name = `Name: ${displayName}`;
-        // const datetime = `Date: ${selectedDate}` + ', ' + new Date(selectedDate + 'T' + selectedTime).toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: 'numeric', second: 'numeric' });
-        const now = new Date();
-        const date = now.toISOString().split('T')[0];
-        const time = now.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        const datetime = `Date: ${date}, ${time}`;
-        const effectiveDate = `Effective date of address change: ${selectedEffectiveDate}`
-        const strNewAddress = `New Address: ${newAddress}`;
-        
-        let addressChangeEffectStr = `Will this address change affect the usage and distance driven of any of the vehicles on the policy: ${selectAddressChangeEffect || 'no'}`;
-        if (selectAddressChangeEffect === 'yes') {
-            addressChangeEffectStr = `Change to use and distance driven: ${addressChangeEffect}`;            
+    const handleNewDriverSelection = (value: string) => {
+        if (value === "no") {
+            setNewDrivers([]);
+            setNewDriverAdded(false);
+        } else if (value === "yes" && newDrivers.length === 0) {
+            handleAddDriver();
         }
-        
-        let addressChangeDriverEffectStr = `Will the address change affect driver assignment on any of the vehicles: ${selectAddressChangeDriverEffect || 'no'}`;
-        if (selectAddressChangeDriverEffect === 'yes') {
-            addressChangeDriverEffectStr = `Please note any changes to driver assignment for all vehicles listed on the policy: ${addressChangeDriverEffect}`;
-        }
-        
-        const strAdditionalNotes = `Additional Notes: ${additionalNotes}`;
-        const message = `${name}\n${datetime}\n${effectiveDate}\n${strNewAddress}\n${addressChangeEffectStr}\n${addressChangeDriverEffectStr}\n${strAdditionalNotes}`;
+    };
+
+    const handleGenerate = () => {
+        const newDriversString = newDrivers.map(driver => 
+            `New Driver Name: ${driver.name}, Insurance Carrier: ${driver.insuranceCarrier}, Policy Number: ${driver.policyNumber}`).join('\n');
+        const message = `Name: ${displayName}\nEffective Date of Address Change: ${selectedEffectiveDate}\nNew Address: ${newAddress}\nAddress Change Effect: ${addressChangeEffect}\nDriver Assignment Change: ${addressChangeDriverEffect}\nAdditional Notes: ${additionalNotes}\nNew Drivers:\n${newDriversString}`;
         setMessage(message);
         saveData();
-
-        // Copy the message to the clipboard
         try {
-            await navigator.clipboard.writeText(message);
-            console.log('Message copied to clipboard');
+            navigator.clipboard.writeText(message);
         } catch (err) {
             console.error('Failed to copy message: ', err);
         }
     };
 
     const handleClear = () => {
-        console.log("Local storage cleared for key:", localStorageKey); // Optional: for debugging
         localStorage.removeItem(localStorageKey);
         setMessage('');
         setDisplayName('');
-        setSelectedDate('');
-        setSelectedTime('');
         setSelectedEffectiveDate('');
+        setNewAddress('');
         setSelectAddressChangeEffect('');
         setAddressChangeEffect('');
         setSelectAddressChangeDriverEffect('');
         setAddressChangeDriverEffect('');
-        setNewAddress('');
         setAdditionalNotes('');
+        setNewDrivers([]);
+        setNewDriverAdded(false);
     };
-
     return (
         <div className="containerItemTable1">
             <label className="label">Who called/emailed:</label>
@@ -172,7 +161,44 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
                     style={{ width: '100%', padding: '8px', marginTop: '10px' }}
                 />
             </div>
-
+            <label className="label">Are there any new drivers in the household?</label>
+            <div className="column">
+                <div>
+                    <input type="radio" id="yesNewDriver" name="newDriver" value="yes" onChange={(e) => handleNewDriverSelection(e.target.value)} />
+                    <label htmlFor="yesNewDriver">Yes</label>
+                </div>
+                <div>
+                    <input type="radio" id="noNewDriver" name="newDriver" value="no" onChange={(e) => handleNewDriverSelection(e.target.value)} defaultChecked />
+                    <label htmlFor="noNewDriver">No</label>
+                </div>
+            </div>
+            {newDriverAdded && (
+                <div>
+                    <p style={{ color: 'red' }}>All drivers in household must be insured under OAP1</p>
+                    <label>Please provide drivers insurance information:</label>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>New Driver Name</th>
+                                <th>Insurance Carrier</th>
+                                <th>Policy Number</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {newDrivers.map((driver, index) => (
+                                <tr key={index}>
+                                    <td><input type="text" value={driver.name} onChange={(e) => handleDriverChange(index, 'name', e.target.value)} /></td>
+                                    <td><input type="text" value={driver.insuranceCarrier} onChange={(e) => handleDriverChange(index, 'insuranceCarrier', e.target.value)} /></td>
+                                    <td><input type="text" value={driver.policyNumber} onChange={(e) => handleDriverChange(index, 'policyNumber', e.target.value)} /></td>
+                                    <td><button onClick={() => handleRemoveDriver(index)}>X</button></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <button onClick={handleAddDriver}>Add another new driver</button>
+                </div>
+            )}
             <label className="row">Will this address change affect the usage and distance driven of any of the vehicles on the policy?</label>
             <div className="">
                 <div>
