@@ -58,12 +58,12 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
         console.log("Data saved:", dataToSave); // Optional: for debugging
     };
 
-    const handleTodayDate = () => {
-        const today = new Date().toISOString().split('T')[0];
-        setSelectedDate(today);
-        const currentTime = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
-        setSelectedTime(currentTime);
-    };
+    // const handleTodayDate = () => {
+    //     const today = new Date().toISOString().split('T')[0];
+    //     setSelectedDate(today);
+    //     const currentTime = new Date().toLocaleTimeString('en-US', { hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
+    //     setSelectedTime(currentTime);
+    // };
 
     // const setAddressChangeEffect = (value: string) => {
     //     console.log('Address change effect:', value);
