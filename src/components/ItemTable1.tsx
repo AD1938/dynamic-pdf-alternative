@@ -7,12 +7,15 @@ interface ItemTableProps {
 }
 
 const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [displayName, setDisplayName] = useState('');
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedTime, setSelectedTime] = useState('');
     const [selectedEffectiveDate, setSelectedEffectiveDate] = useState('');
     const [newAddress, setNewAddress] = useState('');
+    const [selectAddressChangeEffect, setSelectAddressChangeEffect] = useState('');
+    const [addressChangeEffect, setAddressChangeEffect] = useState('');
+    const [selectAddressChangeDriverEffect, setSelectAddressChangeDriverEffect] = useState('');
+    const [addressChangeDriverEffect, setAddressChangeDriverEffect] = useState('');
     const [additionalNotes, setAdditionalNotes] = useState('');
     const [selectedOption, setSelectedOption] = useState('A');
     const [message, setMessage] = useState('');
@@ -23,12 +26,15 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
         const data = localStorage.getItem(localStorageKey);
         if (data) {
             const savedData = JSON.parse(data);
-            setFirstName(savedData.firstName || '');
-            setLastName(savedData.lastName || '');
+            setDisplayName(savedData.displayName || '');
             setSelectedDate(savedData.selectedDate || '');
             setSelectedTime(savedData.selectedTime || '');
             setSelectedEffectiveDate(savedData.selectedEffectiveDate || '');
             setNewAddress(savedData.newAddress || '');
+            setSelectAddressChangeEffect(savedData.selectAddressChangeEffect || '');
+            setAddressChangeEffect(savedData.addressChangeEffect || '');
+            setSelectAddressChangeDriverEffect(savedData.selectAddressChangeDriverEffect || '');
+            setAddressChangeDriverEffect(savedData.addressChangeDriverEffect || '');
             setAdditionalNotes(savedData.additionalNotes || '');
             setSelectedOption(savedData.selectedOption || 'ABC');
         }
@@ -36,12 +42,15 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
 
     const saveData = () => {
         const dataToSave = {
-            firstName,
-            lastName,
+            displayName,
             selectedDate,
             selectedTime,
             selectedEffectiveDate,
             newAddress,
+            selectAddressChangeEffect,
+            addressChangeEffect,
+            selectAddressChangeDriverEffect,
+            addressChangeDriverEffect,
             additionalNotes,
             selectedOption
         };
@@ -56,14 +65,39 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
         setSelectedTime(currentTime);
     };
 
+    // const setAddressChangeEffect = (value: string) => {
+    //     console.log('Address change effect:', value);
+    //     if (value == 'yes') {
+    //         // show the following fields
+
+    //     } else {
+    //         // hide the following fields
+    //     }
+    // };
+
     const handleGenerate = async () => {
-        // setMessage(`${firstName} ${lastName} selects ${selectedOption} at the date of ${selectedDate}`);
-        const name = `Name: ${firstName} ${lastName}`;
-        const datetime = `Date: ${selectedDate}` + ', ' + new Date(selectedDate + 'T' + selectedTime).toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: 'numeric', second: 'numeric' });
+        // setMessage(`${displayName} ${lastName} selects ${selectedOption} at the date of ${selectedDate}`);
+        const name = `Name: ${displayName}`;
+        // const datetime = `Date: ${selectedDate}` + ', ' + new Date(selectedDate + 'T' + selectedTime).toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: 'numeric', second: 'numeric' });
+        const now = new Date();
+        const date = now.toISOString().split('T')[0];
+        const time = now.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const datetime = `Date: ${date}, ${time}`;
         const effectiveDate = `Effective date of address change: ${selectedEffectiveDate}`
         const strNewAddress = `New Address: ${newAddress}`;
+        
+        let addressChangeEffectStr = `Will this address change affect the usage and distance driven of any of the vehicles on the policy: ${selectAddressChangeEffect || 'no'}`;
+        if (selectAddressChangeEffect === 'yes') {
+            addressChangeEffectStr = `Change to use and distance driven: ${addressChangeEffect}`;            
+        }
+        
+        let addressChangeDriverEffectStr = `Will the address change affect driver assignment on any of the vehicles: ${selectAddressChangeDriverEffect || 'no'}`;
+        if (selectAddressChangeDriverEffect === 'yes') {
+            addressChangeDriverEffectStr = `Please note any changes to driver assignment for all vehicles listed on the policy: ${addressChangeDriverEffect}`;
+        }
+        
         const strAdditionalNotes = `Additional Notes: ${additionalNotes}`;
-        const message = `${name}\n${datetime}\n${effectiveDate}\n${strNewAddress}\n${strAdditionalNotes}`;
+        const message = `${name}\n${datetime}\n${effectiveDate}\n${strNewAddress}\n${addressChangeEffectStr}\n${addressChangeDriverEffectStr}\n${strAdditionalNotes}`;
         setMessage(message);
         saveData();
 
@@ -80,38 +114,30 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
         console.log("Local storage cleared for key:", localStorageKey); // Optional: for debugging
         localStorage.removeItem(localStorageKey);
         setMessage('');
-        setFirstName('');
-        setLastName('');
+        setDisplayName('');
         setSelectedDate('');
         setSelectedTime('');
         setSelectedEffectiveDate('');
+        setSelectAddressChangeEffect('');
+        setAddressChangeEffect('');
+        setSelectAddressChangeDriverEffect('');
+        setAddressChangeDriverEffect('');
         setNewAddress('');
         setAdditionalNotes('');
     };
 
     return (
         <div className="containerItemTable1">
+            <label className="label">Who called/emailed:</label>
             <div className="row">
-                <div>
-                    <label className="label">First Name:</label>
-                    <input
-                        className="input input-short"
-                        type="text"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label className="label">Last Name:</label>
-                    <input
-                        className="input input-short"
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                    />
-                </div>
+                <input
+                    className="input input-short"
+                    type="text"
+                    value={displayName}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                />
             </div>
-            <label className="label">Date:</label>
+            {/* <label className="label">Date:</label>
             <div className="row">
                 <input
                     className="input"
@@ -126,7 +152,7 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
                     onChange={(e) => setSelectedTime(e.target.value)}
                 />
                 <button className="button button-margin" onClick={handleTodayDate}>Today & Now</button>
-            </div>
+            </div> */}
             <label className="label">Effective date of address change:</label>
             <div className="row">
                 <input
@@ -147,15 +173,15 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
                 />
             </div>
 
-            {/* <label className="row">Will this address change affect the usage and distance driven of any of the vehicles on the policy?</label>
+            <label className="row">Will this address change affect the usage and distance driven of any of the vehicles on the policy?</label>
             <div className="">
                 <div>
                     <input
                         type="radio"
                         id="yes"
-                        name="addressChangeEffect"
+                        name="selectAddressChangeEffect"
                         value="yes"
-                        onChange={(e) => setAddressChangeEffect(e.target.value)}
+                        onChange={(e) => setSelectAddressChangeEffect(e.target.value)}
                     />
                     <label htmlFor="yes">Yes</label>
                 </div>
@@ -163,14 +189,66 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
                     <input
                         type="radio"
                         id="no"
-                        name="addressChangeEffect"
+                        name="selectAddressChangeEffect"
                         value="no"
-                        onChange={(e) => setAddressChangeEffect(e.target.value)}
+                        onChange={(e) => setSelectAddressChangeEffect(e.target.value)}
                         defaultChecked
                     />
                     <label htmlFor="no">No</label>
                 </div>
-            </div> */}
+                {selectAddressChangeEffect === 'yes' && (
+                    <div id="addressChangeEffectDiv">
+                        <label className="">Note any change in use (i.e. pleasure, commute, business) and distance driven for all vehicles on the policy:</label>
+                        <div className="row label">
+                            <textarea
+                                className='input'
+                                value={addressChangeEffect}
+                                onChange={(e) => setAddressChangeEffect(e.target.value)}
+                                style={{ width: '100%', padding: '8px', marginTop: '10px' }}
+                            />
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            <label className="row">Will the address change affect driver assignment on any of the vehicles?</label>
+            <div className="">
+                <div>
+                    <input
+                        type="radio"
+                        id="yesDriver"
+                        name="selectAddressChangeDriverEffect"
+                        value="yes"
+                        onChange={(e) => setSelectAddressChangeDriverEffect(e.target.value)}
+                    />
+                    <label htmlFor="yesDriver">Yes</label>
+                </div>
+                <div>
+                    <input
+                        type="radio"
+                        id="noDriver"
+                        name="selectAddressChangeDriverEffect"
+                        value="no"
+                        onChange={(e) => setSelectAddressChangeDriverEffect(e.target.value)}
+                        defaultChecked
+                    />
+                    <label htmlFor="noDriver">No</label>
+                </div>
+                {selectAddressChangeDriverEffect === 'yes' && (
+                    <div id="addressChangeDriverEffectDiv">
+                        <label className="">Please note any changes to driver assignment for all vehicles listed on the policy:</label>
+                        <div className="row label">
+                            <textarea
+                                className='input'
+                                value={addressChangeDriverEffect}
+                                onChange={(e) => setAddressChangeDriverEffect(e.target.value)}
+                                style={{ width: '100%', padding: '8px', marginTop: '10px' }}
+                            />
+                        </div>
+                    </div>
+                )}
+            </div>
+
             <label className="">Additional Notes:</label>
             <div className="row label">
                 <textarea
