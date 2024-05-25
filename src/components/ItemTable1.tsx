@@ -115,8 +115,9 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
         setNewDrivers([]);
         setNewDriverAdded(false);
     };
+    
     return (
-        <div className="containerItemTable1">
+        <div className="containerItemTable1" style={{ backgroundColor: 'white', color: 'black' }}>
             <label className="label">Who called/emailed:</label>
             <div className="row">
                 <input
@@ -126,22 +127,7 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
                     onChange={(e) => setDisplayName(e.target.value)}
                 />
             </div>
-            {/* <label className="label">Date:</label>
-            <div className="row">
-                <input
-                    className="input"
-                    type="date"
-                    value={selectedDate.split('T')[0]}
-                    onChange={(e) => setSelectedDate(e.target.value + 'T' + selectedTime)}
-                />
-                <input
-                    className="input button-margin"
-                    type="time"
-                    value={selectedTime}
-                    onChange={(e) => setSelectedTime(e.target.value)}
-                />
-                <button className="button button-margin" onClick={handleTodayDate}>Today & Now</button>
-            </div> */}
+
             <label className="label">Effective date of address change:</label>
             <div className="row">
                 <input
@@ -151,7 +137,7 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
                     onChange={(e) => setSelectedEffectiveDate(e.target.value)}
                 />
             </div>
-            <label className="">New Address:</label>
+            <label className="newAddress">New Address:</label>
             <div className="row label">
                 <input
                     className='input'
@@ -162,7 +148,7 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
                 />
             </div>
             <label className="label">Are there any new drivers in the household?</label>
-            <div className="column">
+            <div className="yesNo">
                 <div>
                     <input type="radio" id="yesNewDriver" name="newDriver" value="yes" onChange={(e) => handleNewDriverSelection(e.target.value)} />
                     <label htmlFor="yesNewDriver">Yes</label>
@@ -175,8 +161,8 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
             {newDriverAdded && (
                 <div>
                     <p style={{ color: 'red' }}>All drivers in household must be insured under OAP1</p>
-                    <label>Please provide drivers insurance information:</label>
-                    <table>
+                    <div style={{marginTop: '20px', marginBottom: '20px'}}><label>Please provide drivers insurance information:</label></div>
+                    <table style={{marginBottom: '20px'}}>
                         <thead>
                             <tr>
                                 <th>New Driver Name</th>
@@ -196,11 +182,15 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
                             ))}
                         </tbody>
                     </table>
-                    <button onClick={handleAddDriver}>Add another new driver</button>
+                    <button onClick={handleAddDriver} style={{marginRight: '30px', backgroundColor: 'white', color: 'black', border: '1px solid black', padding: '10px 20px', borderRadius: '4px', cursor: 'pointer' }}>Add another new driver</button>
+
                 </div>
             )}
-            <label className="row">Will this address change affect the usage and distance driven of any of the vehicles on the policy?</label>
-            <div className="">
+            <div style={{marginTop:'30px', marginBottom:'10px'}}>
+            <label className="question-block" >Will this address change affect the usage and distance driven of any of the vehicles on the policy?</label>
+            </div>
+          
+            <div className="yesNo">
                 <div>
                     <input
                         type="radio"
@@ -222,6 +212,8 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
                     />
                     <label htmlFor="no">No</label>
                 </div>
+            </div>
+            <div style={{marginTop: '30px'}}>
                 {selectAddressChangeEffect === 'yes' && (
                     <div id="addressChangeEffectDiv">
                         <label className="">Note any change in use (i.e. pleasure, commute, business) and distance driven for all vehicles on the policy:</label>
@@ -235,10 +227,12 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
                         </div>
                     </div>
                 )}
-            </div>
 
-            <label className="row">Will the address change affect driver assignment on any of the vehicles?</label>
-            <div className="">
+            </div>
+            <div style={{marginTop:'30px', marginBottom:'10px'}}>
+            <label className="question-block">Will the address change affect driver assignment on any of the vehicles?</label>
+            </div>
+            <div className="yesNo">
                 <div>
                     <input
                         type="radio"
@@ -260,6 +254,8 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
                     />
                     <label htmlFor="noDriver">No</label>
                 </div>
+            </div>
+            <div style={{marginTop: '30px'}}>
                 {selectAddressChangeDriverEffect === 'yes' && (
                     <div id="addressChangeDriverEffectDiv">
                         <label className="">Please note any changes to driver assignment for all vehicles listed on the policy:</label>
@@ -274,8 +270,9 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
                     </div>
                 )}
             </div>
-
-            <label className="">Additional Notes:</label>
+            <div style={{marginTop:'30px'}}>
+            <label className="additionalNotes">Additional Notes:</label>
+            </div>
             <div className="row label">
                 <textarea
                     className='input'
@@ -284,26 +281,16 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
                     style={{ width: '100%', padding: '8px', marginTop: '10px' }}
                 />
             </div>
-            {/* <div>
-                <label className="label">Select Option:</label>
-                <select className="select" value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                </select>
-            </div> */}
-            {/* <div>
-                <button className="button" onClick={saveData}>Save</button>
-            </div> */}
-            <div>
-                <button className="button" onClick={handleGenerate}>Generate & Copy</button>
-            </div>
-            {/* {message && <p className="message">{message}</p>} */}
+
+
+                <button onClick={handleGenerate} style={{marginRight: '30px', backgroundColor: 'white', color: 'black', border: '1px solid black', padding: '10px 20px', borderRadius: '4px', cursor: 'pointer' }}>Generate & Copy</button>
+
+
             {message && <pre className="message">{message}</pre>}
             
-            <div>
-                <button className="button" onClick={handleClear}>Clear</button>
-            </div>
+
+                <button onClick={handleClear} style={{ backgroundColor: 'white', color: 'black', border: '1px solid black', padding: '10px 20px', borderRadius: '4px', cursor: 'pointer' }}>Clear</button>
+
         </div>
     );
 };
