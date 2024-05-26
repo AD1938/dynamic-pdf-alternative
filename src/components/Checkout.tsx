@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import ItemTable1 from './ItemTable1';
 import ItemTable2 from './ItemTable2';
-import ItemTable3 from './ItemTable3';
+// import ItemTable3 from './ItemTable3';
 import UITest from './UITest';
 import NotExist from './NotExist';
 import './Checkout.css';
+import { Container, Typography, Checkbox, FormControlLabel, Button, Box } from '@mui/material';
 
 interface CheckoutProps {
     items: string[];
@@ -36,8 +37,6 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
             return <ItemTable1 itemId={itemId} />;
         } else if (index == 1) {
             return <ItemTable2 itemId={itemId} />;
-        } else if (index == 2) {
-            return <ItemTable3 />;
         } else if (index == 11) {
             return <UITest itemId={itemId} />;
         } else {
@@ -46,29 +45,37 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
     };
 
     return (
-        <div className="wide-container">
-            <h1>Auto Policy Change</h1>
-            <div className="items-row">
-                {items.map((item, index) => (
-                    <div key={index} className="item">
-                        <input
-                            type="checkbox"
-                            id={`checkbox-${index}`}
-                            checked={checkedItems[index]}
-                            onChange={() => handleCheckboxChange(index)}
-                        />
-                        <label htmlFor={`checkbox-${index}`}>{item}</label>
-                        <button
-                            disabled={!checkedItems[index]}
-                            onClick={() => handleEditClick(index)}
-                        >
-                            Edit
-                        </button>
-                    </div>
-                ))}
-            </div>
-            {selectedItemId && renderTable(selectedItemId)}
-        </div>
+
+    <Container maxWidth="md" sx={{ marginTop: 2 }}>
+      <Typography variant="h4" gutterBottom>
+        Auto Policy Change
+      </Typography>
+      <Box display="flex" flexDirection="column" gap={2}>
+        {items.map((item, index) => (
+          <Box key={index} display="flex" alignItems="center">
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={checkedItems[index]}
+                  onChange={() => handleCheckboxChange(index)}
+                  id={`checkbox-${index}`}
+                />
+              }
+              label={item}
+              sx={{ marginRight: 10}}
+            />
+            <Button
+              variant="outlined"
+              disabled={!checkedItems[index]}
+              onClick={() => handleEditClick(index)}
+            >
+              Edit
+            </Button>
+          </Box>
+        ))}
+      </Box>
+      {selectedItemId && renderTable(selectedItemId)}
+    </Container>
     );
 };
 

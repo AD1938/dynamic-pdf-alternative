@@ -2,6 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import './ItemTable1.css';
 import { TextField, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Button, TextareaAutosize, FormGroup } from '@mui/material';
+import {
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+  Paper, Box
+} from '@mui/material';
 
 interface ItemTableProps {
     itemId: string;
@@ -129,7 +133,18 @@ const UITest: React.FC<ItemTableProps> = ({ itemId }) => {
     };
     
     return (
-      <div style={{ padding: '20px', backgroundColor: 'white' }}>
+      <Paper
+      sx={{
+        backgroundColor: '#white',
+        borderRadius: '8px',
+        p: '30px', // shorthand for padding
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        fontFamily: 'Arial, sans-serif',
+        maxWidth: '800px',
+        mx: 'auto', // shorthand for margin left and right auto
+        my: 2 // shorthand for margin top and bottom 20px
+      }}
+    >
 
         <FormControl fullWidth margin="normal">
           <FormLabel style={TitleStyle}>Who called/emailed:</FormLabel>
@@ -183,32 +198,66 @@ const UITest: React.FC<ItemTableProps> = ({ itemId }) => {
       </FormControl>
 
       {newDriverAdded && (
-          <div>
-          <p style={{ color: 'red' }}>All drivers in household must be insured under OAP1</p>
-          <FormLabel>Please provide drivers insurance information:</FormLabel>
-              <table style={{marginBottom: '20px'}}>
-                  <thead>
-                      <tr>
-                          <th>New Driver Name</th>
-                          <th>Insurance Carrier</th>
-                          <th>Policy Number</th>
-                          <th></th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      {newDrivers.map((driver, index) => (
-                          <tr key={index}>
-                              <td><input type="text" value={driver.name} onChange={(e) => handleDriverChange(index, 'name', e.target.value)} /></td>
-                              <td><input type="text" value={driver.insuranceCarrier} onChange={(e) => handleDriverChange(index, 'insuranceCarrier', e.target.value)} /></td>
-                              <td><input type="text" value={driver.policyNumber} onChange={(e) => handleDriverChange(index, 'policyNumber', e.target.value)} /></td>
-                              <td><button onClick={() => handleRemoveDriver(index)}>X</button></td>
-                          </tr>
-                      ))}
-                  </tbody>
-              </table>
-              <Button onClick={handleAddDriver} variant="outlined" style={{ margin: '20px 0' }}>Add another new driver</Button>
-            </div>
-
+             <TableContainer component={Paper} style={{ marginBottom: '20px' }}>
+             <Table>
+               <TableHead>
+                 <TableRow>
+                   <TableCell>New Driver Name</TableCell>
+                   <TableCell>Insurance Carrier</TableCell>
+                   <TableCell>Policy Number</TableCell>
+                   <TableCell>Action</TableCell>
+                 </TableRow>
+               </TableHead>
+               <TableBody>
+                 {newDrivers.map((driver, index) => (
+                   <TableRow key={index}>
+                     <TableCell>
+                       <TextField
+                         fullWidth
+                         variant="outlined"
+                         value={driver.name}
+                         onChange={(e) => handleDriverChange(index, 'name', e.target.value)}
+                       />
+                     </TableCell>
+                     <TableCell>
+                       <TextField
+                         fullWidth
+                         variant="outlined"
+                         value={driver.insuranceCarrier}
+                         onChange={(e) => handleDriverChange(index, 'insuranceCarrier', e.target.value)}
+                       />
+                     </TableCell>
+                     <TableCell>
+                       <TextField
+                         fullWidth
+                         variant="outlined"
+                         value={driver.policyNumber}
+                         onChange={(e) => handleDriverChange(index, 'policyNumber', e.target.value)}
+                       />
+                     </TableCell>
+                     <TableCell>
+                       <Button
+                         color="error"
+                         variant="contained"
+                         onClick={() => handleRemoveDriver(index)}
+                       >
+                         Remove
+                       </Button>
+                     </TableCell>
+                   </TableRow>
+                 ))}
+               </TableBody>
+             </Table>
+             <Button
+              variant="contained"
+              color="primary"
+              onClick={handleAddDriver}
+              style={{ marginTop: '30px' }}
+             >
+              Add New Driver
+            </Button> 
+           </TableContainer>
+   
         )}
 
       <FormControl component="fieldset" margin="normal">
@@ -297,10 +346,22 @@ const UITest: React.FC<ItemTableProps> = ({ itemId }) => {
 
 
       <Button onClick={handleGenerate} variant="contained" color="primary" style={{ marginRight: '50px',  marginTop:'20px'}}>Generate & Copy</Button>
-      {message && <pre>{message}</pre>}
+      { message && (
+      <Box
+        sx={{
+          backgroundColor: '#e8f5e9', // Light blue background color
+          color: 'black', // White text color
+          // borderLeft: '5px solid #0056b3', // Solid blue border on the left
+          padding: '15px', // Padding around the content
+          fontFamily: 'monospace', // Monospace font for the content
+          whiteSpace: 'pre-wrap' // Preserves formatting and allows wrapping
+        }}
+      >
+        {message}
+      </Box>)}
       <Button onClick={handleClear} variant="contained" color="primary" style={{marginTop: '20px'}}>Clear</Button>
 
-        </div>
+    </Paper>
     );
 };
 
