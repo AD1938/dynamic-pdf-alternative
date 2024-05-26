@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ItemTable1 from './ItemTable1';
 import ItemTable2 from './ItemTable2';
 import ItemTable3 from './ItemTable3';
+import UITest from './UITest';
 import NotExist from './NotExist';
 import './Checkout.css';
 
@@ -32,11 +33,13 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
     const renderTable = (itemId: string) => {
         const index = parseInt(itemId.split(' ')[1]) - 1;
         if (index == 0) {
-            return <div style={{paddingTop: '30px'}}><ItemTable1 itemId={itemId} /></div>;
+            return <ItemTable1 itemId={itemId} />;
         } else if (index == 1) {
-            return <div style={{paddingTop: '30px'}}><ItemTable2 itemId={itemId} /></div> ;
+            return <ItemTable2 itemId={itemId} />;
         } else if (index == 2) {
-            return <div style={{paddingTop: '30px'}}><ItemTable3 /></div>;
+            return <ItemTable3 />;
+        } else if (index == 11) {
+            return <UITest itemId={itemId} />;
         } else {
             return <NotExist />;
         }

@@ -17,6 +17,7 @@ body {
   grid-template-columns: repeat(1, 1fr); /* This creates two columns */
   grid-auto-rows: auto; /* This makes the rows size to content */
   grid-gap: 10px; /* This adds some gap between the grid items */
+  padding-bottom: 30px
 }
 
 .item {
@@ -59,9 +60,7 @@ body {
   font-family: Arial, sans-serif;
   font-size: 20px;
 }
-.menu-button {
-  /* Style your buttons here */
-}
+
 
 .wide-container {
     width: 800px;

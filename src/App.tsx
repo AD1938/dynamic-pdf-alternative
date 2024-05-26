@@ -14,6 +14,7 @@ function App() {
     'Amend Coverage',
     'Amend Rating or License Class',
     'Adding Discount',
+    'UI Test'
   ];
   return (
     <>
