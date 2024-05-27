@@ -1,6 +1,11 @@
 import Checkout from './components/Checkout';
+import CheckoutGeneral from './components/CheckoutGeneral';
 
 function App() {
+
+  const generalNoteItems = [
+    'Generate Note'
+  ];
 
   const autoPolicyItems = [
     'Address Change',
@@ -14,7 +19,7 @@ function App() {
     'Amend Coverage',
     'Amend Rating or License Class',
     'Adding Discount',
-    'UI Test'
+    // 'UI Test'
   ];
   return (
     <>
@@ -25,7 +30,8 @@ function App() {
         </nav>
       </header>
       <div style={{ height: '50px' }}></div>
-     <Checkout items={autoPolicyItems}/>
+      <CheckoutGeneral items={generalNoteItems}/>
+      <Checkout items={autoPolicyItems}/>
 
     </>
   )
