@@ -28,43 +28,46 @@ const ItemTable0: React.FC<ItemTableProps> = ({ itemId }) => {
     const [selectNewDrivers, setSelectNewDrivers] = useState('');
     const [additionalNotes, setAdditionalNotes] = useState('');
     const [newDrivers, setNewDrivers] = useState<NewDriver[]>([]);
+    const [noNewDriverEffect, setNoNewDriverEffect] = useState('');
     const [newDriverAdded, setNewDriverAdded] = useState(false);
     const [message, setMessage] = useState('');
 
     const localStorageKey = `itemTable0-${itemId}`;
 
     useEffect(() => {
-        const data = localStorage.getItem(localStorageKey);
-        if (data) {
-            const savedData = JSON.parse(data);
-            setDisplayName(savedData.displayName || '');
-            setSelectedEffectiveDate(savedData.selectedEffectiveDate || '');
-            setNewAddress(savedData.newAddress || '');
-            setSelectAddressChangeEffect(savedData.selectAddressChangeEffect || '');
-            setAddressChangeEffect(savedData.addressChangeEffect || '');
-            setSelectAddressChangeDriverEffect(savedData.selectAddressChangeDriverEffect || '');
-            setAddressChangeDriverEffect(savedData.addressChangeDriverEffect || '');
-            setAdditionalNotes(savedData.additionalNotes || '');
-            setSelectNewDrivers(savedData.selectNewDrivers || '');
-            setNewDrivers(savedData.newDrivers || []);
-            setNewDriverAdded(savedData.newDrivers && savedData.newDrivers.length > 0);
-        }
+      const data = localStorage.getItem(localStorageKey);
+      if (data) {
+        const savedData = JSON.parse(data);
+        setDisplayName(savedData.displayName || '');
+        setSelectedEffectiveDate(savedData.selectedEffectiveDate || '');
+        setNewAddress(savedData.newAddress || '');
+        setSelectAddressChangeEffect(savedData.selectAddressChangeEffect || '');
+        setAddressChangeEffect(savedData.addressChangeEffect || '');
+        setSelectAddressChangeDriverEffect(savedData.selectAddressChangeDriverEffect || '');
+        setAddressChangeDriverEffect(savedData.addressChangeDriverEffect || '');
+        setAdditionalNotes(savedData.additionalNotes || '');
+        setSelectNewDrivers(savedData.selectNewDrivers || '');
+        setNewDrivers(savedData.newDrivers || []);
+        setNoNewDriverEffect(savedData.noNewDriverEffect || '');
+        setNewDriverAdded(savedData.newDrivers && savedData.newDrivers.length > 0);
+      }
     }, [itemId, localStorageKey]);
 
     const saveData = () => {
-        const dataToSave = {
-            displayName,
-            selectedEffectiveDate,
-            newAddress,
-            selectAddressChangeEffect,
-            addressChangeEffect,
-            selectNewDrivers,
-            selectAddressChangeDriverEffect,
-            addressChangeDriverEffect,
-            additionalNotes,
-            newDrivers
-        };
-        localStorage.setItem(localStorageKey, JSON.stringify(dataToSave));
+      const dataToSave = {
+        displayName,
+        selectedEffectiveDate,
+        newAddress,
+        selectAddressChangeEffect,
+        addressChangeEffect,
+        selectNewDrivers,
+        selectAddressChangeDriverEffect,
+        addressChangeDriverEffect,
+        additionalNotes,
+        newDrivers,
+        noNewDriverEffect
+      };
+      localStorage.setItem(localStorageKey, JSON.stringify(dataToSave));
     };
     
     const handleAddDriver = () => {
@@ -111,8 +114,9 @@ const ItemTable0: React.FC<ItemTableProps> = ({ itemId }) => {
 
         message += `\nAre there any new drivers in the household: ${selectNewDrivers}`;
         if (selectNewDrivers === 'yes') {
-            // message += `\nDriver Assignment Change: ${addressChangeDriverEffect}`;
             message += `\nNew Drivers:\n${newDriversString}`;
+        } else {
+            message += `\nDetails as to why driver not being added: ${noNewDriverEffect}`;
         }
         message += `\n`;
         message += `\nWill the address change affect driver assignment on any of the vehicles: ${selectAddressChangeDriverEffect}`;
@@ -120,7 +124,6 @@ const ItemTable0: React.FC<ItemTableProps> = ({ itemId }) => {
             message += `\nPlease note any changes to driver assignment for all vehicles listed on the policy: ${addressChangeDriverEffect}`;
         }
 
-        // message += `\nDriver Assignment Change: ${addressChangeDriverEffect}`;
         message += `\nAdditional Notes: ${additionalNotes}`;
 
         setMessage(message);
@@ -145,6 +148,7 @@ const ItemTable0: React.FC<ItemTableProps> = ({ itemId }) => {
       setAdditionalNotes('');
       setSelectNewDrivers('');
       setNewDrivers([]);
+      setNoNewDriverEffect('');
       setNewDriverAdded(false);
     };
     
@@ -215,7 +219,7 @@ const ItemTable0: React.FC<ItemTableProps> = ({ itemId }) => {
       </FormControl>
           
       {selectAddressChangeEffect === 'yes' && (
-        <FormControl fullWidth margin="normal">
+        <FormControl>
           <FormLabel className='titleStyle'>Note any change in use (i.e., pleasure, commute, business) and distance driven for all vehicles on the policy:</FormLabel>
           <TextareaAutosize
             minRows={3}
@@ -245,7 +249,19 @@ const ItemTable0: React.FC<ItemTableProps> = ({ itemId }) => {
           />
         </RadioGroup>
       </FormControl>
-
+      
+      {selectNewDrivers === 'no' && (
+        <FormControl fullWidth margin="normal">
+          <FormLabel className='titleStyle'>Details as to why driver not being added:</FormLabel>
+          <TextareaAutosize
+            minRows={3}
+            value={noNewDriverEffect}
+            onChange={(e) => setNoNewDriverEffect(e.target.value)}
+            style={{ width: '100%' }}
+          />
+        </FormControl>
+      )}
+      
       {newDriverAdded && (
              <TableContainer component={Paper} style={{ marginBottom: '20px' }}>
              <Table>
@@ -301,12 +317,11 @@ const ItemTable0: React.FC<ItemTableProps> = ({ itemId }) => {
               variant="contained"
               color="primary"
               onClick={handleAddDriver}
-              style={{ marginTop: '30px' }}
+              style={{ marginTop: '10px' }}
              >
               Add New Driver
             </Button> 
            </TableContainer>
-   
         )}
 
       <FormControl component="fieldset" margin="normal">
@@ -331,7 +346,7 @@ const ItemTable0: React.FC<ItemTableProps> = ({ itemId }) => {
       </FormControl>
           
       {selectAddressChangeDriverEffect === 'yes' && (
-        <FormControl fullWidth margin="normal">
+        <FormControl>
           <FormLabel className='titleStyle'>Please note any changes to driver assignment for all vehicles listed on the policy:</FormLabel>
           <TextareaAutosize
             minRows={3}

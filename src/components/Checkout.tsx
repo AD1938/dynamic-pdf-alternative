@@ -37,6 +37,8 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
         if (index == 0) {
             return <ItemTable0 itemId={itemId} />;
         } else if (index == 1) {
+            return <ItemTable1 itemId={itemId} />;
+        } else if (index == 2) {
             return <ItemTable2 itemId={itemId} />;
         } else if (index == 11) {
             return <UITest itemId={itemId} />;
@@ -51,7 +53,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
       <Typography variant="h4" gutterBottom>
         Auto Policy Change
       </Typography>
-      <Box display="flex" flexDirection="column" gap={2}>
+      <Box display="flex" flexDirection="column" gap={0}>
         {items.map((item, index) => (
           <Box key={index} display="flex" alignItems="center">
             <FormControlLabel
