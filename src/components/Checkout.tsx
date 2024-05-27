@@ -1,5 +1,6 @@
 // Checkout.tsx
 import React, { useState } from 'react';
+import ItemTable0 from './ItemTable0';
 import ItemTable1 from './ItemTable1';
 import ItemTable2 from './ItemTable2';
 // import ItemTable3 from './ItemTable3';
@@ -34,7 +35,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
     const renderTable = (itemId: string) => {
         const index = parseInt(itemId.split(' ')[1]) - 1;
         if (index == 0) {
-            return <ItemTable1 itemId={itemId} />;
+            return <ItemTable0 itemId={itemId} />;
         } else if (index == 1) {
             return <ItemTable2 itemId={itemId} />;
         } else if (index == 11) {
