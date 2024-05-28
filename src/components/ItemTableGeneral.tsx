@@ -16,7 +16,7 @@ const ItemTableGeneral: React.FC<ItemTableProps> = ({ itemId }) => {
     const [additionalNotes, setAdditionalNotes] = useState('');
     const [message, setMessage] = useState('');
 
-    const localStorageKey = `itemTable0-${itemId}`;
+    const localStorageKey = `itemTableGeneral-${itemId}`;
 
     useEffect(() => {
       const data = localStorage.getItem(localStorageKey);
