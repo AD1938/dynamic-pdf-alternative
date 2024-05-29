@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import ItemTable0 from './ItemTable0';
 import ItemTable1 from './ItemTable1';
 import ItemTable2 from './ItemTable2';
-// import ItemTable3 from './ItemTable3';
 import ItemTable4 from './ItemTable4';
 import UITest from './UITest';
 import NotExist from './NotExist';
@@ -11,7 +10,7 @@ import './Checkout.css';
 import { Container, Typography, Checkbox, FormControlLabel, Button, Box } from '@mui/material';
 
 interface CheckoutProps {
-    items: string[];
+  items: string[];
 }
 
 const Checkout: React.FC<CheckoutProps> = ({ items }) => {

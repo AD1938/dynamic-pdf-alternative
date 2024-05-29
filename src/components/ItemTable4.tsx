@@ -18,7 +18,7 @@ const ItemTable4: React.FC<ItemTableProps> = ({ itemId }) => {
     const [additionalNotes, setAdditionalNotes] = useState('');
     const [message, setMessage] = useState('');
 
-    const localStorageKey = `itemTableGeneral-${itemId}`;
+    const localStorageKey = `itemTable4-${itemId}`;
 
     useEffect(() => {
       const data = localStorage.getItem(localStorageKey);
@@ -33,6 +33,11 @@ const ItemTable4: React.FC<ItemTableProps> = ({ itemId }) => {
         setAdditionalNotes(savedData.additionalNotes || '');
       }
     }, [itemId, localStorageKey]);
+
+    useEffect(() => {
+        const intervalId = setInterval(saveData, 5000); // Call saveData every 5 seconds
+        return () => {clearInterval(intervalId);}; // Clear the interval when the component unmounts
+    }, [displayName, selectedEffectiveDate, whyVehicleBeingDeleted, vehicleBeingDeleted, selectVehicleDeletionAffect, vehicleDeletionAffect, additionalNotes]); // Empty dependency array means this effect runs once when the component mounts
 
     const saveData = () => {
       const dataToSave = {
