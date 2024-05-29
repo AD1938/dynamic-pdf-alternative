@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ItemTable0 from './ItemTable0';
 import ItemTable1 from './ItemTable1';
 import ItemTable2 from './ItemTable2';
+// import ItemTable3 from './ItemTable3';
 import ItemTable4 from './ItemTable4';
 import UITest from './UITest';
 import NotExist from './NotExist';
@@ -40,6 +41,8 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
             return <ItemTable1 itemId={itemId} />;
         } else if (index == 2) {
             return <ItemTable2 itemId={itemId} />;
+        // } else if (index == 3) {
+        //     return <ItemTable3 itemId={itemId} />;
         } else if (index == 4) {
             return <ItemTable4 itemId={itemId} />;
         } else if (index == 11) {

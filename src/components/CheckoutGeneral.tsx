@@ -1,6 +1,6 @@
 // Checkout.tsx
 import React, { useState } from 'react';
-import ItemTable00 from './ItemTableGeneral';
+import ItemTableGeneral from './ItemTableGeneral';
 import NotExist from './NotExist';
 import './Checkout.css';
 import { Container, Typography, Checkbox, FormControlLabel, Button, Box } from '@mui/material';
@@ -31,7 +31,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
     const renderTable = (itemId: string) => {
         const index = parseInt(itemId.split(' ')[1]) - 1;
         if (index == 0) {
-            return <ItemTable00 itemId={itemId} />;
+            return <ItemTableGeneral itemId={itemId} />;
         } else {
             return <NotExist />;
         }
