@@ -185,7 +185,7 @@ const ItemTable0: React.FC<ItemTableProps> = ({ itemId }) => {
             onChange={(e) => setSelectedEffectiveDate(e.target.value)}
             fullWidth
           />
-      </FormControl>
+        </FormControl>
 
       <FormControl fullWidth margin="normal">
         <FormLabel className='titleStyle'>New Address:</FormLabel>
