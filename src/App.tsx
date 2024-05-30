@@ -9,17 +9,17 @@ function App() {
   ];
 
   const autoPolicyItems = [
-    'Address Change',
-    'Name Change',
-    'Adding a Vehicle',
-    'Substituting a Vehicle',
-    'Removing a Vehicle',
-    'Adding a Driver',
-    'Removing a Driver',
-    'Add, Remove, Amend Interested Party',
-    'Amend Coverage',
-    'Amend Rating or License Class',
-    'Adding Discount',
+    '0 - Address Change',
+    '1 - Name Change',
+    '2 - Adding a Vehicle',
+    '3 - Substituting a Vehicle',
+    '4 - Removing a Vehicle',
+    '5 - Adding a Driver',
+    '6 - Removing a Driver',
+    '7 - Add, Remove, Amend Interested Party',
+    '8 - Amend Coverage',
+    '9 - Amend Rating or License Class',
+    '10 - Adding Discount',
     // 'UI Test'
   ];
   return (

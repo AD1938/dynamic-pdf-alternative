@@ -42,7 +42,7 @@ const ItemTable1: React.FC<ItemTableProps> = ({ itemId }) => {
             setNewDrivers(savedData.newDrivers || []);
             setNewDriverAdded(savedData.newDrivers && savedData.newDrivers.length > 0);
         }
-    }, [itemId]);
+    }, [itemId, localStorageKey]);
 
     const saveData = () => {
         const dataToSave = {
