@@ -5,15 +5,15 @@ import { Container } from '@mui/material';
 function App() {
 
   const generalNoteItems = [
-    'Generate Note'
+    'Generate Note - done'
   ];
 
   const autoPolicyItems = [
-    '0 - Address Change',
+    '0 - Address Change - done',
     '1 - Name Change',
     '2 - Adding a Vehicle',
     '3 - Substituting a Vehicle',
-    '4 - Removing a Vehicle',
+    '4 - Removing a Vehicle - done',
     '5 - Adding a Driver',
     '6 - Removing a Driver',
     '7 - Add, Remove, Amend Interested Party',
