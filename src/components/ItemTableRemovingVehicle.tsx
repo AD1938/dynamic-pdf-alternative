@@ -17,7 +17,7 @@ const ItemTableRemovingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
     const [additionalNotes, setAdditionalNotes] = useState('');
     const [message, setMessage] = useState('');
 
-    const localStorageKey = `itemTable4-${itemId}`;
+    const localStorageKey = `key-${itemId}`;
 
     useEffect(() => {
       const data = localStorage.getItem(localStorageKey);

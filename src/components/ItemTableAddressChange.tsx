@@ -32,7 +32,7 @@ const ItemTableAddressChange: React.FC<ItemTableProps> = ({ itemId }) => {
     const [newDriverAdded, setNewDriverAdded] = useState(false);
     const [message, setMessage] = useState('');
 
-    const localStorageKey = `itemTable0-${itemId}`;
+    const localStorageKey = `key-${itemId}`;
 
     useEffect(() => {
       const data = localStorage.getItem(localStorageKey);
@@ -52,6 +52,11 @@ const ItemTableAddressChange: React.FC<ItemTableProps> = ({ itemId }) => {
         setNewDriverAdded(savedData.newDrivers && savedData.newDrivers.length > 0);
       }
     }, [itemId, localStorageKey]);
+
+    useEffect(() => {
+      const intervalId = setInterval(saveData, 5000); // Call saveData every 5 seconds
+      return () => {clearInterval(intervalId)}; // Clear the interval when the component unmounts
+    });
 
     const saveData = () => {
       const dataToSave = {
