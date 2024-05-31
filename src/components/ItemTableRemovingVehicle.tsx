@@ -7,7 +7,7 @@ interface ItemTableProps {
   itemId: string;
 }
 
-const ItemTable4: React.FC<ItemTableProps> = ({ itemId }) => {
+const ItemTableRemovingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
     const [displayName, setDisplayName] = useState('');
     const [selectedEffectiveDate, setSelectedEffectiveDate] = useState('');
     const [whyVehicleBeingDeleted, setWhyVehicleBeingDeleted] = useState('');
@@ -205,4 +205,4 @@ const ItemTable4: React.FC<ItemTableProps> = ({ itemId }) => {
     );
 };
 
-export default ItemTable4;
+export default ItemTableRemovingVehicle;
