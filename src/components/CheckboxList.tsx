@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import TableAddressChange from './TableAddressChange';
 import TableNameChange from './TableNameChange';
 import TableGeneral from './TableGeneral';
+import TableAddingVehicle from './TableAddingVehicle';
+// import TableSubtractingVehicle from './TableSubtractingVehicle';
 import TableRemovingVehicle from './TableRemovingVehicle';
 import './Checkout.css';
 import { Container, Typography, Checkbox, Button, Box, FormControlLabel } from '@mui/material';
@@ -9,12 +11,16 @@ import { Container, Typography, Checkbox, Button, Box, FormControlLabel } from '
 const GENERATE_NOTE = 'Generate Note';
 const ADDRESS_CHANGE = 'Address Change';
 const NAME_CHANGE = 'Name Change';
+const ADDING_VEHICLE = 'Adding a Vehicle - working in progress';
+const SUBTRACTING_VEHICLE = 'Subtracting a Vehicle';
 const REMOVING_VEHICLE = 'Removing a Vehicle';
 
 const items = {
   [GENERATE_NOTE]: false,
   [ADDRESS_CHANGE]: false,
   [NAME_CHANGE]: false,
+  [ADDING_VEHICLE]: false,
+  [SUBTRACTING_VEHICLE]: false,
   [REMOVING_VEHICLE]: false,
 };
 
@@ -24,6 +30,8 @@ const CheckBoxList: React.FC = () => {
       [GENERATE_NOTE]: false,
       [ADDRESS_CHANGE]: false,
       [NAME_CHANGE]: false,
+      [ADDING_VEHICLE]: false,
+      [SUBTRACTING_VEHICLE]: false,
       [REMOVING_VEHICLE]: false,
     };
     const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>(items);
@@ -45,7 +53,6 @@ const CheckBoxList: React.FC = () => {
       setSelectedItemId(id);
     };
 
-
     const handleResetAll = () => {
       // Clear local storage
       localStorage.clear();
@@ -53,7 +60,7 @@ const CheckBoxList: React.FC = () => {
       // Reset checked items and selected item ID
       setCheckedItems(initialCheckedState);
       setSelectedItemId(null);
-  };
+    };
 
     const renderTable = (itemId: string) => {
         switch (itemId) {
@@ -63,6 +70,10 @@ const CheckBoxList: React.FC = () => {
                 return <TableAddressChange itemId="addressChange" />;
             case NAME_CHANGE:
                 return <TableNameChange itemId="nameChange" />;
+            case ADDING_VEHICLE:
+                return <TableAddingVehicle itemId="addingVehicle" />;
+            // case SUBTRACTING_VEHICLE:
+            //     return <TableSubtractingVehicle itemId="subtractingVehicle" />;
             case REMOVING_VEHICLE:
                 return <TableRemovingVehicle itemId="removingVehicle" />;
             default:
@@ -116,6 +127,18 @@ const CheckBoxList: React.FC = () => {
             />
             <Box sx={{ width: '100px', textAlign: 'center' }}>
               <Button variant="outlined" disabled={!checkedItems[NAME_CHANGE]} onClick={() => handleEditClick(NAME_CHANGE)}>
+                Edit
+              </Button>
+            </Box>
+          </Box>
+          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+            <FormControlLabel
+              control={<Checkbox checked={checkedItems[ADDING_VEHICLE]} onChange={() => handleCheckboxChange(ADDING_VEHICLE)} id="checkbox-name-change" />}
+              label={ADDING_VEHICLE}
+              sx={{ flexGrow: 1, marginRight: 10 }}
+            />
+            <Box sx={{ width: '100px', textAlign: 'center' }}>
+              <Button variant="outlined" disabled={!checkedItems[ADDING_VEHICLE]} onClick={() => handleEditClick(ADDING_VEHICLE)}>
                 Edit
               </Button>
             </Box>

@@ -16,7 +16,7 @@ interface NewDriver {
   policyNumber: string;
 }
 
-const TableAddressChange: React.FC<ItemTableProps> = ({ itemId }) => {
+const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
     const [displayName, setDisplayName] = useState('');
     const [selectedEffectiveDate, setSelectedEffectiveDate] = useState('');
     const [newAddress, setNewAddress] = useState('');
@@ -391,4 +391,4 @@ const TableAddressChange: React.FC<ItemTableProps> = ({ itemId }) => {
     );
 };
 
-export default TableAddressChange;
+export default TableAddingVehicle;
