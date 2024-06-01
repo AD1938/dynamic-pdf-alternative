@@ -6,20 +6,25 @@ import ItemTableRemovingVehicle from './ItemTableRemovingVehicle';
 import './Checkout.css';
 import { Container, Typography, Checkbox, Button, Box, FormControlLabel } from '@mui/material';
 
+const GENERATE_NOTE = 'Generate Note';
+const ADDRESS_CHANGE = 'Address Change';
+const NAME_CHANGE = 'Name Change';
+const REMOVING_VEHICLE = 'Removing a Vehicle';
+
 const items = {
-  'Generate Note - done': false,
-  'Name Change - done': false,
-  'Address Change - done': false,
-  'Removing a Vehicle - done': false,
+  [GENERATE_NOTE]: false,
+  [ADDRESS_CHANGE]: false,
+  [NAME_CHANGE]: false,
+  [REMOVING_VEHICLE]: false,
 };
 
 const NewCheckBox: React.FC = () => {
 
     const initialCheckedState =  {
-      'Generate Note - done': false,
-      'Name Change - done': false,
-      'Address Change - done': false,
-      'Removing a Vehicle - done': false,
+      [GENERATE_NOTE]: false,
+      [ADDRESS_CHANGE]: false,
+      [NAME_CHANGE]: false,
+      [REMOVING_VEHICLE]: false,
     };
     const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>(items);
     const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -52,13 +57,13 @@ const NewCheckBox: React.FC = () => {
 
     const renderTable = (itemId: string) => {
         switch (itemId) {
-            case 'Generate Note - done':
+            case GENERATE_NOTE:
                 return <ItemTableGeneral itemId="general" />;
-            case 'Address Change - done':
+            case ADDRESS_CHANGE:
                 return <ItemTableAddressChange itemId="addressChange" />;
-            case 'Name Change - done':
+            case NAME_CHANGE:
                 return <ItemTableNameChange itemId="nameChange" />;
-            case 'Removing a Vehicle - done':
+            case REMOVING_VEHICLE:
                 return <ItemTableRemovingVehicle itemId="removingVehicle" />;
             default:
            return <div>Item not found.</div>;
@@ -76,12 +81,12 @@ const NewCheckBox: React.FC = () => {
         <Box display="flex" flexDirection="column" gap={1}>
           <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
             <FormControlLabel
-              control={<Checkbox checked={checkedItems['Generate Note - done']} onChange={() => handleCheckboxChange('Generate Note - done')} id="checkbox-generate-note" />}
-              label="Generate Note - done"
+              control={<Checkbox checked={checkedItems[GENERATE_NOTE]} onChange={() => handleCheckboxChange(GENERATE_NOTE)} id="checkbox-generate-note" />}
+              label={GENERATE_NOTE}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
             <Box sx={{ width: '100px', textAlign: 'center' }}>
-              <Button variant="outlined" disabled={!checkedItems['Generate Note - done']} onClick={() => handleEditClick('Generate Note - done')}>
+              <Button variant="outlined" disabled={!checkedItems[GENERATE_NOTE]} onClick={() => handleEditClick(GENERATE_NOTE)}>
                 Edit
               </Button>
             </Box>
@@ -93,36 +98,36 @@ const NewCheckBox: React.FC = () => {
         <Box display="flex" flexDirection="column" gap={1}>
         <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
             <FormControlLabel
-              control={<Checkbox checked={checkedItems['Address Change - done']} onChange={() => handleCheckboxChange('Address Change - done')} id="checkbox-address-change" />}
-              label="Address Change - done"
+              control={<Checkbox checked={checkedItems[ADDRESS_CHANGE]} onChange={() => handleCheckboxChange(ADDRESS_CHANGE)} id="checkbox-address-change" />}
+              label={ADDRESS_CHANGE}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
             <Box sx={{ width: '100px', textAlign: 'center' }}>
-              <Button variant="outlined" disabled={!checkedItems['Address Change - done']} onClick={() => handleEditClick('Address Change - done')}>
+              <Button variant="outlined" disabled={!checkedItems[ADDRESS_CHANGE]} onClick={() => handleEditClick(ADDRESS_CHANGE)}>
                 Edit
               </Button>
             </Box>
           </Box>
           <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
             <FormControlLabel
-              control={<Checkbox checked={checkedItems['Name Change - done']} onChange={() => handleCheckboxChange('Name Change - done')} id="checkbox-name-change" />}
-              label="Name Change - done"
+              control={<Checkbox checked={checkedItems[NAME_CHANGE]} onChange={() => handleCheckboxChange(NAME_CHANGE)} id="checkbox-name-change" />}
+              label={NAME_CHANGE}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
             <Box sx={{ width: '100px', textAlign: 'center' }}>
-              <Button variant="outlined" disabled={!checkedItems['Name Change - done']} onClick={() => handleEditClick('Name Change - done')}>
+              <Button variant="outlined" disabled={!checkedItems[NAME_CHANGE]} onClick={() => handleEditClick(NAME_CHANGE)}>
                 Edit
               </Button>
             </Box>
           </Box>
           <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
             <FormControlLabel
-              control={<Checkbox checked={checkedItems['Removing a Vehicle - done']} onChange={() => handleCheckboxChange('Removing a Vehicle - done')} id="checkbox-removing-vehicle" />}
-              label="Removing a Vehicle - done"
+              control={<Checkbox checked={checkedItems[REMOVING_VEHICLE]} onChange={() => handleCheckboxChange(REMOVING_VEHICLE)} id="checkbox-removing-vehicle" />}
+              label={REMOVING_VEHICLE}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
             <Box sx={{ width: '100px', textAlign: 'center' }}>
-              <Button variant="outlined" disabled={!checkedItems['Removing a Vehicle - done']} onClick={() => handleEditClick('Removing a Vehicle - done')}>
+              <Button variant="outlined" disabled={!checkedItems[REMOVING_VEHICLE]} onClick={() => handleEditClick(REMOVING_VEHICLE)}>
                 Edit
               </Button>
             </Box>
@@ -130,8 +135,8 @@ const NewCheckBox: React.FC = () => {
         </Box>
         {selectedItemId && (
           <>
-            <Typography variant="h6" gutterBottom sx={{ marginTop: 2, color: 'red', fontWeight: 'bold' }}>
-              Editing: {selectedItemId}
+            <Typography variant="h5" gutterBottom sx={{ marginTop: 2, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>
+              {selectedItemId}
             </Typography>
             {renderTable(selectedItemId)}
           </>
