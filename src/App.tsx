@@ -1,4 +1,4 @@
-import NewCheckBox from './components/NewCheckbox';
+import CheckBoxList from './components/CheckboxList';
 import { Container } from '@mui/material';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
             <label className="menu-label">WellCare Gen AI</label>
           </nav>
         </header>
-        <NewCheckBox />
+        <CheckBoxList />
       </Container> 
     </>
   )

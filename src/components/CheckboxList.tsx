@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import ItemTableAddressChange from './ItemTableAddressChange';
-import ItemTableNameChange from './ItemTableNameChange';
-import ItemTableGeneral from './ItemTableGeneral';
-import ItemTableRemovingVehicle from './ItemTableRemovingVehicle';
+import ItemTableAddressChange from './TableAddressChange';
+import TableNameChange from './TableNameChange';
+import TableGeneral from './TableGeneral';
+import TableRemovingVehicle from './TableRemovingVehicle';
 import './Checkout.css';
 import { Container, Typography, Checkbox, Button, Box, FormControlLabel } from '@mui/material';
 
@@ -18,7 +18,7 @@ const items = {
   [REMOVING_VEHICLE]: false,
 };
 
-const NewCheckBox: React.FC = () => {
+const CheckBoxList: React.FC = () => {
 
     const initialCheckedState =  {
       [GENERATE_NOTE]: false,
@@ -58,13 +58,13 @@ const NewCheckBox: React.FC = () => {
     const renderTable = (itemId: string) => {
         switch (itemId) {
             case GENERATE_NOTE:
-                return <ItemTableGeneral itemId="general" />;
+                return <TableGeneral itemId="general" />;
             case ADDRESS_CHANGE:
                 return <ItemTableAddressChange itemId="addressChange" />;
             case NAME_CHANGE:
-                return <ItemTableNameChange itemId="nameChange" />;
+                return <TableNameChange itemId="nameChange" />;
             case REMOVING_VEHICLE:
-                return <ItemTableRemovingVehicle itemId="removingVehicle" />;
+                return <TableRemovingVehicle itemId="removingVehicle" />;
             default:
            return <div>Item not found.</div>;
         }
@@ -72,9 +72,9 @@ const NewCheckBox: React.FC = () => {
 
     return (
       <Container maxWidth="md" sx={{ marginTop: 2 }}>
-        <Button variant="contained" color="primary" onClick={handleResetAll} sx={{ marginBottom: 2 }}>
+        {/* <Button variant="contained" color="primary" onClick={handleResetAll} sx={{ marginBottom: 2 }}>
                 Reset All
-        </Button>
+        </Button> */}
         <Typography variant="h4" gutterBottom marginTop='30px'>
           General Note Change
         </Typography>
@@ -91,7 +91,7 @@ const NewCheckBox: React.FC = () => {
               </Button>
             </Box>
           </Box>
-          </Box>
+        </Box>
         <Typography variant="h4" gutterBottom marginTop='25px'>
           Auto Policy Change
         </Typography>
@@ -133,6 +133,9 @@ const NewCheckBox: React.FC = () => {
             </Box>
           </Box>
         </Box>
+        <Button variant="contained" color="primary" onClick={handleResetAll} sx={{ margintop: 2 }}>
+          Reset All
+        </Button>
         {selectedItemId && (
           <>
             <Typography variant="h5" gutterBottom sx={{ marginTop: 2, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>
@@ -145,4 +148,4 @@ const NewCheckBox: React.FC = () => {
     );
 };
 
-export default NewCheckBox;
+export default CheckBoxList;

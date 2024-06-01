@@ -1,6 +1,6 @@
 // ItemTableGeneral.tsx
 import React, { useEffect, useState } from 'react';
-import './ItemTable0.css';
+import './Table.css';
 import { TextField, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Button, TextareaAutosize, FormGroup } from '@mui/material';
 import {  Paper, Box } from '@mui/material';
 

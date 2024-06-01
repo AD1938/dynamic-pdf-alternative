@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './ItemTable0.css';
+import './Table.css';
 import { TextField, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Button, TextareaAutosize, FormGroup } from '@mui/material';
 import {  Paper, Box } from '@mui/material';
 
@@ -7,7 +7,7 @@ interface ItemTableProps {
   itemId: string;
 }
 
-const ItemTableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
+const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
     const [displayName, setDisplayName] = useState('');
     const [selectedEffectiveDate, setSelectedEffectiveDate] = useState('');
     const [reasonForNameChange, setReasonForNameChange] = useState('');
@@ -215,4 +215,4 @@ const ItemTableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
     );
 };
 
-export default ItemTableNameChange;
+export default TableNameChange;

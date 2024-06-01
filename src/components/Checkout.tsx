@@ -1,10 +1,10 @@
 // Checkout.tsx
 import React, { useState } from 'react';
-import ItemTable0 from './ItemTableAddressChange';
-import ItemTable1 from './ItemTableNameChange';
+import ItemTable0 from './TableAddressChange';
+import ItemTable1 from './TableNameChange';
 import ItemTable2 from './ItemTable2';
 // import ItemTable3 from './ItemTable3';
-import ItemTable4 from './ItemTableRemovingVehicle';
+import ItemTable4 from './TableRemovingVehicle';
 import UITest from './UITest';
 import NotExist from './NotExist';
 import './Checkout.css';
