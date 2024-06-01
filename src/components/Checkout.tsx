@@ -1,12 +1,12 @@
 // Checkout.tsx
 import React, { useState } from 'react';
-import ItemTable0 from './TableAddressChange';
-import ItemTable1 from './TableNameChange';
-import ItemTable2 from './TableNameChange';
+import TableAdressChange from './TableAddressChange';
+import TableNameChange from './TableNameChange';
 // import ItemTable3 from './ItemTable3';
-import ItemTable4 from './TableRemovingVehicle';
+import TableRemovingVehicle from './TableRemovingVehicle';
 import UITest from './UITest';
 import NotExist from './NotExist';
+import TableGeneral from './TableGeneral';
 import './Checkout.css';
 import { Container, Typography, Checkbox, FormControlLabel, Button, Box } from '@mui/material';
 
@@ -36,15 +36,15 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
     const renderTable = (itemId: string) => {
         const index = parseInt(itemId.split(' ')[1]) - 1;
         if (index == 0) {
-            return <ItemTable0 itemId={itemId} />;
+            return <TableAdressChange itemId={itemId} />;
         } else if (index == 1) {
-            return <ItemTable1 itemId={itemId} />;
+            return <TableNameChange itemId={itemId} />;
         } else if (index == 2) {
-            return <ItemTable2 itemId={itemId} />;
+            return <TableRemovingVehicle itemId={itemId} />;
         // } else if (index == 3) {
         //     return <ItemTable3 itemId={itemId} />;
         } else if (index == 4) {
-            return <ItemTable4 itemId={itemId} />;
+            return <TableGeneral itemId={itemId} />;
         } else if (index == 11) {
             return <UITest itemId={itemId} />;
         } else {

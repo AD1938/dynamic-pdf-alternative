@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ItemTableAddressChange from './TableAddressChange';
+import TableAddressChange from './TableAddressChange';
 import TableNameChange from './TableNameChange';
 import TableGeneral from './TableGeneral';
 import TableRemovingVehicle from './TableRemovingVehicle';
@@ -60,7 +60,7 @@ const CheckBoxList: React.FC = () => {
             case GENERATE_NOTE:
                 return <TableGeneral itemId="general" />;
             case ADDRESS_CHANGE:
-                return <ItemTableAddressChange itemId="addressChange" />;
+                return <TableAddressChange itemId="addressChange" />;
             case NAME_CHANGE:
                 return <TableNameChange itemId="nameChange" />;
             case REMOVING_VEHICLE:
