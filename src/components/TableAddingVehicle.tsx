@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Table.css';
-import { TextField, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Button, TextareaAutosize, FormGroup } from '@mui/material';
+import { TextField, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Button, TextareaAutosize, FormGroup, Grid, MenuItem } from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   Paper, Box
@@ -19,9 +20,34 @@ interface NewDriver {
 const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
     const [displayName, setDisplayName] = useState('');
     const [selectedEffectiveDate, setSelectedEffectiveDate] = useState('');
-    const [newAddress, setNewAddress] = useState('');
-    const [selectAddressChangeEffect, setSelectAddressChangeEffect] = useState('');
-    const [addressChangeEffect, setAddressChangeEffect] = useState('');
+    const [year, setYear] = useState('');
+    const [make, setMake] = useState('');
+    const [model, setModel] = useState('');
+    const [vin, setVIN] = useState('');
+    const [vehicleOwner, setVehicleOwner] = useState('');
+    const [selectLeasedOrFinanced, setSelectLeasedOrFinanced] = useState('leased');
+    const [lessorNameAddress, setLessorNameAddress] = useState('');
+    const [lienholderNameAddress, setLienholderNameAddress] = useState('');
+    const [selectNewOrUsed, setSelectNewOrUsed] = useState('new');
+    const [mileageAtPurchase, setMileageAtPurchase] = useState('');
+    const [selectAnyModCusDam, setSelectAnyModCusDam] = useState('');
+    const [anyModCusDam, setAnyModCusDam] = useState('');
+    const [selectHasWinterTires, setSelectHasWinterTires] = useState('');
+    const [principalOperator, setPrincipalOperator] = useState('');
+    const [occasionalDrivers, setOccasionalDrivers] = useState('');
+    const [vehicleUse, setVehicleUse] = useState('');
+    const [totalAnnualDistance, setTotalAnnualDistance] = useState('');
+    const [oneWayCommuteToWork, setOneWayCommuteToWork] = useState('');
+    const [totalBusinessDistance, setTotalBusinessDistance] = useState('');
+    const [selectRideSharing, setSelectRideSharing] = useState('');
+    const [rideSharing, setRideSharing] = useState('');
+    const [selectFoodDelivery, setSelectFoodDelivery] = useState('');
+    const [foodDelivery, setFoodDelivery] = useState('');
+    const [liabilityLimit, setLiabilityLimit] = useState('');
+    const [allPerilsDeductible, setAllPerilsDeductible] = useState('');
+    const [collisionDeductible, setCollisionDeductible] = useState('');
+    const [comprehensiveDeductible, setComprehensiveDeductible] = useState('');
+    
     const [selectAddressChangeDriverEffect, setSelectAddressChangeDriverEffect] = useState('');
     const [addressChangeDriverEffect, setAddressChangeDriverEffect] = useState('');
     const [selectNewDrivers, setSelectNewDrivers] = useState('');
@@ -39,9 +65,34 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
         const savedData = JSON.parse(data);
         setDisplayName(savedData.displayName || '');
         setSelectedEffectiveDate(savedData.selectedEffectiveDate || '');
-        setNewAddress(savedData.newAddress || '');
-        setSelectAddressChangeEffect(savedData.selectAddressChangeEffect || '');
-        setAddressChangeEffect(savedData.addressChangeEffect || '');
+        setYear(savedData.year || '');
+        setMake(savedData.make || '');
+        setModel(savedData.model || '');
+        setVIN(savedData.vin || '');
+        setVehicleOwner(savedData.vehicleOwner || '');
+        setSelectLeasedOrFinanced(savedData.selectLeasedOrFinanced || '');
+        setLienholderNameAddress(savedData.lienholderNameAddress || '');
+        setLessorNameAddress(savedData.lessorNameAddress || '');
+        setSelectNewOrUsed(savedData.selectNewOrUsed || '');
+        setMileageAtPurchase(savedData.mileageAtPurchase || '');
+        setSelectAnyModCusDam(savedData.selectAnyModCusDam || '');
+        setAnyModCusDam(savedData.anyModCusDam || '');
+        setSelectHasWinterTires(savedData.selectHasWinterTires || '');
+        setPrincipalOperator(savedData.principalOperator || '');
+        setOccasionalDrivers(savedData.occasionalDrivers || '');
+        setVehicleUse(savedData.vehicleUse || '');
+        setTotalAnnualDistance(savedData.totalAnnualDistance || '');
+        setOneWayCommuteToWork(savedData.oneWayCommuteToWork || '');
+        setTotalBusinessDistance(savedData.totalBusinessDistance || '');
+        setSelectRideSharing(savedData.selectRideSharing || '');
+        setRideSharing(savedData.rideSharing || '');
+        setSelectFoodDelivery(savedData.selectFoodDelivery || '');
+        setFoodDelivery(savedData.foodDelivery || '');
+        setLiabilityLimit(savedData.liabilityLimit || '');
+        setAllPerilsDeductible(savedData.allPerilsDeductible || '');
+        setCollisionDeductible(savedData.collisionDeductible || '');
+        setComprehensiveDeductible(savedData.comprehensiveDeductible || '');
+
         setSelectAddressChangeDriverEffect(savedData.selectAddressChangeDriverEffect || '');
         setAddressChangeDriverEffect(savedData.addressChangeDriverEffect || '');
         setAdditionalNotes(savedData.additionalNotes || '');
@@ -61,9 +112,34 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
       const dataToSave = {
         displayName,
         selectedEffectiveDate,
-        newAddress,
-        selectAddressChangeEffect,
-        addressChangeEffect,
+        year,
+        make,
+        model,
+        vin,
+        vehicleOwner,
+        selectLeasedOrFinanced,
+        lessorNameAddress,
+        lienholderNameAddress,
+        selectNewOrUsed,
+        mileageAtPurchase,
+        selectAnyModCusDam,
+        anyModCusDam,
+        selectHasWinterTires,
+        principalOperator,
+        occasionalDrivers,
+        vehicleUse,
+        totalAnnualDistance,
+        oneWayCommuteToWork,
+        totalBusinessDistance,
+        selectRideSharing,
+        rideSharing,
+        selectFoodDelivery,
+        foodDelivery,
+        liabilityLimit,
+        allPerilsDeductible,
+        collisionDeductible,
+        comprehensiveDeductible,
+
         selectNewDrivers,
         selectAddressChangeDriverEffect,
         addressChangeDriverEffect,
@@ -74,6 +150,26 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
       localStorage.setItem(localStorageKey, JSON.stringify(dataToSave));
     };
     
+    const handleVehicleUseChange = (event: SelectChangeEvent) => {
+      setVehicleUse(event.target.value as string);
+    };
+
+    const handleLiabilityLimitChange = (event: SelectChangeEvent) => {
+      setLiabilityLimit(event.target.value as string);
+    };
+
+    const handleAllPerilsDeductibleChange = (event: SelectChangeEvent) => {
+      setAllPerilsDeductible(event.target.value as string);
+    };
+
+    const handleCollisionDeductibleChange = (event: SelectChangeEvent) => {
+      setCollisionDeductible(event.target.value as string);
+    };
+
+    const handleComprehensiveDeductibleChange = (event: SelectChangeEvent) => {
+      setComprehensiveDeductible(event.target.value as string);
+    };
+
     const handleAddDriver = () => {
         setNewDrivers([...newDrivers, { name: '', insuranceCarrier: '', policyNumber: '' }]);
         setNewDriverAdded(true);
@@ -109,11 +205,11 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
             `New Driver Name: ${driver.name}, Insurance Carrier: ${driver.insuranceCarrier}, Policy Number: ${driver.policyNumber}`).join('\n');
         let message = `Who called/emailed and when: ${displayName} at ` + new Date().toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' }) + ' on ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
         message += `\nEffective Date of Address Change: ${selectedEffectiveDate}`;
-        message += `\nNew Address: ${newAddress}`;
+        message += `\nNew Address: ${year}`;
         
-        message += `\nWill this address change affect the usage and distance driven of any of the vehicles on the policy: ${selectAddressChangeEffect}`;
-        if (selectAddressChangeEffect === 'yes') {
-            message += `\nChange to use and distance driven: ${addressChangeEffect}`;
+        message += `\nWill this address change affect the usage and distance driven of any of the vehicles on the policy: ${selectAnyModCusDam}`;
+        if (selectAnyModCusDam === 'yes') {
+            message += `\nChange to use and distance driven: ${anyModCusDam}`;
         }
 
         message += `\nAre there any new drivers in the household: ${selectNewDrivers}`;
@@ -144,9 +240,9 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
       setMessage('');
       setDisplayName('');
       setSelectedEffectiveDate('');
-      setNewAddress('');
-      setSelectAddressChangeEffect('');
-      setAddressChangeEffect('');
+      setYear('');
+      setSelectAnyModCusDam('');
+      setAnyModCusDam('');
       setSelectAddressChangeDriverEffect('');
       setAddressChangeDriverEffect('');
       setAdditionalNotes('');
@@ -191,22 +287,222 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
           />
         </FormControl>
 
+        <FormControl fullWidth margin="normal">
+          <FormLabel className='titleStyle'>Vehicle being added:</FormLabel>
+        </FormControl>
+        <Grid container spacing={3}>
+          <Grid item xs={3}>
+            <FormControl margin="normal">
+              <FormLabel className='titleStyle'>Year:</FormLabel>
+              <TextField
+                variant="outlined"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl margin="normal">
+              <FormLabel className='titleStyle'>Make:</FormLabel>
+              <TextField
+                variant="outlined"
+                value={make}
+                onChange={(e) => setMake(e.target.value)}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl margin="normal">
+              <FormLabel className='titleStyle'>Model:</FormLabel>
+              <TextField
+                variant="outlined"
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl margin="normal">
+              <FormLabel className='titleStyle'>VIN:</FormLabel>
+              <TextField
+                variant="outlined"
+                value={vin}
+                onChange={(e) => setVIN(e.target.value)}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
+
+        <FormControl fullWidth margin="normal">
+          <FormLabel className='titleStyle'>Who is the registered owner of the vehicle?</FormLabel>
+          <TextField
+            variant="outlined"
+            value={vehicleOwner}
+            onChange={(e) => setVehicleOwner(e.target.value)}
+            fullWidth
+          />
+        </FormControl>
+
+        <FormControl component="fieldset" fullWidth margin="normal">
+          <FormGroup>
+            <FormLabel className='titleStyle'>Is the Vehicle Leased or Financed?</FormLabel>
+            <RadioGroup row name="selectLeasedOrFinanced" onChange={(e) => setSelectLeasedOrFinanced(e.target.value)}>
+              <FormControlLabel value="leased" control={<Radio />} label="Leased" />
+              <FormControlLabel value="financed" control={<Radio />} label="Financed" />
+              <FormControlLabel value="noFinancialInterest" control={<Radio />} label="No Financial Interest" />
+            </RadioGroup>
+          </FormGroup>
+        </FormControl>
+        {selectLeasedOrFinanced === 'leased' && (
+          <FormControl fullWidth margin="normal">
+            <FormLabel className='titleStyle'>Please enter Lessor's Name and Mailing Address:</FormLabel>
+            <TextareaAutosize minRows={3} value={lessorNameAddress} onChange={(e) => setLessorNameAddress(e.target.value)} style={{ width: '100%' }} />
+          </FormControl>
+        )}
+        {selectLeasedOrFinanced === 'financed' && (
+          <FormControl fullWidth margin="normal">
+            <FormLabel className='titleStyle'>Please enter Lienholder's Name and Mailing Address:</FormLabel>
+            <TextareaAutosize minRows={3} value={lienholderNameAddress} onChange={(e) => setLienholderNameAddress(e.target.value)} style={{ width: '100%' }} />
+          </FormControl>
+        )}
+
+        <FormControl component="fieldset" fullWidth margin="normal">
+          <FormGroup>
+            <FormLabel className='titleStyle'>Is the vehicle new / used / demo?</FormLabel>
+            <RadioGroup row name="selectNewOrUsed" onChange={(e) => setSelectNewOrUsed(e.target.value)}>
+              <FormControlLabel value="new" control={<Radio />} label="New" />
+              <FormControlLabel value="used" control={<Radio />} label="Used" />
+              <FormControlLabel value="demo" control={<Radio />} label="Demo" />
+            </RadioGroup>
+          </FormGroup>
+        </FormControl>
+        {selectNewOrUsed === 'new' && (
+          <FormControl fullWidth margin="normal">
+            <FormLabel className='titleStyle'>Please enter the mileage at purchase:</FormLabel>
+            <TextareaAutosize minRows={3} value={mileageAtPurchase} onChange={(e) => setMileageAtPurchase(e.target.value)} style={{ width: '100%' }} />
+          </FormControl>
+        )}
+        {selectNewOrUsed === 'demo' && (
+          <FormControl fullWidth margin="normal">
+            <FormLabel className='titleStyle'>Please enter the mileage at purchase:</FormLabel>
+            <TextareaAutosize minRows={3} value={mileageAtPurchase} onChange={(e) => setMileageAtPurchase(e.target.value)} style={{ width: '100%' }} />
+          </FormControl>
+        )}
+
+        <FormControl component="fieldset" margin="normal">
+          <FormGroup>
+            <FormLabel className='titleStyle'>Are there any modifications, customizations or existing damage?</FormLabel>
+            <RadioGroup row name="selectAnyModCusDam" onChange={(e) => setSelectAnyModCusDam(e.target.value)}>
+              <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="no" control={<Radio />} label="No" />
+            </RadioGroup>
+          </FormGroup>
+        </FormControl>
+          
+        {selectAnyModCusDam === 'yes' && (
+          <FormControl fullWidth margin="normal">
+            <FormLabel className='titleStyle'>Please provide details:</FormLabel>
+            <TextareaAutosize
+              minRows={3}
+              value={anyModCusDam}
+              onChange={(e) => setAnyModCusDam(e.target.value)}
+              style={{ width: '100%' }}
+            />
+          </FormControl>
+        )}
+
+      <FormControl component="fieldset" margin="normal">
+        <FormGroup>
+          <FormLabel className='titleStyle'>Do you own winter tires that will be installed November-April?</FormLabel>
+          <RadioGroup 
+            row name="selectHasWinterTires"
+            onChange={(e) => setSelectHasWinterTires(e.target.value)}
+            >
+            <FormControlLabel
+              value="yes"
+              control={<Radio />}
+              label="Yes"
+            />
+            <FormControlLabel
+              value="no"
+              control={<Radio />}
+              label="No"
+            />
+          </RadioGroup>
+        </FormGroup>
+      </FormControl>
+
       <FormControl fullWidth margin="normal">
-        <FormLabel className='titleStyle'>New Address:</FormLabel>
+        <FormLabel className='titleStyle'>Confirm Principal Operator of added vehicle</FormLabel>
         <TextField
           variant="outlined"
-          value={newAddress}
-          onChange={(e) => setNewAddress(e.target.value)}
+          value={principalOperator}
+          onChange={(e) => setPrincipalOperator(e.target.value)}
           fullWidth
         />
       </FormControl>
 
-      <FormControl component="fieldset" margin="normal">
+      <FormControl fullWidth margin="normal">
+        <FormLabel className='titleStyle'>Confirm Occasional Drivers of added vehicle</FormLabel>
+        <TextField
+          variant="outlined"
+          value={occasionalDrivers}
+          onChange={(e) => setOccasionalDrivers(e.target.value)}
+          fullWidth
+        />
+      </FormControl>
+
+      <FormControl fullWidth margin="normal">
+        <FormLabel className='titleStyle'>Vehicle Use</FormLabel>
+        <Select labelId="vehicleUse-select-label" id="vehicleUse-select" value={vehicleUse} label="Vehicle Use" onChange={handleVehicleUseChange}>
+          <MenuItem value={'Pleasure'}>Pleasure</MenuItem>
+          <MenuItem value={'Commute'}>Commute</MenuItem>
+          <MenuItem value={'Business'}>Business</MenuItem>
+        </Select>
+      </FormControl>
+      {vehicleUse === 'Pleasure' && (
+        <FormControl fullWidth margin="normal">
+          <FormLabel className='titleStyle'>Total annual km driven:</FormLabel>
+          <TextField variant="outlined" value={totalAnnualDistance} onChange={(e) => setTotalAnnualDistance(e.target.value)} fullWidth />
+        </FormControl>
+      )}
+      {vehicleUse === 'Commute' && (
+        <>
+          <FormControl fullWidth margin="normal">
+            <FormLabel className='titleStyle'>1-way commute to work:</FormLabel>
+            <TextField variant="outlined" value={oneWayCommuteToWork} onChange={(e) => setOneWayCommuteToWork(e.target.value)} fullWidth />
+          </FormControl>
+
+          <FormControl fullWidth margin="normal">
+            <FormLabel className='titleStyle'>Total annual km driven:</FormLabel>
+            <TextField variant="outlined" value={totalAnnualDistance} onChange={(e) => setTotalAnnualDistance(e.target.value)} fullWidth />
+          </FormControl>
+        </>
+      )}
+      {vehicleUse === 'Business' && (
+        <>
+          <FormControl fullWidth margin="normal">
+            <FormLabel className='titleStyle'>Total annual km driven:</FormLabel>
+            <TextField variant="outlined" value={totalAnnualDistance} onChange={(e) => setTotalAnnualDistance(e.target.value)} fullWidth />
+          </FormControl>
+
+          <FormControl fullWidth margin="normal">
+            <FormLabel className='titleStyle'>Total business km driven:</FormLabel>
+            <TextField variant="outlined" value={totalBusinessDistance} onChange={(e) => setTotalBusinessDistance(e.target.value)} fullWidth />
+          </FormControl>
+        </>
+      )}
+
+      <FormControl component="fieldset" fullWidth margin="normal">
         <FormGroup>
-          <FormLabel className='titleStyle'>Will this address change affect the usage and distance driven of any of the vehicles on the policy?</FormLabel>
+          <FormLabel className='titleStyle'>Ride sharing?</FormLabel>
           <RadioGroup 
-            row name="selectAddressChangeEffect"
-            onChange={(e) => setSelectAddressChangeEffect(e.target.value)}
+            row name="selectRideSharing"
+            onChange={(e) => setSelectRideSharing(e.target.value)}
             >
             <FormControlLabel
               value="yes"
@@ -222,19 +518,106 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
         </FormGroup>
       </FormControl>
           
-      {selectAddressChangeEffect === 'yes' && (
-        <FormControl>
-          <FormLabel className='titleStyle'>Note any change in use (i.e., pleasure, commute, business) and distance driven for all vehicles on the policy:</FormLabel>
+      {selectRideSharing === 'yes' && (
+        <FormControl fullWidth margin="normal">
+          <FormLabel className='titleStyle'>Ensure eligibility! - 
+Please note transportation network, names of drivers, number of hours worked and vehicle(s) used:</FormLabel>
           <TextareaAutosize
             minRows={3}
-            value={addressChangeEffect}
-            onChange={(e) => setAddressChangeEffect(e.target.value)}
+            value={rideSharing}
+            onChange={(e) => setRideSharing(e.target.value)}
             style={{ width: '100%' }}
           />
         </FormControl>
       )}
 
-      <FormControl margin="normal">
+      <FormControl component="fieldset" margin="normal">
+        <FormGroup>
+          <FormLabel className='titleStyle'>Food delivery?</FormLabel>
+          <RadioGroup 
+            row name="selectFoodDelivery"
+            onChange={(e) => setSelectFoodDelivery(e.target.value)}
+            >
+            <FormControlLabel
+              value="yes"
+              control={<Radio />}
+              label="Yes"
+            />
+            <FormControlLabel
+              value="no"
+              control={<Radio />}
+              label="No"
+            />
+          </RadioGroup>
+        </FormGroup>
+      </FormControl>
+      {selectFoodDelivery === 'yes' && (
+        <FormControl fullWidth margin="normal">
+          <FormLabel className='titleStyle'>Ensure eligibility! - Note relevant information:</FormLabel>
+          <TextareaAutosize
+            minRows={3}
+            value={foodDelivery}
+            onChange={(e) => setFoodDelivery(e.target.value)}
+            style={{ width: '100%' }}
+          />
+        </FormControl>
+      )}
+
+      <FormControl fullWidth margin="normal">
+        <FormLabel className='titleStyle'>Coverage for Added Vehicle:</FormLabel>
+      </FormControl>
+      <Grid container spacing={3}>
+        <Grid item xs={2}>
+          <FormControl margin="normal">
+            <FormLabel className='titleStyle'>Liability Limit:</FormLabel>
+            <Select value={liabilityLimit} label="Liability Limit" onChange={handleLiabilityLimitChange}>
+              <MenuItem value={'$1,000,000'}>$1,000,000</MenuItem>
+              <MenuItem value={'$2,000,000'}>$2,000,000</MenuItem>
+              <MenuItem value={'n/a'}>n/a</MenuItem>
+              <MenuItem value={'Not Covered'}>Not Covered</MenuItem>
+              <MenuItem value={'Declined'}>Declined</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={3}>
+          <FormControl margin="normal">
+            <FormLabel className='titleStyle'>All Perils Deductible:</FormLabel>
+            <Select value={allPerilsDeductible} label="All Perils Deductible" onChange={handleAllPerilsDeductibleChange}>
+              <MenuItem value={'$500'}>$500</MenuItem>
+              <MenuItem value={'$1,000'}>$1,000</MenuItem>
+              <MenuItem value={'n/a'}>n/a</MenuItem>
+              <MenuItem value={'Not Covered'}>Not Covered</MenuItem>
+              <MenuItem value={'Declined'}>Declined</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={3}>
+          <FormControl margin="normal">
+            <FormLabel className='titleStyle'>Collision Deductible:</FormLabel>
+            <Select value={collisionDeductible} label="Collision Deductible" onChange={handleCollisionDeductibleChange}>
+              <MenuItem value={'$500'}>$500</MenuItem>
+              <MenuItem value={'$1,000'}>$1,000</MenuItem>
+              <MenuItem value={'n/a'}>n/a</MenuItem>
+              <MenuItem value={'Not Covered'}>Not Covered</MenuItem>
+              <MenuItem value={'Declined'}>Declined</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={4}>
+          <FormControl margin="normal">
+            <FormLabel className='titleStyle'>Comprehensive Deductible:</FormLabel>
+            <Select value={comprehensiveDeductible} label="Comprehensive Deductible" onChange={handleComprehensiveDeductibleChange}>
+              <MenuItem value={'$500'}>$500</MenuItem>
+              <MenuItem value={'$1,000'}>$1,000</MenuItem>
+              <MenuItem value={'n/a'}>n/a</MenuItem>
+              <MenuItem value={'Not Covered'}>Not Covered</MenuItem>
+              <MenuItem value={'Declined'}>Declined</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
+
+      <FormControl fullWidth margin="normal">
         <FormLabel className='titleStyle'>Are there any new drivers in the household?</FormLabel>
         <RadioGroup 
           row name="selectNewDrivers"
