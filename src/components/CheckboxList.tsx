@@ -6,6 +6,7 @@ import TableAddingVehicle from './TableAddingVehicle';
 import TableSubtractingVehicle from './TableSubtractingVehicle';
 import TableRemovingVehicle from './TableRemovingVehicle';
 import TableAddingDriver from './TableAddingDriver';
+import TableRemovingDriver from './TableRemovingDriver';
 import './Checkout.css';
 import { Container, Typography, Checkbox, Button, Box, FormControlLabel } from '@mui/material';
 
@@ -16,6 +17,7 @@ const ADDING_A_VEHICLE = 'Adding a Vehicle';
 const SUBTRACTING_VEHICLE = 'Subtracting a Vehicle';
 const REMOVING_VEHICLE = 'Removing a Vehicle';
 const ADDING_A_DRIVER = 'Adding a Driver';
+const REMOVING_A_DRIVER = 'Removing a Driver - in progress';
 
 const items = {
   [GENERATE_NOTE]: false,
@@ -25,6 +27,7 @@ const items = {
   [SUBTRACTING_VEHICLE]: false,
   [REMOVING_VEHICLE]: false,
   [ADDING_A_DRIVER]: false,
+  [REMOVING_A_DRIVER]: false,
 };
 
 const CheckBoxList: React.FC = () => {
@@ -37,6 +40,7 @@ const CheckBoxList: React.FC = () => {
       [SUBTRACTING_VEHICLE]: false,
       [REMOVING_VEHICLE]: false,
       [ADDING_A_DRIVER]: false,
+      [REMOVING_A_DRIVER]: false,
     };
     const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>(items);
     const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -82,6 +86,8 @@ const CheckBoxList: React.FC = () => {
                 return <TableRemovingVehicle itemId="removingVehicle" />;
             case ADDING_A_DRIVER:
                 return <TableAddingDriver itemId="addingADriver" />;
+            case REMOVING_A_DRIVER:
+                return <TableRemovingDriver itemId="removingADriver" />;
             default:
            return <div>Item not found.</div>;
         }
@@ -181,6 +187,18 @@ const CheckBoxList: React.FC = () => {
             />
             <Box sx={{ width: '100px', textAlign: 'center' }}>
               <Button variant="outlined" disabled={!checkedItems[ADDING_A_DRIVER]} onClick={() => handleEditClick(ADDING_A_DRIVER)}>
+                Edit
+              </Button>
+            </Box>
+          </Box>
+          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+            <FormControlLabel
+              control={<Checkbox checked={checkedItems[REMOVING_A_DRIVER]} onChange={() => handleCheckboxChange(REMOVING_A_DRIVER)} id="checkbox-removing-vehicle" />}
+              label={REMOVING_A_DRIVER}
+              sx={{ flexGrow: 1, marginRight: 10 }}
+            />
+            <Box sx={{ width: '100px', textAlign: 'center' }}>
+              <Button variant="outlined" disabled={!checkedItems[REMOVING_A_DRIVER]} onClick={() => handleEditClick(REMOVING_A_DRIVER)}>
                 Edit
               </Button>
             </Box>
