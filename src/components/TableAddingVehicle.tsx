@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './Table.css';
-import { TextField, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Button, TextareaAutosize, FormGroup, Grid, MenuItem } from '@mui/material';
+import { TextField, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Button, TextareaAutosize, FormGroup, Grid, MenuItem, Checkbox } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import {
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-  Paper, Box
-} from '@mui/material';
+import {Paper, Box } from '@mui/material';
 
 interface ItemTableProps {
   itemId: string;
-}
-
-interface NewDriver {
-  name: string;
-  insuranceCarrier: string;
-  policyNumber: string;
 }
 
 const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
@@ -47,14 +38,17 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
     const [allPerilsDeductible, setAllPerilsDeductible] = useState('');
     const [collisionDeductible, setCollisionDeductible] = useState('');
     const [comprehensiveDeductible, setComprehensiveDeductible] = useState('');
-    
-    const [selectAddressChangeDriverEffect, setSelectAddressChangeDriverEffect] = useState('');
-    const [addressChangeDriverEffect, setAddressChangeDriverEffect] = useState('');
-    const [selectNewDrivers, setSelectNewDrivers] = useState('');
+    const [selectAccidentBenefitsBuyUps, setSelectAccidentBenefitsBuyUps] = useState('');
+    const [accidentForgiveness, setAccidentForgiveness] = useState('');
+    const [opcf20, setOpcf20] = useState(false);
+    const [opcf20Limit, setOpcf20Limit] = useState('');
+    const [opcf27, setOpcf27] = useState(false);
+    const [opcf27Limit, setOpcf27Limit] = useState('');
+    const [opcf43, setOpcf43] = useState(false);
+    const [anyOtherCoverages, setAnyOtherCoverages] = useState('');
+    const [selectVehicleChangeEffect, setSelectVehicleChangeEffect] = useState('');
+    const [vehicleChangeEffect, setVehicleChangeEffect] = useState('');
     const [additionalNotes, setAdditionalNotes] = useState('');
-    const [newDrivers, setNewDrivers] = useState<NewDriver[]>([]);
-    const [noNewDriverEffect, setNoNewDriverEffect] = useState('');
-    const [newDriverAdded, setNewDriverAdded] = useState(false);
     const [message, setMessage] = useState('');
 
     const localStorageKey = `key-${itemId}`;
@@ -92,14 +86,17 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
         setAllPerilsDeductible(savedData.allPerilsDeductible || '');
         setCollisionDeductible(savedData.collisionDeductible || '');
         setComprehensiveDeductible(savedData.comprehensiveDeductible || '');
-
-        setSelectAddressChangeDriverEffect(savedData.selectAddressChangeDriverEffect || '');
-        setAddressChangeDriverEffect(savedData.addressChangeDriverEffect || '');
+        setSelectAccidentBenefitsBuyUps(savedData.selectAccidentBenefitsBuyUps || '');
+        setAccidentForgiveness(savedData.accidentForgiveness || '');
+        setOpcf20(savedData.opcf20 || false);
+        setOpcf20Limit(savedData.opcf20Limit || '');
+        setOpcf27(savedData.opcf27 || false);
+        setOpcf27Limit(savedData.opcf27Limit || '');
+        setOpcf43(savedData.opcf43 || false);
+        setAnyOtherCoverages(savedData.anyOtherCoverages || '');
+        setSelectVehicleChangeEffect(savedData.selectVehicleChangeEffect || '');
+        setVehicleChangeEffect(savedData.vehicleChangeEffect || '');
         setAdditionalNotes(savedData.additionalNotes || '');
-        setSelectNewDrivers(savedData.selectNewDrivers || '');
-        setNewDrivers(savedData.newDrivers || []);
-        setNoNewDriverEffect(savedData.noNewDriverEffect || '');
-        setNewDriverAdded(savedData.newDrivers && savedData.newDrivers.length > 0);
       }
     }, [itemId, localStorageKey]);
 
@@ -139,13 +136,17 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
         allPerilsDeductible,
         collisionDeductible,
         comprehensiveDeductible,
-
-        selectNewDrivers,
-        selectAddressChangeDriverEffect,
-        addressChangeDriverEffect,
-        additionalNotes,
-        newDrivers,
-        noNewDriverEffect
+        selectAccidentBenefitsBuyUps,
+        accidentForgiveness,
+        opcf20,
+        opcf20Limit,
+        opcf27,
+        opcf27Limit,
+        opcf43,
+        anyOtherCoverages,
+        selectVehicleChangeEffect,
+        vehicleChangeEffect,
+        additionalNotes
       };
       localStorage.setItem(localStorageKey, JSON.stringify(dataToSave));
     };
@@ -170,58 +171,82 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
       setComprehensiveDeductible(event.target.value as string);
     };
 
-    const handleAddDriver = () => {
-        setNewDrivers([...newDrivers, { name: '', insuranceCarrier: '', policyNumber: '' }]);
-        setNewDriverAdded(true);
-    };
-
-    const handleRemoveDriver = (index: number) => {
-        const updatedDrivers = newDrivers.filter((_, i) => i !== index);
-        setNewDrivers(updatedDrivers);
-    };
-
-    const handleDriverChange = (index: number, field: string, value: string) => {
-        const updatedDrivers = newDrivers.map((driver, i) => {
-            if (i === index) {
-                return { ...driver, [field]: value };
-            }
-            return driver;
-        });
-        setNewDrivers(updatedDrivers);
-    };
-
-    const handleNewDriverSelection = (value: string) => {
-      setSelectNewDrivers(value);
-      if (value === "no") {
-          setNewDrivers([]);
-          setNewDriverAdded(false);
-      } else if (value === "yes" && newDrivers.length === 0) {
-          handleAddDriver();
-      }
-    };
-
     const handleGenerate = () => {
-        const newDriversString = newDrivers.map(driver => 
-            `New Driver Name: ${driver.name}, Insurance Carrier: ${driver.insuranceCarrier}, Policy Number: ${driver.policyNumber}`).join('\n');
         let message = `Who called/emailed and when: ${displayName} at ` + new Date().toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' }) + ' on ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
         message += `\nEffective Date of Address Change: ${selectedEffectiveDate}`;
-        message += `\nNew Address: ${year}`;
-        
-        message += `\nWill this address change affect the usage and distance driven of any of the vehicles on the policy: ${selectAnyModCusDam}`;
-        if (selectAnyModCusDam === 'yes') {
-            message += `\nChange to use and distance driven: ${anyModCusDam}`;
+
+        message += `\nVehicle Being Added: ${year} ${make} ${model} VIN: ${vin}`;
+        message += `\nWho is the registered owner of the vehicle: ${vehicleOwner}`;
+        message += `\nIs the Vehicle Leased or Financed: ${selectLeasedOrFinanced}`;
+        if (selectLeasedOrFinanced === 'leased') {
+            message += `\nLessor's Name and Mailing Address: ${lessorNameAddress}`;
+        } else if (selectLeasedOrFinanced === 'financed') {
+            message += `\nLienholder's Name and Mailing Address: ${lienholderNameAddress}`;
         }
 
-        message += `\nAre there any new drivers in the household: ${selectNewDrivers}`;
-        if (selectNewDrivers === 'yes') {
-            message += `\nNew Drivers:\n${newDriversString}`;
-        } else {
-            message += `\nDetails as to why driver not being added: ${noNewDriverEffect}`;
+        message += `\nIs the vehicle new / used / demo: ${selectNewOrUsed}`;
+        if (selectNewOrUsed === 'new' || selectNewOrUsed === 'demo') {
+            message += `\nMileage at Purchase: ${mileageAtPurchase}`;
         }
-        message += `\n`;
-        message += `\nWill the address change affect driver assignment on any of the vehicles: ${selectAddressChangeDriverEffect}`;
-        if (selectAddressChangeDriverEffect === 'yes') {
-            message += `\nPlease note any changes to driver assignment for all vehicles listed on the policy: ${addressChangeDriverEffect}`;
+
+        message += `\nAre there any modifications, customizations or existing damage: ${selectAnyModCusDam}`;
+        if (selectAnyModCusDam === 'yes') {
+            message += `\nDetails: ${anyModCusDam}`;
+        }
+
+        message += `\nWill you be using winter tires: ${selectHasWinterTires}`;
+        message += `\nPrincipal Operator of added vehicle: ${principalOperator}`;
+        message += `\nOccasional Drivers of added vehicle: ${occasionalDrivers}`;
+        message += `\nVehicle Use: ${vehicleUse}`;
+        if (vehicleUse === 'Pleasure') {
+            message += `\nTotal annual km driven: ${totalAnnualDistance}`;
+        } else if (vehicleUse === 'Commute') {
+            message += `\n1-way commute to work: ${oneWayCommuteToWork}`;
+            message += `\nTotal annual km driven: ${totalAnnualDistance}`;
+        } else if (vehicleUse === 'Business') {
+            message += `\nTotal annual km driven: ${totalAnnualDistance}`;
+            message += `\nTotal business km driven: ${totalBusinessDistance}`;
+        }
+
+        message += `\nRide sharing: ${selectRideSharing}`;
+        if (selectRideSharing === 'yes') {
+            message += `\nDetails: ${rideSharing}`;
+        }
+
+        message += `\nFood delivery: ${selectFoodDelivery}`;
+        if (selectFoodDelivery === 'yes') {
+            message += `\nDetails: ${foodDelivery}`;
+        }
+
+        message += `\nCoverage for Added Vehicle:`;
+        message += `\nLiability Limit: ${liabilityLimit}`;
+        message += `\nAll Perils Deductible: ${allPerilsDeductible}`;
+        message += `\nCollision Deductible: ${collisionDeductible}`;
+        message += `\nComprehensive Deductible: ${comprehensiveDeductible}`;
+
+        message += `\nAccident Benefits Buy-ups: ${selectAccidentBenefitsBuyUps}`;
+        if (selectAccidentBenefitsBuyUps === 'yes') {
+            message += `\nIncome Replacement: ${liabilityLimit}`;
+            message += `\nMedical, Rehabilitation and Attendant Care: ${allPerilsDeductible}`;
+            message += `\nMedical, Rehabilitation and Attendant Care - catastrophic impairment: ${collisionDeductible}`;
+            message += `\nCaregiver, Housekeeping & Home Maintenance: ${comprehensiveDeductible}`;
+        }
+
+        message += `\nAccident Forgiveness (APE): ${accidentForgiveness}`;
+        message += `\nOPCF 20: ${opcf20}`;
+        if (opcf20) {
+            message += `\nLimit: ${opcf20Limit}`;
+        }
+        message += `\nOPCF 27: ${opcf27}`;
+        if (opcf27) {
+            message += `\nLimit: ${opcf27Limit}`;
+        }
+        message += `\nOPCF 43: ${opcf43}`;
+        message += `\nAny Other Coverages: ${anyOtherCoverages}`;
+
+        message += `\nVehicle Change Effect: ${selectVehicleChangeEffect}`;
+        if (selectVehicleChangeEffect === 'yes') {
+            message += `\nChange: ${vehicleChangeEffect}`;
         }
 
         message += `\nAdditional Notes: ${additionalNotes}`;
@@ -237,19 +262,14 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
 
     const handleClear = () => {
       localStorage.removeItem(localStorageKey);
-      setMessage('');
-      setDisplayName('');
-      setSelectedEffectiveDate('');
-      setYear('');
-      setSelectAnyModCusDam('');
-      setAnyModCusDam('');
-      setSelectAddressChangeDriverEffect('');
-      setAddressChangeDriverEffect('');
-      setAdditionalNotes('');
-      setSelectNewDrivers('');
-      setNewDrivers([]);
-      setNoNewDriverEffect('');
-      setNewDriverAdded(false);
+      // setMessage('');
+      // setDisplayName('');
+      // setSelectedEffectiveDate('');
+      // setYear('');
+      // setSelectAnyModCusDam('');
+      // setAnyModCusDam('');
+      // setAdditionalNotes('');
+      window.location.reload();
     };
     
     return (
@@ -566,7 +586,7 @@ Please note transportation network, names of drivers, number of hours worked and
       <FormControl fullWidth margin="normal">
         <FormLabel className='titleStyle'>Coverage for Added Vehicle:</FormLabel>
       </FormControl>
-      <Grid container spacing={3}>
+      <Grid container spacing={1}>
         <Grid item xs={2}>
           <FormControl margin="normal">
             <FormLabel className='titleStyle'>Liability Limit:</FormLabel>
@@ -617,106 +637,116 @@ Please note transportation network, names of drivers, number of hours worked and
         </Grid>
       </Grid>
 
-      <FormControl fullWidth margin="normal">
-        <FormLabel className='titleStyle'>Are there any new drivers in the household?</FormLabel>
-        <RadioGroup 
-          row name="selectNewDrivers"
-          onChange={(e) => handleNewDriverSelection(e.target.value)}
-          >
-          <FormControlLabel
-            value="yes"
-            control={<Radio />}
-            label="Yes"
-          />
-          <FormControlLabel
-            value="no"
-            control={<Radio />}
-            label="No"
-            // defaultChecked
-          />
-        </RadioGroup>
+      <FormControl component="fieldset" margin="normal">
+        <FormGroup>
+          <FormLabel className='titleStyle'>Accident Benefits Buy-ups?</FormLabel>
+          <RadioGroup row name="selectAccidentBenefitsBuyUps" onChange={(e) => setSelectAccidentBenefitsBuyUps(e.target.value)}>
+            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+            <FormControlLabel value="no" control={<Radio />} label="No" />
+          </RadioGroup>
+        </FormGroup>
       </FormControl>
-      
-      {selectNewDrivers === 'no' && (
+      {selectAccidentBenefitsBuyUps === 'yes' && (
+        <Grid container spacing={1}>
+          <Grid item xs={2}>
+            <FormControl margin="normal">
+              <FormLabel className='titleStyle'>Income Replacement:</FormLabel>
+              <Select value={liabilityLimit} label="Liability Limit" onChange={handleLiabilityLimitChange}>
+                <MenuItem value={'Standard'}>Standard</MenuItem>
+                <MenuItem value={'$600'}>$600</MenuItem>
+                <MenuItem value={'$800'}>$800</MenuItem>
+                <MenuItem value={'$1,000'}>$1,000</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl margin="normal">
+              <FormLabel className='titleStyle'>Medical, Rehabilitation and Attendant Care:</FormLabel>
+              <Select value={allPerilsDeductible} label="All Perils Deductible" onChange={handleAllPerilsDeductibleChange}>
+              <MenuItem value={'Standard'}>Standard</MenuItem>
+                <MenuItem value={'$130K Non-Catastrophic'}>$130K Non-Catastrophic</MenuItem>
+                <MenuItem value={'$1 million All Injuries'}>$1 million All Injuries</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={4}>
+            <FormControl margin="normal">
+              <FormLabel className='titleStyle'>Medical, Rehabilitation and Attendant Care - catastrophic impairment:</FormLabel>
+              <Select value={collisionDeductible} label="Collision Deductible" onChange={handleCollisionDeductibleChange}>
+                <MenuItem value={'Standard'}>Standard</MenuItem>
+                <MenuItem value={'Enhanced'}>Enhanced</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl margin="normal">
+              <FormLabel className='titleStyle'>Caregiver, Housekeeping & Home Maintenance:</FormLabel>
+              <Select value={comprehensiveDeductible} label="Comprehensive Deductible" onChange={handleComprehensiveDeductibleChange}>
+                <MenuItem value={'Standard'}>Standard</MenuItem>
+                <MenuItem value={'Enhanced'}>Enhanced</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+      )}
+
+      <FormControl fullWidth margin="normal" component="fieldset">
+        <FormGroup aria-label="accidentForgiveness" row>
+          <FormControlLabel value="accidentForgiveness" control={<Checkbox />} label="Accident Forgiveness (APE)"/>
+        </FormGroup>
+      </FormControl>
+
+      <FormControl fullWidth margin="normal" component="fieldset">
+        <FormGroup aria-label="opcf20" row>
+          <FormControlLabel value="opcf20" control={<Checkbox checked={opcf20} onChange={(e) => setOpcf20(e.target.checked)} />} label="OPCF 20"/>
+        </FormGroup>
+      </FormControl>
+      {opcf20 && (
         <FormControl fullWidth margin="normal">
-          <FormLabel className='titleStyle'>Details as to why driver not being added:</FormLabel>
-          <TextareaAutosize
-            minRows={3}
-            value={noNewDriverEffect}
-            onChange={(e) => setNoNewDriverEffect(e.target.value)}
-            style={{ width: '100%' }}
-          />
+          <FormLabel className='titleStyle'>Limit:</FormLabel>
+          <TextField variant="outlined" value={opcf20Limit} onChange={(e) => setOpcf20Limit(e.target.value)} fullWidth />
         </FormControl>
       )}
-      
-      {newDriverAdded && (
-             <TableContainer component={Paper} style={{ marginBottom: '20px' }}>
-             <Table>
-               <TableHead>
-                 <TableRow>
-                   <TableCell>New Driver Name</TableCell>
-                   <TableCell>Insurance Carrier</TableCell>
-                   <TableCell>Policy Number</TableCell>
-                   <TableCell>Action</TableCell>
-                 </TableRow>
-               </TableHead>
-               <TableBody>
-                 {newDrivers.map((driver, index) => (
-                   <TableRow key={index}>
-                     <TableCell>
-                       <TextField
-                         fullWidth
-                         variant="outlined"
-                         value={driver.name}
-                         onChange={(e) => handleDriverChange(index, 'name', e.target.value)}
-                       />
-                     </TableCell>
-                     <TableCell>
-                       <TextField
-                         fullWidth
-                         variant="outlined"
-                         value={driver.insuranceCarrier}
-                         onChange={(e) => handleDriverChange(index, 'insuranceCarrier', e.target.value)}
-                       />
-                     </TableCell>
-                     <TableCell>
-                       <TextField
-                         fullWidth
-                         variant="outlined"
-                         value={driver.policyNumber}
-                         onChange={(e) => handleDriverChange(index, 'policyNumber', e.target.value)}
-                       />
-                     </TableCell>
-                     <TableCell>
-                       <Button
-                         color="error"
-                         variant="contained"
-                         onClick={() => handleRemoveDriver(index)}
-                       >
-                         Remove
-                       </Button>
-                     </TableCell>
-                   </TableRow>
-                 ))}
-               </TableBody>
-             </Table>
-             <Button
-              variant="contained"
-              color="primary"
-              onClick={handleAddDriver}
-              style={{ marginTop: '10px' }}
-             >
-              Add New Driver
-            </Button> 
-           </TableContainer>
-        )}
+
+      <FormControl fullWidth margin="normal" component="fieldset">
+        <FormGroup aria-label="opcf27" row>
+          <FormControlLabel value="opcf27" control={<Checkbox checked={opcf27} onChange={(e) => setOpcf27(e.target.checked)} />} label="OPCF 27"/>
+        </FormGroup>
+      </FormControl>
+      {opcf27 && (
+        <FormControl fullWidth margin="normal">
+          <FormLabel className='titleStyle'>Limit:</FormLabel>
+          <TextField variant="outlined" value={opcf27Limit} onChange={(e) => setOpcf27Limit(e.target.value)} fullWidth />
+        </FormControl>
+      )}
+
+      <FormControl fullWidth margin="normal" component="fieldset">
+        <FormGroup aria-label="opcf43" row>
+          <FormControlLabel value="opcf43" control={<Checkbox checked={opcf43} onChange={(e) => setOpcf43(e.target.checked)} />} label="OPCF 43"/>
+        </FormGroup>
+      </FormControl>
+      {opcf43 && (
+        <FormControl fullWidth margin="normal">
+          <FormLabel className='titleStyle' style={{color: 'red', fontWeight: 'bold'}}>REMINDER: Confirm Eligibility! Attach the Bill of Sale to the file</FormLabel>
+        </FormControl>
+      )}
+
+      <FormControl fullWidth margin="normal">
+        <FormLabel className='titleStyle'>Note any other coverages here:</FormLabel>
+        <TextareaAutosize
+          minRows={4}
+          value={anyOtherCoverages}
+          onChange={(e) => setAnyOtherCoverages(e.target.value)}
+          style={{ width: '100%'}}
+        />
+      </FormControl>
 
       <FormControl component="fieldset" margin="normal">
         <FormGroup>
-          <FormLabel className='titleStyle'>Will this address change affect driver assignment on any of the vehicles?</FormLabel>
+          <FormLabel className='titleStyle'>Will vehicle addition affect the usage / distances driven or driver assignment on remaining vehicles on the policy?</FormLabel>
           <RadioGroup 
-            row name="selectAddressChangeDriverEffect"
-            onChange={(e) => setSelectAddressChangeDriverEffect(e.target.value)}
+            row name="selectVehicleChangeEffect"
+            onChange={(e) => setSelectVehicleChangeEffect(e.target.value)}
             >
             <FormControlLabel
               value="yes"
@@ -731,14 +761,13 @@ Please note transportation network, names of drivers, number of hours worked and
           </RadioGroup>
         </FormGroup>
       </FormControl>
-          
-      {selectAddressChangeDriverEffect === 'yes' && (
+      {selectVehicleChangeEffect === 'yes' && (
         <FormControl>
-          <FormLabel className='titleStyle'>Please note any changes to driver assignment for all vehicles listed on the policy:</FormLabel>
+          <FormLabel className='titleStyle'>Please note all changes:</FormLabel>
           <TextareaAutosize
             minRows={3}
-            value={addressChangeDriverEffect}
-            onChange={(e) => setAddressChangeDriverEffect(e.target.value)}
+            value={vehicleChangeEffect}
+            onChange={(e) => setVehicleChangeEffect(e.target.value)}
             style={{ width: '100%' }}
           />
         </FormControl>

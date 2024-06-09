@@ -11,7 +11,7 @@ import { Container, Typography, Checkbox, Button, Box, FormControlLabel } from '
 const GENERATE_NOTE = 'Generate Note';
 const ADDRESS_CHANGE = 'Address Change';
 const NAME_CHANGE = 'Name Change';
-const ADDING_VEHICLE = 'Adding a Vehicle - working in progress';
+const ADDING_VEHICLE = 'Adding a Vehicle';
 const SUBTRACTING_VEHICLE = 'Subtracting a Vehicle';
 const REMOVING_VEHICLE = 'Removing a Vehicle';
 
@@ -71,7 +71,7 @@ const CheckBoxList: React.FC = () => {
             case NAME_CHANGE:
                 return <TableNameChange itemId="nameChange" />;
             case ADDING_VEHICLE:
-                return <TableAddingVehicle itemId="addingVehicle" />;
+                return <TableAddingVehicle itemId="addingAVehicle" />;
             // case SUBTRACTING_VEHICLE:
             //     return <TableSubtractingVehicle itemId="subtractingVehicle" />;
             case REMOVING_VEHICLE:
