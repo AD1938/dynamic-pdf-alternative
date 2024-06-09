@@ -3,7 +3,7 @@ import TableAddressChange from './TableAddressChange';
 import TableNameChange from './TableNameChange';
 import TableGeneral from './TableGeneral';
 import TableAddingVehicle from './TableAddingVehicle';
-// import TableSubtractingVehicle from './TableSubtractingVehicle';
+import TableSubtractingVehicle from './TableSubtractingVehicle';
 import TableRemovingVehicle from './TableRemovingVehicle';
 import './Checkout.css';
 import { Container, Typography, Checkbox, Button, Box, FormControlLabel } from '@mui/material';
@@ -72,8 +72,8 @@ const CheckBoxList: React.FC = () => {
                 return <TableNameChange itemId="nameChange" />;
             case ADDING_VEHICLE:
                 return <TableAddingVehicle itemId="addingAVehicle" />;
-            // case SUBTRACTING_VEHICLE:
-            //     return <TableSubtractingVehicle itemId="subtractingVehicle" />;
+            case SUBTRACTING_VEHICLE:
+                return <TableSubtractingVehicle itemId="subtractingVehicle" />;
             case REMOVING_VEHICLE:
                 return <TableRemovingVehicle itemId="removingVehicle" />;
             default:
@@ -139,6 +139,18 @@ const CheckBoxList: React.FC = () => {
             />
             <Box sx={{ width: '100px', textAlign: 'center' }}>
               <Button variant="outlined" disabled={!checkedItems[ADDING_VEHICLE]} onClick={() => handleEditClick(ADDING_VEHICLE)}>
+                Edit
+              </Button>
+            </Box>
+          </Box>
+          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+            <FormControlLabel
+              control={<Checkbox checked={checkedItems[SUBTRACTING_VEHICLE]} onChange={() => handleCheckboxChange(SUBTRACTING_VEHICLE)} id="checkbox-name-change" />}
+              label={SUBTRACTING_VEHICLE}
+              sx={{ flexGrow: 1, marginRight: 10 }}
+            />
+            <Box sx={{ width: '100px', textAlign: 'center' }}>
+              <Button variant="outlined" disabled={!checkedItems[SUBTRACTING_VEHICLE]} onClick={() => handleEditClick(SUBTRACTING_VEHICLE)}>
                 Edit
               </Button>
             </Box>

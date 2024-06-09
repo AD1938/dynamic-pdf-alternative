@@ -15,6 +15,9 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
     const [make, setMake] = useState('');
     const [model, setModel] = useState('');
     const [vin, setVIN] = useState('');
+    const [yearRemoved, setYearRemoved] = useState('');
+    const [makeRemoved, setMakeRemoved] = useState('');
+    const [modelRemoved, setModelRemoved] = useState('');
     const [vehicleOwner, setVehicleOwner] = useState('');
     const [selectLeasedOrFinanced, setSelectLeasedOrFinanced] = useState('leased');
     const [lessorNameAddress, setLessorNameAddress] = useState('');
@@ -63,6 +66,9 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
         setMake(savedData.make || '');
         setModel(savedData.model || '');
         setVIN(savedData.vin || '');
+        setYearRemoved(savedData.yearRemoved || '');
+        setMakeRemoved(savedData.makeRemoved || '');
+        setModelRemoved(savedData.modelRemoved || '');
         setVehicleOwner(savedData.vehicleOwner || '');
         setSelectLeasedOrFinanced(savedData.selectLeasedOrFinanced || '');
         setLienholderNameAddress(savedData.lienholderNameAddress || '');
@@ -113,6 +119,9 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
         make,
         model,
         vin,
+        yearRemoved,
+        makeRemoved,
+        modelRemoved,
         vehicleOwner,
         selectLeasedOrFinanced,
         lessorNameAddress,
@@ -176,6 +185,7 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
         message += `\nEffective date of vehicle addition: ${selectedEffectiveDate}`;
 
         message += `\nVehicle Being Added: ${year} ${make} ${model} VIN: ${vin}`;
+        message += `\nVehicle Being Removed: ${yearRemoved} ${makeRemoved} ${modelRemoved}`;
         message += `\nWho is the registered owner of the vehicle: ${vehicleOwner}`;
         message += `\nIs the Vehicle Leased or Financed: ${selectLeasedOrFinanced}`;
         if (selectLeasedOrFinanced === 'leased') {
@@ -308,7 +318,7 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
         </FormControl>
 
         <FormControl fullWidth margin="normal">
-          <FormLabel className='titleStyle'>Vehicle being added:</FormLabel>
+          <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>Vehicle being added:</FormLabel>
         </FormControl>
         <Grid container spacing={3}>
           <Grid item xs={3}>
@@ -351,6 +361,45 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
                 variant="outlined"
                 value={vin}
                 onChange={(e) => setVIN(e.target.value)}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
+
+        <FormControl fullWidth margin="normal">
+          <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>Vehicle being removed:</FormLabel>
+        </FormControl>
+        <Grid container spacing={3}>
+          <Grid item xs={3}>
+            <FormControl margin="normal">
+              <FormLabel className='titleStyle'>Year:</FormLabel>
+              <TextField
+                variant="outlined"
+                value={yearRemoved}
+                onChange={(e) => setYearRemoved(e.target.value)}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl margin="normal">
+              <FormLabel className='titleStyle'>Make:</FormLabel>
+              <TextField
+                variant="outlined"
+                value={makeRemoved}
+                onChange={(e) => setMakeRemoved(e.target.value)}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl margin="normal">
+              <FormLabel className='titleStyle'>Model:</FormLabel>
+              <TextField
+                variant="outlined"
+                value={modelRemoved}
+                onChange={(e) => setModelRemoved(e.target.value)}
                 fullWidth
               />
             </FormControl>
