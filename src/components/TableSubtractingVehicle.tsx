@@ -296,26 +296,31 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
       }}
     >
 
-        <FormControl fullWidth margin="normal">
-          <FormLabel className='titleStyle'>Who called/emailed:</FormLabel>
-          <TextField
-            variant="outlined"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-            fullWidth
-          />
-        </FormControl>
-
-        <FormControl fullWidth margin="normal">
-          <FormLabel className='titleStyle'>Effective date of vehicle addition:</FormLabel>
-          <TextField
-            type="date"
-            variant="outlined"
-            value={selectedEffectiveDate.split('T')[0]}
-            onChange={(e) => setSelectedEffectiveDate(e.target.value)}
-            fullWidth
-          />
-        </FormControl>
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <FormControl fullWidth margin="normal">
+              <FormLabel className='titleStyle'>Who called/emailed:</FormLabel>
+              <TextField
+                variant="outlined"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={6}>
+            <FormControl fullWidth margin="normal">
+              <FormLabel className='titleStyle'>Effective date of vehicle addition:</FormLabel>
+                <TextField
+                  type="date"
+                  variant="outlined"
+                  value={selectedEffectiveDate.split('T')[0]}
+                  onChange={(e) => setSelectedEffectiveDate(e.target.value)}
+                  fullWidth
+                />
+            </FormControl>
+          </Grid>
+        </Grid>
 
         <FormControl fullWidth margin="normal">
           <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>Vehicle being added:</FormLabel>

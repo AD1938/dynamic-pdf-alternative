@@ -274,39 +274,43 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
     
     return (
       <Paper
-      sx={{
-        backgroundColor: '#white',
-        borderRadius: '8px',
-        p: '30px', // shorthand for padding
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-        fontFamily: 'Arial, sans-serif',
-        maxWidth: '800px',
-        mx: 'auto', // shorthand for margin left and right auto
-        my: 2 // shorthand for margin top and bottom 20px
-      }}
-    >
-
-        <FormControl fullWidth margin="normal">
-          <FormLabel className='titleStyle'>Who called/emailed:</FormLabel>
-          <TextField
-            variant="outlined"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-            fullWidth
-          />
-        </FormControl>
-
-        <FormControl fullWidth margin="normal">
-          <FormLabel className='titleStyle'>Effective date of vehicle addition:</FormLabel>
-          <TextField
-            type="date"
-            variant="outlined"
-            value={selectedEffectiveDate.split('T')[0]}
-            onChange={(e) => setSelectedEffectiveDate(e.target.value)}
-            fullWidth
-          />
-        </FormControl>
-
+        sx={{
+          backgroundColor: '#white',
+          borderRadius: '8px',
+          p: '30px', // shorthand for padding
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          fontFamily: 'Arial, sans-serif',
+          maxWidth: '800px',
+          mx: 'auto', // shorthand for margin left and right auto
+          my: 2 // shorthand for margin top and bottom 20px
+        }}
+      >
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <FormControl fullWidth margin="normal">
+              <FormLabel className='titleStyle'>Who called/emailed:</FormLabel>
+              <TextField
+                variant="outlined"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={6}>
+            <FormControl fullWidth margin="normal">
+              <FormLabel className='titleStyle'>Effective date of vehicle addition:</FormLabel>
+                <TextField
+                  type="date"
+                  variant="outlined"
+                  value={selectedEffectiveDate.split('T')[0]}
+                  onChange={(e) => setSelectedEffectiveDate(e.target.value)}
+                  fullWidth
+                />
+            </FormControl>
+          </Grid>
+        </Grid>
+        
         <FormControl fullWidth margin="normal">
           <FormLabel className='titleStyle'>Vehicle being added:</FormLabel>
         </FormControl>

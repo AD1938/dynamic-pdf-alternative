@@ -5,23 +5,26 @@ import TableGeneral from './TableGeneral';
 import TableAddingVehicle from './TableAddingVehicle';
 import TableSubtractingVehicle from './TableSubtractingVehicle';
 import TableRemovingVehicle from './TableRemovingVehicle';
+import TableAddingDriver from './TableAddingDriver';
 import './Checkout.css';
 import { Container, Typography, Checkbox, Button, Box, FormControlLabel } from '@mui/material';
 
 const GENERATE_NOTE = 'Generate Note';
 const ADDRESS_CHANGE = 'Address Change';
 const NAME_CHANGE = 'Name Change';
-const ADDING_VEHICLE = 'Adding a Vehicle';
+const ADDING_A_VEHICLE = 'Adding a Vehicle';
 const SUBTRACTING_VEHICLE = 'Subtracting a Vehicle';
 const REMOVING_VEHICLE = 'Removing a Vehicle';
+const ADDING_A_DRIVER = 'Adding a Driver';
 
 const items = {
   [GENERATE_NOTE]: false,
   [ADDRESS_CHANGE]: false,
   [NAME_CHANGE]: false,
-  [ADDING_VEHICLE]: false,
+  [ADDING_A_VEHICLE]: false,
   [SUBTRACTING_VEHICLE]: false,
   [REMOVING_VEHICLE]: false,
+  [ADDING_A_DRIVER]: false,
 };
 
 const CheckBoxList: React.FC = () => {
@@ -30,9 +33,10 @@ const CheckBoxList: React.FC = () => {
       [GENERATE_NOTE]: false,
       [ADDRESS_CHANGE]: false,
       [NAME_CHANGE]: false,
-      [ADDING_VEHICLE]: false,
+      [ADDING_A_VEHICLE]: false,
       [SUBTRACTING_VEHICLE]: false,
       [REMOVING_VEHICLE]: false,
+      [ADDING_A_DRIVER]: false,
     };
     const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>(items);
     const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -70,12 +74,14 @@ const CheckBoxList: React.FC = () => {
                 return <TableAddressChange itemId="addressChange" />;
             case NAME_CHANGE:
                 return <TableNameChange itemId="nameChange" />;
-            case ADDING_VEHICLE:
+            case ADDING_A_VEHICLE:
                 return <TableAddingVehicle itemId="addingAVehicle" />;
             case SUBTRACTING_VEHICLE:
                 return <TableSubtractingVehicle itemId="subtractingVehicle" />;
             case REMOVING_VEHICLE:
                 return <TableRemovingVehicle itemId="removingVehicle" />;
+            case ADDING_A_DRIVER:
+                return <TableAddingDriver itemId="addingADriver" />;
             default:
            return <div>Item not found.</div>;
         }
@@ -133,12 +139,12 @@ const CheckBoxList: React.FC = () => {
           </Box>
           <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
             <FormControlLabel
-              control={<Checkbox checked={checkedItems[ADDING_VEHICLE]} onChange={() => handleCheckboxChange(ADDING_VEHICLE)} id="checkbox-name-change" />}
-              label={ADDING_VEHICLE}
+              control={<Checkbox checked={checkedItems[ADDING_A_VEHICLE]} onChange={() => handleCheckboxChange(ADDING_A_VEHICLE)} id="checkbox-name-change" />}
+              label={ADDING_A_VEHICLE}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
             <Box sx={{ width: '100px', textAlign: 'center' }}>
-              <Button variant="outlined" disabled={!checkedItems[ADDING_VEHICLE]} onClick={() => handleEditClick(ADDING_VEHICLE)}>
+              <Button variant="outlined" disabled={!checkedItems[ADDING_A_VEHICLE]} onClick={() => handleEditClick(ADDING_A_VEHICLE)}>
                 Edit
               </Button>
             </Box>
@@ -167,7 +173,21 @@ const CheckBoxList: React.FC = () => {
               </Button>
             </Box>
           </Box>
+          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+            <FormControlLabel
+              control={<Checkbox checked={checkedItems[ADDING_A_DRIVER]} onChange={() => handleCheckboxChange(ADDING_A_DRIVER)} id="checkbox-removing-vehicle" />}
+              label={ADDING_A_DRIVER}
+              sx={{ flexGrow: 1, marginRight: 10 }}
+            />
+            <Box sx={{ width: '100px', textAlign: 'center' }}>
+              <Button variant="outlined" disabled={!checkedItems[ADDING_A_DRIVER]} onClick={() => handleEditClick(ADDING_A_DRIVER)}>
+                Edit
+              </Button>
+            </Box>
+          </Box>
         </Box>
+
+        <br />
         <Button variant="contained" color="primary" onClick={handleResetAll} sx={{ margintop: 2 }}>
           Reset All
         </Button>
