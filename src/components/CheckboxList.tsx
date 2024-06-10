@@ -9,9 +9,12 @@ import TableAddingDriver from './TableAddingDriver';
 import TableRemovingDriver from './TableRemovingDriver';
 import TableAddRemoveAmendInterestedParty from './TableAddRemoveAmendInterestedParty';
 import './Checkout.css';
-import { Container, Typography, Checkbox, Button, Box, FormControlLabel } from '@mui/material';
+import { Container, Typography, Checkbox, Button, Box, FormControlLabel, Grid } from '@mui/material';
 
+// General Note
 const GENERATE_NOTE = 'Generate Note';
+
+// Auto Policy Change
 const ADDRESS_CHANGE = 'Address Change';
 const NAME_CHANGE = 'Name Change';
 const ADDING_A_VEHICLE = 'Adding a Vehicle';
@@ -21,31 +24,19 @@ const ADDING_A_DRIVER = 'Adding a Driver';
 const REMOVING_A_DRIVER = 'Removing a Driver';
 const ADD_REMOVE_AMEND_INTERESTED_PARTY = 'Add, Remove, Amend Interested Party';
 
-// const items = {
-//   [GENERATE_NOTE]: false,
-//   [ADDRESS_CHANGE]: false,
-//   [NAME_CHANGE]: false,
-//   [ADDING_A_VEHICLE]: false,
-//   [SUBTRACTING_VEHICLE]: false,
-//   [REMOVING_VEHICLE]: false,
-//   [ADDING_A_DRIVER]: false,
-//   [REMOVING_A_DRIVER]: false,
-//   [ADD_REMOVE_AMEND_INTERESTED_PARTY]: false
-// };
+// Property Change  
+const ADDING_A_NAMED_INSURED = "Adding a Named Insured";
+const ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS = "Adding or Subbing a Location - Homeowners";
+const ADDING_OR_SUBBING_A_LOCATION_CONDO = "Adding or Subbing a Location - Condo"; 
+const ADDING_OR_SUBBING_A_LOCATION_TENATNS = "Adding or Subbing a Location - Tenants"; 
+const REMOVING_A_LOCATION = "Removing a Location";
+const AMEND_COVERAGE = "Amend Coverage"; 
+const ADD_REMOVE_AMEND_MORTAGEE = "Add, Remove, Amend Mortgagee"; 
+const ADD_DISCOUNT = "Add Discount";
 
 const CheckBoxList: React.FC = () => {
 
-    // const initialCheckedState =  {
-    //   [GENERATE_NOTE]: false,
-    //   [ADDRESS_CHANGE]: false,
-    //   [NAME_CHANGE]: false,
-    //   [ADDING_A_VEHICLE]: false,
-    //   [SUBTRACTING_VEHICLE]: false,
-    //   [REMOVING_VEHICLE]: false,
-    //   [ADDING_A_DRIVER]: false,
-    //   [REMOVING_A_DRIVER]: false,
-    //   [ADD_REMOVE_AMEND_INTERESTED_PARTY]: false
-    // };
+
     const items = {
       [GENERATE_NOTE]: false,
       [ADDRESS_CHANGE]: false,
@@ -55,7 +46,15 @@ const CheckBoxList: React.FC = () => {
       [REMOVING_VEHICLE]: false,
       [ADDING_A_DRIVER]: false,
       [REMOVING_A_DRIVER]: false,
-      [ADD_REMOVE_AMEND_INTERESTED_PARTY]: false
+      [ADD_REMOVE_AMEND_INTERESTED_PARTY]: false,
+      [ADDING_A_NAMED_INSURED]: false,
+      [ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS]: false,
+      [ADDING_OR_SUBBING_A_LOCATION_CONDO]: false,
+      [ADDING_OR_SUBBING_A_LOCATION_TENATNS]: false,
+      [REMOVING_A_LOCATION]: false,
+      [AMEND_COVERAGE]: false,
+      [ADD_REMOVE_AMEND_MORTAGEE]: false,
+      [ADD_DISCOUNT]: false
     };
     const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>(items);
     const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -111,10 +110,7 @@ const CheckBoxList: React.FC = () => {
     };
 
     return (
-      <Container maxWidth="md" sx={{ marginTop: 2 }}>
-        {/* <Button variant="contained" color="primary" onClick={handleResetAll} sx={{ marginBottom: 2 }}>
-                Reset All
-        </Button> */}
+      <Container maxWidth="xl" sx={{ marginTop: 2 }}>
         <Typography variant="h4" gutterBottom marginTop='30px'>
           General Note Change
         </Typography>
@@ -132,6 +128,8 @@ const CheckBoxList: React.FC = () => {
             </Box>
           </Box>
         </Box>
+        <Grid container spacing={3} justifyContent="center"> 
+          <Grid item xs={6}>
         <Typography variant="h4" gutterBottom marginTop='25px'>
           Auto Policy Change
         </Typography>
@@ -233,7 +231,113 @@ const CheckBoxList: React.FC = () => {
             </Box>
           </Box>
         </Box>
+        </Grid> 
+        <Grid item xs={6}>
+        <Typography variant="h4" gutterBottom marginTop='25px'>
+          Property Policy Change
+        </Typography>
+        <Box display="flex" flexDirection="column" gap={1}>
+        <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+            <FormControlLabel
+              control={<Checkbox checked={checkedItems[ADDING_A_NAMED_INSURED]} onChange={() => handleCheckboxChange(ADDING_A_NAMED_INSURED)} id="checkbox-adding-a-named-insured" />}
+              label={ADDING_A_NAMED_INSURED}
+              sx={{ flexGrow: 1, marginRight: 10 }}
+            />
+            <Box sx={{ width: '100px', textAlign: 'center' }}>
+              <Button variant="outlined" disabled={!checkedItems[ADDING_A_NAMED_INSURED]} onClick={() => handleEditClick(ADDING_A_NAMED_INSURED)}>
+                Edit
+              </Button>
+            </Box>
+          </Box>
+          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+            <FormControlLabel
+              control={<Checkbox checked={checkedItems[ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS]} onChange={() => handleCheckboxChange(ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS)} id="checkbox-adding-or-subbing-a-location-homeowners" />}
+              label={ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS}
+              sx={{ flexGrow: 1, marginRight: 10 }}
+            />
+            <Box sx={{ width: '100px', textAlign: 'center' }}>
+              <Button variant="outlined" disabled={!checkedItems[ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS]} onClick={() => handleEditClick(ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS)}>
+                Edit
+              </Button>
+            </Box>
+          </Box>
+          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+            <FormControlLabel
+              control={<Checkbox checked={checkedItems[ADDING_OR_SUBBING_A_LOCATION_CONDO]} onChange={() => handleCheckboxChange(ADDING_OR_SUBBING_A_LOCATION_CONDO)} id="checkbox-adding-or-subbing-a-location-condo" />}
+              label={ADDING_OR_SUBBING_A_LOCATION_CONDO}
+              sx={{ flexGrow: 1, marginRight: 10 }}
+            />
+            <Box sx={{ width: '100px', textAlign: 'center' }}>
+              <Button variant="outlined" disabled={!checkedItems[ADDING_OR_SUBBING_A_LOCATION_CONDO]} onClick={() => handleEditClick(ADDING_OR_SUBBING_A_LOCATION_CONDO)}>
+                Edit
+              </Button>
+            </Box>
+          </Box>
+          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+            <FormControlLabel
+              control={<Checkbox checked={checkedItems[ADDING_OR_SUBBING_A_LOCATION_TENATNS]} onChange={() => handleCheckboxChange(ADDING_OR_SUBBING_A_LOCATION_TENATNS)} id="checkbox-adding-or-subbing-a-location-tenants" />}
+              label={ADDING_OR_SUBBING_A_LOCATION_TENATNS}
+              sx={{ flexGrow: 1, marginRight: 10 }}
+            />
+            <Box sx={{ width: '100px', textAlign: 'center' }}>
+              <Button variant="outlined" disabled={!checkedItems[ADDING_OR_SUBBING_A_LOCATION_TENATNS]} onClick={() => handleEditClick(ADDING_OR_SUBBING_A_LOCATION_TENATNS)}>
+                Edit
+              </Button>
+            </Box>
+          </Box>
+          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+            <FormControlLabel
+              control={<Checkbox checked={checkedItems[REMOVING_A_LOCATION]} onChange={() => handleCheckboxChange(REMOVING_A_LOCATION)} id="checkbox-removing-a-location" />}
+              label={REMOVING_A_LOCATION}
+              sx={{ flexGrow: 1, marginRight: 10 }}
+            />
+            <Box sx={{ width: '100px', textAlign: 'center' }}>
+              <Button variant="outlined" disabled={!checkedItems[REMOVING_A_LOCATION]} onClick={() => handleEditClick(REMOVING_A_LOCATION)}>
+                Edit
+              </Button>
+            </Box>
+          </Box>
 
+        
+        <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+          <FormControlLabel
+            control={<Checkbox checked={checkedItems[AMEND_COVERAGE]} onChange={() => handleCheckboxChange(AMEND_COVERAGE)} id="checkbox-amend-coverage" />}
+            label={AMEND_COVERAGE}
+            sx={{ flexGrow: 1, marginRight: 10 }}
+          />
+          <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Button variant="outlined" disabled={!checkedItems[AMEND_COVERAGE]} onClick={() => handleEditClick(AMEND_COVERAGE)}>
+              Edit
+            </Button>
+          </Box>
+        </Box>
+        <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+          <FormControlLabel
+            control={<Checkbox checked={checkedItems[ADD_REMOVE_AMEND_MORTAGEE]} onChange={() => handleCheckboxChange(ADD_REMOVE_AMEND_MORTAGEE)} id="checkbox-add-remove-amend-mortagee" />}
+            label={ADD_REMOVE_AMEND_MORTAGEE}
+            sx={{ flexGrow: 1, marginRight: 10 }}
+          />
+          <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Button variant="outlined" disabled={!checkedItems[ADD_REMOVE_AMEND_MORTAGEE]} onClick={() => handleEditClick(ADD_REMOVE_AMEND_MORTAGEE)}>
+              Edit
+            </Button>
+          </Box>
+        </Box>
+        <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+          <FormControlLabel
+            control={<Checkbox checked={checkedItems[ADD_DISCOUNT]} onChange={() => handleCheckboxChange(ADD_DISCOUNT)} id="checkbox-add-discount" />}
+            label={ADD_DISCOUNT}
+            sx={{ flexGrow: 1, marginRight: 10 }}
+          />
+          <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Button variant="outlined" disabled={!checkedItems[ADD_DISCOUNT]} onClick={() => handleEditClick(ADD_DISCOUNT)}>
+              Edit
+            </Button>
+          </Box>
+          </Box>
+       </Box>
+          </Grid>
+          </Grid>
         <br />
         <Button variant="contained" color="primary" onClick={handleResetAll} sx={{ margintop: 2 }}>
           Reset All
