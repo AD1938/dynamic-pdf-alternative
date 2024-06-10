@@ -7,6 +7,7 @@ import TableSubtractingVehicle from './TableSubtractingVehicle';
 import TableRemovingVehicle from './TableRemovingVehicle';
 import TableAddingDriver from './TableAddingDriver';
 import TableRemovingDriver from './TableRemovingDriver';
+import TableAddRemoveAmendInterestedParty from './TableAddRemoveAmendInterestedParty';
 import './Checkout.css';
 import { Container, Typography, Checkbox, Button, Box, FormControlLabel } from '@mui/material';
 
@@ -18,21 +19,34 @@ const SUBTRACTING_VEHICLE = 'Subtracting a Vehicle';
 const REMOVING_VEHICLE = 'Removing a Vehicle';
 const ADDING_A_DRIVER = 'Adding a Driver';
 const REMOVING_A_DRIVER = 'Removing a Driver';
+const ADD_REMOVE_AMEND_INTERESTED_PARTY = 'Add, Remove, Amend Interested Party';
 
-const items = {
-  [GENERATE_NOTE]: false,
-  [ADDRESS_CHANGE]: false,
-  [NAME_CHANGE]: false,
-  [ADDING_A_VEHICLE]: false,
-  [SUBTRACTING_VEHICLE]: false,
-  [REMOVING_VEHICLE]: false,
-  [ADDING_A_DRIVER]: false,
-  [REMOVING_A_DRIVER]: false,
-};
+// const items = {
+//   [GENERATE_NOTE]: false,
+//   [ADDRESS_CHANGE]: false,
+//   [NAME_CHANGE]: false,
+//   [ADDING_A_VEHICLE]: false,
+//   [SUBTRACTING_VEHICLE]: false,
+//   [REMOVING_VEHICLE]: false,
+//   [ADDING_A_DRIVER]: false,
+//   [REMOVING_A_DRIVER]: false,
+//   [ADD_REMOVE_AMEND_INTERESTED_PARTY]: false
+// };
 
 const CheckBoxList: React.FC = () => {
 
-    const initialCheckedState =  {
+    // const initialCheckedState =  {
+    //   [GENERATE_NOTE]: false,
+    //   [ADDRESS_CHANGE]: false,
+    //   [NAME_CHANGE]: false,
+    //   [ADDING_A_VEHICLE]: false,
+    //   [SUBTRACTING_VEHICLE]: false,
+    //   [REMOVING_VEHICLE]: false,
+    //   [ADDING_A_DRIVER]: false,
+    //   [REMOVING_A_DRIVER]: false,
+    //   [ADD_REMOVE_AMEND_INTERESTED_PARTY]: false
+    // };
+    const items = {
       [GENERATE_NOTE]: false,
       [ADDRESS_CHANGE]: false,
       [NAME_CHANGE]: false,
@@ -41,6 +55,7 @@ const CheckBoxList: React.FC = () => {
       [REMOVING_VEHICLE]: false,
       [ADDING_A_DRIVER]: false,
       [REMOVING_A_DRIVER]: false,
+      [ADD_REMOVE_AMEND_INTERESTED_PARTY]: false
     };
     const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>(items);
     const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -66,7 +81,7 @@ const CheckBoxList: React.FC = () => {
       localStorage.clear();
 
       // Reset checked items and selected item ID
-      setCheckedItems(initialCheckedState);
+      setCheckedItems(items);
       setSelectedItemId(null);
     };
 
@@ -88,6 +103,8 @@ const CheckBoxList: React.FC = () => {
                 return <TableAddingDriver itemId="addingADriver" />;
             case REMOVING_A_DRIVER:
                 return <TableRemovingDriver itemId="removingADriver" />;
+            case ADD_REMOVE_AMEND_INTERESTED_PARTY:
+                return <TableAddRemoveAmendInterestedParty itemId="addRemoveAmendInterestedParty" />;
             default:
            return <div>Item not found.</div>;
         }
@@ -199,6 +216,18 @@ const CheckBoxList: React.FC = () => {
             />
             <Box sx={{ width: '100px', textAlign: 'center' }}>
               <Button variant="outlined" disabled={!checkedItems[REMOVING_A_DRIVER]} onClick={() => handleEditClick(REMOVING_A_DRIVER)}>
+                Edit
+              </Button>
+            </Box>
+          </Box>
+          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+            <FormControlLabel
+              control={<Checkbox checked={checkedItems[ADD_REMOVE_AMEND_INTERESTED_PARTY]} onChange={() => handleCheckboxChange(ADD_REMOVE_AMEND_INTERESTED_PARTY)} id="checkbox-removing-vehicle" />}
+              label={ADD_REMOVE_AMEND_INTERESTED_PARTY}
+              sx={{ flexGrow: 1, marginRight: 10 }}
+            />
+            <Box sx={{ width: '100px', textAlign: 'center' }}>
+              <Button variant="outlined" disabled={!checkedItems[ADD_REMOVE_AMEND_INTERESTED_PARTY]} onClick={() => handleEditClick(ADD_REMOVE_AMEND_INTERESTED_PARTY)}>
                 Edit
               </Button>
             </Box>
