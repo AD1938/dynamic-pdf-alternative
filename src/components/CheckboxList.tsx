@@ -8,6 +8,7 @@ import TableRemovingVehicle from './TableRemovingVehicle';
 import TableAddingDriver from './TableAddingDriver';
 import TableRemovingDriver from './TableRemovingDriver';
 import TableAddRemoveAmendInterestedParty from './TableAddRemoveAmendInterestedParty';
+import TableAmendCoverage from './TableAmendCoverage';
 import './Checkout.css';
 import { Container, Typography, Checkbox, Button, Box, FormControlLabel, Grid } from '@mui/material';
 
@@ -23,6 +24,7 @@ const REMOVING_VEHICLE = 'Removing a Vehicle';
 const ADDING_A_DRIVER = 'Adding a Driver';
 const REMOVING_A_DRIVER = 'Removing a Driver';
 const ADD_REMOVE_AMEND_INTERESTED_PARTY = 'Add, Remove, Amend Interested Party';
+const AMEND_COVERAGE = 'Amend Coverage - in progress';
 
 // Property Change  
 const ADDING_A_NAMED_INSURED = "Adding a Named Insured";
@@ -30,12 +32,10 @@ const ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS = "Adding or Subbing a Location - 
 const ADDING_OR_SUBBING_A_LOCATION_CONDO = "Adding or Subbing a Location - Condo"; 
 const ADDING_OR_SUBBING_A_LOCATION_TENATNS = "Adding or Subbing a Location - Tenants"; 
 const REMOVING_A_LOCATION = "Removing a Location";
-const AMEND_COVERAGE = "Amend Coverage"; 
 const ADD_REMOVE_AMEND_MORTAGEE = "Add, Remove, Amend Mortgagee"; 
 const ADD_DISCOUNT = "Add Discount";
 
 const CheckBoxList: React.FC = () => {
-
 
     const items = {
       [GENERATE_NOTE]: false,
@@ -47,12 +47,12 @@ const CheckBoxList: React.FC = () => {
       [ADDING_A_DRIVER]: false,
       [REMOVING_A_DRIVER]: false,
       [ADD_REMOVE_AMEND_INTERESTED_PARTY]: false,
+      [AMEND_COVERAGE]: false,
       [ADDING_A_NAMED_INSURED]: false,
       [ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS]: false,
       [ADDING_OR_SUBBING_A_LOCATION_CONDO]: false,
       [ADDING_OR_SUBBING_A_LOCATION_TENATNS]: false,
       [REMOVING_A_LOCATION]: false,
-      [AMEND_COVERAGE]: false,
       [ADD_REMOVE_AMEND_MORTAGEE]: false,
       [ADD_DISCOUNT]: false
     };
@@ -104,6 +104,8 @@ const CheckBoxList: React.FC = () => {
                 return <TableRemovingDriver itemId="removingADriver" />;
             case ADD_REMOVE_AMEND_INTERESTED_PARTY:
                 return <TableAddRemoveAmendInterestedParty itemId="addRemoveAmendInterestedParty" />;
+            case AMEND_COVERAGE:
+                return <TableAmendCoverage itemId="amendCoverage" />;
             default:
            return <div>Item not found.</div>;
         }
@@ -226,6 +228,18 @@ const CheckBoxList: React.FC = () => {
             />
             <Box sx={{ width: '100px', textAlign: 'center' }}>
               <Button variant="outlined" disabled={!checkedItems[ADD_REMOVE_AMEND_INTERESTED_PARTY]} onClick={() => handleEditClick(ADD_REMOVE_AMEND_INTERESTED_PARTY)}>
+                Edit
+              </Button>
+            </Box>
+          </Box>
+          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+            <FormControlLabel
+              control={<Checkbox checked={checkedItems[AMEND_COVERAGE]} onChange={() => handleCheckboxChange(AMEND_COVERAGE)} id="checkbox-removing-vehicle" />}
+              label={AMEND_COVERAGE}
+              sx={{ flexGrow: 1, marginRight: 10 }}
+            />
+            <Box sx={{ width: '100px', textAlign: 'center' }}>
+              <Button variant="outlined" disabled={!checkedItems[AMEND_COVERAGE]} onClick={() => handleEditClick(AMEND_COVERAGE)}>
                 Edit
               </Button>
             </Box>
