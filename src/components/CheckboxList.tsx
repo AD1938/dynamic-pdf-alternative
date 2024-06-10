@@ -17,7 +17,7 @@ const ADDING_A_VEHICLE = 'Adding a Vehicle';
 const SUBTRACTING_VEHICLE = 'Subtracting a Vehicle';
 const REMOVING_VEHICLE = 'Removing a Vehicle';
 const ADDING_A_DRIVER = 'Adding a Driver';
-const REMOVING_A_DRIVER = 'Removing a Driver - in progress';
+const REMOVING_A_DRIVER = 'Removing a Driver';
 
 const items = {
   [GENERATE_NOTE]: false,

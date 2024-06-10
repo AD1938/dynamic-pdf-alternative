@@ -11,22 +11,13 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
     const [displayName, setDisplayName] = useState('');
     const [selectedEffectiveDate, setSelectedEffectiveDate] = useState('');
     const [driverLegalName, setDriverLegalName] = useState('');
-    const [driverLicense, setDriverLicense] = useState('');
-    const [selectedDriveryDOB, setSelectedDriveryDOB] = useState('');
-    const [driverRelationship, setDriverRelationship] = useState('');
-    const [driverMaritalStatus, setDriverMaritalStatus] = useState('married');
-    const [selectSpouseOwnInsurance, setSelectSpouseOwnInsurance] = useState('no');
-    const [spouseInsuranceDetails, setSpouseInsuranceDetails] = useState('');
-    const [spouseName, setSpouseName] = useState('');
+    const [resonForRemoval, setResonForRemoval] = useState('');
+    const [selectDriverRemainInHousehold, setSelectDriverRemainInHousehold] = useState('no');
+    const [selectDriverOwnInsurance, setSelectDriverOwnInsurance] = useState('no');
+    const [driverInsuranceDetails, setDriverInsuranceDetails] = useState('');
     const [spouseInsuranceCarrier, setSpouseInsuranceCarrier] = useState('');
     const [spousePolicyNumber, setSpousePolicyNumber] = useState('');
-    const [driverLicenseDateG1, setDriverLicenseDateG1] = useState('');
-    const [driverLicenseDateG2, setDriverLicenseDateG2] = useState('');
-    const [driverLicenseDateG, setDriverLicenseDateG] = useState('');
-    const [selectBeginnerDriverEducation, setSelectBeginnerDriverEducation] = useState('no');
-    const [whyAddDriver, setWhyAddDriver] = useState('');
-    const [selectMVRAndAutoplus, setSelectMVRAndAutoplus] = useState('no');
-    const [selectDriverAdditionEffect, setSelectDriverAdditionEffect] = useState('no');
+    const [selectDriverDeletionEffect, setSelectDriverDeletionEffect] = useState('no');
     const [driverAdditionChanges, setDriverAdditionChanges] = useState('');
     const [additionalNotes, setAdditionalNotes] = useState('');
     const [message, setMessage] = useState('');
@@ -40,22 +31,13 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
         setDisplayName(savedData.displayName || '');
         setSelectedEffectiveDate(savedData.selectedEffectiveDate || '');
         setDriverLegalName(savedData.driverLegalName || '');
-        setDriverLicense(savedData.driverLicense || '');
-        setSelectedDriveryDOB(savedData.selectedDriveryDOB || '');
-        setDriverRelationship(savedData.driverRelationship || '');
-        setDriverMaritalStatus(savedData.driverMaritalStatus || '');
-        setSelectSpouseOwnInsurance(savedData.selectSpouseOwnInsurance || '');
-        setSpouseInsuranceDetails(savedData.spouseInsuranceDetails || '');
-        setSpouseName(savedData.spouseName || '');
+        setResonForRemoval(savedData.resonForRemoval || '');
+        setSelectDriverRemainInHousehold(savedData.selectDriverRemainInHousehold || 'no');
+        setSelectDriverOwnInsurance(savedData.selectDriverOwnInsurance || 'no');
+        setDriverInsuranceDetails(savedData.driverInsuranceDetails || '');
         setSpouseInsuranceCarrier(savedData.spouseInsuranceCarrier || '');
         setSpousePolicyNumber(savedData.spousePolicyNumber || '');
-        setDriverLicenseDateG1(savedData.driverLicenseDateG1 || '');
-        setDriverLicenseDateG2(savedData.driverLicenseDateG2 || '');
-        setDriverLicenseDateG(savedData.driverLicenseDateG || '');
-        setSelectBeginnerDriverEducation(savedData.selectBeginnerDriverEducation || 'no');
-        setWhyAddDriver(savedData.whyAddDriver || '');
-        setSelectMVRAndAutoplus(savedData.selectMVRAndAutoplus || 'no');
-        setSelectDriverAdditionEffect(savedData.selectDriverAdditionEffect || 'no');
+        setSelectDriverDeletionEffect(savedData.selectDriverDeletionEffect || 'no');
         setDriverAdditionChanges(savedData.driverAdditionChanges || '');
         setAdditionalNotes(savedData.additionalNotes || '');
       }
@@ -71,22 +53,13 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
         displayName,
         selectedEffectiveDate,
         driverLegalName,
-        driverLicense,
-        selectedDriveryDOB,
-        driverRelationship,
-        driverMaritalStatus,
-        selectSpouseOwnInsurance,
-        spouseInsuranceDetails,
-        spouseName,
+        resonForRemoval,
+        selectDriverRemainInHousehold,
+        selectDriverOwnInsurance,
+        driverInsuranceDetails,
         spouseInsuranceCarrier,
         spousePolicyNumber,
-        driverLicenseDateG1,
-        driverLicenseDateG2,
-        driverLicenseDateG,
-        selectBeginnerDriverEducation,
-        whyAddDriver,
-        selectMVRAndAutoplus,
-        selectDriverAdditionEffect,
+        selectDriverDeletionEffect,
         driverAdditionChanges,
         additionalNotes
       };
@@ -95,38 +68,24 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
 
     const handleGenerate = () => {
         let message = `Who called/emailed and when: ${displayName} at ` + new Date().toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' }) + ' on ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-        message += `\nEffective date of vehicle addition: ${selectedEffectiveDate}`;
-        message += `\nFull legal name of driver being added: ${driverLegalName}`;
-        message += `\nDriver's license number of driver being added: ${driverLicense}`;
-        message += `\nDate of birth of driver being added: ${selectedDriveryDOB}`;
-        message += `\nDriver’s relationship to the insured: ${driverRelationship}`;
+        message += `\nEffective date of driver removal: ${selectedEffectiveDate}`;
+        message += `\nDriver being removed: ${driverLegalName}`;
+        message += `\nReason for driver being removed: ${resonForRemoval}`;
         
-        message += `\nDriver's marital status: ${driverMaritalStatus}`;
-        if (driverMaritalStatus === 'married') {
-            message += `\nDoes drivers spouse have their own insurance? ${selectSpouseOwnInsurance}`;
-            if (selectSpouseOwnInsurance === 'yes') {
-                message += `\nSpouse name: ${spouseName}`;
-                message += `\nInsurance carrier: ${spouseInsuranceCarrier}`;
-                message += `\nPolicy number: ${spousePolicyNumber}`;
-            } else {
-                message += `\nPlease note all details: ${spouseInsuranceDetails}`;
-            }
+        message += `\nWill the driver remain in the household: ${selectDriverRemainInHousehold}`;
+        if (selectDriverRemainInHousehold === 'yes') {
+          message += `\nDoes driver have their own insurance policy: ${selectDriverOwnInsurance}`;
+          if (selectDriverOwnInsurance === 'yes') {
+            message += `\nInsurance Carrier: ${spouseInsuranceCarrier}`;
+            message += `\nPolicy number: ${spousePolicyNumber}`;
+          } else {
+            message += `\nInsurance Details: ${driverInsuranceDetails}`;
+          }
         }
 
-        message += `\nAdded driver's licensing dates:`;
-        message += `\nDriver's licensing date - G1: ${driverLicenseDateG1}`;
-        message += `\nDriver's licensing date - G2: ${driverLicenseDateG2}`;
-        message += `\nDriver's licensing date - G: ${driverLicenseDateG}`;
-
-        message += `\nWas beginner driver education completed? ${selectBeginnerDriverEducation}`;
-
-        message += `\nWhy is the driver being added? ${whyAddDriver}`;
-
-        message += `\nWas MVR and Autoplus pulled? ${selectMVRAndAutoplus}`;
-
-        message += `\nWill driver addition affect the usage / distances driven or driver assignment on remaining vehicles on the policy? ${selectDriverAdditionEffect}`;
-        if (selectDriverAdditionEffect === 'yes') {
-            message += `\nPlease note all changes: ${driverAdditionChanges}`;
+        message += `\nWill driver deletion affect the usage / distances driven or driver assignment on remaining vehicles on the policy: ${selectDriverDeletionEffect}`;
+        if (selectDriverDeletionEffect === 'yes') {
+          message += `\nChanges: ${driverAdditionChanges}`;
         }
 
         message += `\nAdditional Notes: ${additionalNotes}`;
@@ -173,7 +132,7 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
         </Grid>
         <Grid item xs={6}>
           <FormControl fullWidth margin="normal">
-            <FormLabel className='titleStyle'>Effective date of vehicle addition:</FormLabel>
+            <FormLabel className='titleStyle'>Effective date of driver removal:</FormLabel>
               <TextField
                 type="date"
                 variant="outlined"
@@ -185,93 +144,48 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
         </Grid>
       </Grid>
 
-      <Grid container spacing={3}>
-        <Grid item xs={6}>
-          <FormControl fullWidth margin="normal">
-            <FormLabel className='titleStyle'>Full legal name of driver being added:</FormLabel>
-            <TextField
-              variant="outlined"
-              value={driverLegalName}
-              onChange={(e) => setDriverLegalName(e.target.value)}
-              fullWidth
-            />
-          </FormControl>
-        </Grid>
-        <Grid item xs={6}>
-          <FormControl fullWidth margin="normal">
-            <FormLabel className='titleStyle'>Driver's license number of driver being added:</FormLabel>
-            <TextField
-              variant="outlined"
-              value={driverLicense}
-              onChange={(e) => setDriverLicense(e.target.value)}
-              fullWidth
-            />
-          </FormControl>
-        </Grid>
-      </Grid>
+      <FormControl fullWidth margin="normal">
+        <FormLabel className='titleStyle'>Driver being removed:</FormLabel>
+        <TextField
+          variant="outlined"
+          value={driverLegalName}
+          onChange={(e) => setDriverLegalName(e.target.value)}
+          fullWidth
+        />
+      </FormControl>
 
-      <Grid container spacing={3}>
-        <Grid item xs={6}>
-          <FormControl fullWidth margin="normal">
-            <FormLabel className='titleStyle'>Date of birth of driver being added:</FormLabel>
-              <TextField
-                type="date"
-                variant="outlined"
-                value={selectedDriveryDOB.split('T')[0]}
-                onChange={(e) => setSelectedDriveryDOB(e.target.value)}
-                fullWidth
-              />
-          </FormControl>
-        </Grid>
-        <Grid item xs={6}>
-          <FormControl fullWidth margin="normal">
-            <FormLabel className='titleStyle'>Driver’s relationship to the insured:</FormLabel>
-            <TextField
-              variant="outlined"
-              value={driverRelationship}
-              onChange={(e) => setDriverRelationship(e.target.value)}
-              fullWidth
-            />
-          </FormControl>
-        </Grid>
-      </Grid>
+      <FormControl fullWidth margin="normal">
+        <FormLabel className='titleStyle'>Reason for driver being removed:</FormLabel>
+        <TextareaAutosize
+          minRows={4}
+          value={resonForRemoval}
+          onChange={(e) => setResonForRemoval(e.target.value)}
+          style={{ width: '100%'}}
+        />
+      </FormControl>
 
       <FormControl component="fieldset" margin="normal">
         <FormGroup>
-          <FormLabel className='titleStyle'>Driver's marital status:</FormLabel>
-          <RadioGroup row name="driverMaritalStatus" onChange={(e) => setDriverMaritalStatus(e.target.value)}>
-            <FormControlLabel value="married" control={<Radio />} label="Married" />
-            <FormControlLabel value="single" control={<Radio />} label="Single" />
-          </RadioGroup>
-        </FormGroup>
-      </FormControl>          
-      {driverMaritalStatus === 'married' && (
-        <FormControl fullWidth margin="normal">
-          <FormLabel className='titleStyle'>Does drivers spouse have their own insurance?</FormLabel>
-          <RadioGroup row name="selectSpouseOwnInsurance" onChange={(e) => setSelectSpouseOwnInsurance(e.target.value)}>
+          <FormLabel className='titleStyle'>Will the driver remain in the household?</FormLabel>
+          <RadioGroup row name="selectDriverRemainInHousehold" onChange={(e) => setSelectDriverRemainInHousehold(e.target.value)}>
             <FormControlLabel value="yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="no" control={<Radio />} label="No" />
           </RadioGroup>
-          {selectSpouseOwnInsurance === 'yes' && (
+        </FormGroup>
+      </FormControl>          
+      {selectDriverRemainInHousehold === 'yes' && (
+        <FormControl fullWidth margin="normal">
+          <FormLabel className='titleStyle'>Does driver have their own insurance policy?</FormLabel>
+          <RadioGroup row name="selectDriverOwnInsurance" onChange={(e) => setSelectDriverOwnInsurance(e.target.value)}>
+            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+            <FormControlLabel value="no" control={<Radio />} label="No" />
+          </RadioGroup>
+          {selectDriverOwnInsurance === 'yes' && (
             <FormControl fullWidth margin="normal">
-              <FormControl fullWidth margin="normal">
-                <FormLabel className='titleStyle'>Please provide spouse insurance information:</FormLabel>
-              </FormControl>
               <Grid container spacing={3}>
-                <Grid item xs={4}>
+                <Grid item xs={6}>
                   <FormControl fullWidth margin="normal">
-                    <FormLabel className='titleStyle'>Spouse name:</FormLabel>
-                    <TextField
-                      variant="outlined"
-                      value={spouseName}
-                      onChange={(e) => setSpouseName(e.target.value)}
-                      fullWidth
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={4}>
-                  <FormControl fullWidth margin="normal">
-                    <FormLabel className='titleStyle'>Insurance carrier:</FormLabel>
+                    <FormLabel className='titleStyle'>Please provide details of Insurance Carrier:</FormLabel>
                     <TextField
                       variant="outlined"
                       value={spouseInsuranceCarrier}
@@ -280,7 +194,7 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
                     />
                   </FormControl>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={6}>
                   <FormControl fullWidth margin="normal">
                     <FormLabel className='titleStyle'>Policy number:</FormLabel>
                     <TextField
@@ -294,106 +208,25 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
               </Grid>
             </FormControl>
           )}
-          {selectSpouseOwnInsurance === 'no' && (
+          {selectDriverOwnInsurance === 'no' && (
             <FormControl fullWidth margin="normal">
               <FormLabel className='titleStyle'>Please note all details:</FormLabel>
-              <TextField variant="outlined" value={spouseInsuranceDetails} onChange={(e) => setSpouseInsuranceDetails(e.target.value)} fullWidth />
+              <TextField variant="outlined" value={driverInsuranceDetails} onChange={(e) => setDriverInsuranceDetails(e.target.value)} fullWidth />
             </FormControl>
           )}
         </FormControl>
       )}
 
-      <FormControl fullWidth margin="normal">
-        <FormControl fullWidth margin="normal">
-          <FormLabel className='titleStyle'>Added driver's licensing dates:</FormLabel>
-        </FormControl>
-        <Grid container spacing={3}>
-          <Grid item xs={4}>
-            <FormControl fullWidth margin="normal">
-              <FormLabel className='titleStyle'>Driver's licensing date - G1:</FormLabel>
-              <TextField
-                variant="outlined"
-                value={driverLicenseDateG1}
-                onChange={(e) => setDriverLicenseDateG1(e.target.value)}
-                fullWidth
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={4}>
-            <FormControl fullWidth margin="normal">
-            <FormLabel className='titleStyle'>Driver's licensing date - G2:</FormLabel>
-              <TextField
-                variant="outlined"
-                value={driverLicenseDateG2}
-                onChange={(e) => setDriverLicenseDateG2(e.target.value)}
-                fullWidth
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={4}>
-            <FormControl fullWidth margin="normal">
-            <FormLabel className='titleStyle'>Driver's licensing date - G:</FormLabel>
-              <TextField
-                variant="outlined"
-                value={driverLicenseDateG}
-                onChange={(e) => setDriverLicenseDateG(e.target.value)}
-                fullWidth
-              />
-            </FormControl>
-          </Grid>
-        </Grid>
-      </FormControl>
-
-      <FormControl component="fieldset" margin="normal">
-        <FormGroup>
-          <FormLabel className='titleStyle'>Was beginner driver education completed?</FormLabel>
-          <RadioGroup row name="selectBeginnerDriverEducation" onChange={(e) => setSelectBeginnerDriverEducation(e.target.value)}>
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
-          </RadioGroup>
-        </FormGroup>
-      </FormControl>
-      {selectBeginnerDriverEducation === 'yes' && (
-        <FormControl fullWidth margin="normal">
-          <FormLabel className='titleStyle' style={{color:'red'}}>ENSURE DRIVER LICENSE HISTORY IS ON FILE</FormLabel>
-        </FormControl>
-      )}
-
-      <FormControl fullWidth margin="normal">
-        <FormLabel className='titleStyle'>Why is the driver being added?</FormLabel>
-        <TextField
-          variant="outlined"
-          value={whyAddDriver}
-          onChange={(e) => setWhyAddDriver(e.target.value)}
-          fullWidth
-        />
-      </FormControl>
-
-      <FormControl component="fieldset" margin="normal">
-        <FormGroup>
-          <FormLabel className='titleStyle'>Was MVR and Autoplus pulled?</FormLabel>
-          <RadioGroup row name="selectMVRAndAutoplus" onChange={(e) => setSelectMVRAndAutoplus(e.target.value)}>
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
-          </RadioGroup>
-        </FormGroup>
-      </FormControl>
-      {selectMVRAndAutoplus === 'yes' && (
-        <FormControl fullWidth margin="normal">
-          <FormLabel className='titleStyle' style={{color:'red'}}>Ensure to pull MVR and Autoplus</FormLabel>
-        </FormControl>
-      )}
-
       <FormControl component="fieldset" margin="normal">
           <FormGroup>
-            <FormLabel className='titleStyle'>Will driver addition affect the usage / distances driven or driver assignment on remaining vehicles on the policy?</FormLabel>
-            <RadioGroup row name="selectDriverAdditionEffect" onChange={(e) => setSelectDriverAdditionEffect(e.target.value)}>
+            <FormLabel className='titleStyle'>Will driver deletion affect the usage / distances driven or driver assignment on remaining vehicles on the policy?</FormLabel>
+            <RadioGroup row name="selectDriverDeletionEffect" onChange={(e) => setSelectDriverDeletionEffect(e.target.value)}>
               <FormControlLabel value="yes" control={<Radio />} label="Yes" />
               <FormControlLabel value="no" control={<Radio />} label="No" />
             </RadioGroup>
           </FormGroup>
-        </FormControl>          
-        {selectDriverAdditionEffect === 'yes' && (
+        </FormControl>
+        {selectDriverDeletionEffect === 'yes' && (
           <FormControl fullWidth margin="normal">
             <FormLabel className='titleStyle'>Please note all changes:</FormLabel>
             <TextareaAutosize
@@ -418,7 +251,7 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
       <FormControl fullWidth margin="normal">
         <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>ATTACH TO FILE:</FormLabel>
         <br />
-        <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>• MVR, Autoplus, LOE (where necessary), Drivers License History (if applying for drivers training discount), Emails to and from client.</FormLabel>
+        <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>• All emails sent to and from client, If removed driver is remaining in household and has no current insurance, a signed OPCF 28 needs to be signed in ink and on file.</FormLabel>
       </FormControl>
 
       <Button onClick={handleGenerate} variant="contained" color="primary" style={{ marginRight: '50px',  marginTop:'20px'}}>Generate & Copy</Button>
