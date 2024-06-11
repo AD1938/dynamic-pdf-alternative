@@ -113,23 +113,28 @@ const CheckBoxList: React.FC = () => {
 
     return (
       <Container maxWidth="xl" sx={{ marginTop: 2 }}>
-        <Typography variant="h4" gutterBottom marginTop='30px'>
-          General Note Change
-        </Typography>
-        <Box display="flex" flexDirection="column" gap={1}>
-          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[GENERATE_NOTE]} onChange={() => handleCheckboxChange(GENERATE_NOTE)} id="checkbox-generate-note" />}
-              label={GENERATE_NOTE}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
-              <Button variant="outlined" disabled={!checkedItems[GENERATE_NOTE]} onClick={() => handleEditClick(GENERATE_NOTE)}>
-                Edit
-              </Button>
+        <Grid container spacing={3} justifyContent="center"> 
+          <Grid item xs={6}>
+            <Typography variant="h4" gutterBottom marginTop='30px'>
+              General Note Change
+            </Typography>
+            <Box display="flex" flexDirection="column" gap={1}>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[GENERATE_NOTE]} onChange={() => handleCheckboxChange(GENERATE_NOTE)} id="checkbox-generate-note" />}
+                  label={GENERATE_NOTE}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'center' }}>
+                  <Button variant="outlined" disabled={!checkedItems[GENERATE_NOTE]} onClick={() => handleEditClick(GENERATE_NOTE)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
             </Box>
-          </Box>
-        </Box>
+          </Grid>
+          <Grid item xs={6}></Grid>
+        </Grid>
         <Grid container spacing={3} justifyContent="center"> 
           <Grid item xs={6}>
         <Typography variant="h4" gutterBottom marginTop='25px'>
