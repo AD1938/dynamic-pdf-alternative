@@ -125,7 +125,7 @@ const CheckBoxList: React.FC = () => {
                   label={GENERATE_NOTE}
                   sx={{ flexGrow: 1, marginRight: 10 }}
                 />
-                <Box sx={{ width: '100px', textAlign: 'center' }}>
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
                   <Button variant="outlined" disabled={!checkedItems[GENERATE_NOTE]} onClick={() => handleEditClick(GENERATE_NOTE)}>
                     Edit
                   </Button>
@@ -147,7 +147,7 @@ const CheckBoxList: React.FC = () => {
               label={ADDRESS_CHANGE}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[ADDRESS_CHANGE]} onClick={() => handleEditClick(ADDRESS_CHANGE)}>
                 Edit
               </Button>
@@ -159,7 +159,7 @@ const CheckBoxList: React.FC = () => {
               label={NAME_CHANGE}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[NAME_CHANGE]} onClick={() => handleEditClick(NAME_CHANGE)}>
                 Edit
               </Button>
@@ -171,7 +171,7 @@ const CheckBoxList: React.FC = () => {
               label={ADDING_A_VEHICLE}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[ADDING_A_VEHICLE]} onClick={() => handleEditClick(ADDING_A_VEHICLE)}>
                 Edit
               </Button>
@@ -183,7 +183,7 @@ const CheckBoxList: React.FC = () => {
               label={SUBTRACTING_VEHICLE}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[SUBTRACTING_VEHICLE]} onClick={() => handleEditClick(SUBTRACTING_VEHICLE)}>
                 Edit
               </Button>
@@ -195,7 +195,7 @@ const CheckBoxList: React.FC = () => {
               label={REMOVING_VEHICLE}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[REMOVING_VEHICLE]} onClick={() => handleEditClick(REMOVING_VEHICLE)}>
                 Edit
               </Button>
@@ -207,7 +207,7 @@ const CheckBoxList: React.FC = () => {
               label={ADDING_A_DRIVER}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[ADDING_A_DRIVER]} onClick={() => handleEditClick(ADDING_A_DRIVER)}>
                 Edit
               </Button>
@@ -219,7 +219,7 @@ const CheckBoxList: React.FC = () => {
               label={REMOVING_A_DRIVER}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[REMOVING_A_DRIVER]} onClick={() => handleEditClick(REMOVING_A_DRIVER)}>
                 Edit
               </Button>
@@ -231,7 +231,7 @@ const CheckBoxList: React.FC = () => {
               label={ADD_REMOVE_AMEND_INTERESTED_PARTY}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[ADD_REMOVE_AMEND_INTERESTED_PARTY]} onClick={() => handleEditClick(ADD_REMOVE_AMEND_INTERESTED_PARTY)}>
                 Edit
               </Button>
@@ -243,7 +243,7 @@ const CheckBoxList: React.FC = () => {
               label={AMEND_COVERAGE}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[AMEND_COVERAGE]} onClick={() => handleEditClick(AMEND_COVERAGE)}>
                 Edit
               </Button>
@@ -262,7 +262,7 @@ const CheckBoxList: React.FC = () => {
               label={ADDING_A_NAMED_INSURED}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[ADDING_A_NAMED_INSURED]} onClick={() => handleEditClick(ADDING_A_NAMED_INSURED)}>
                 Edit
               </Button>
@@ -274,7 +274,7 @@ const CheckBoxList: React.FC = () => {
               label={ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS]} onClick={() => handleEditClick(ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS)}>
                 Edit
               </Button>
@@ -286,7 +286,7 @@ const CheckBoxList: React.FC = () => {
               label={ADDING_OR_SUBBING_A_LOCATION_CONDO}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[ADDING_OR_SUBBING_A_LOCATION_CONDO]} onClick={() => handleEditClick(ADDING_OR_SUBBING_A_LOCATION_CONDO)}>
                 Edit
               </Button>
@@ -298,7 +298,7 @@ const CheckBoxList: React.FC = () => {
               label={ADDING_OR_SUBBING_A_LOCATION_TENATNS}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[ADDING_OR_SUBBING_A_LOCATION_TENATNS]} onClick={() => handleEditClick(ADDING_OR_SUBBING_A_LOCATION_TENATNS)}>
                 Edit
               </Button>
@@ -310,7 +310,7 @@ const CheckBoxList: React.FC = () => {
               label={REMOVING_A_LOCATION}
               sx={{ flexGrow: 1, marginRight: 10 }}
             />
-            <Box sx={{ width: '100px', textAlign: 'center' }}>
+            <Box sx={{ width: '100px', textAlign: 'left' }}>
               <Button variant="outlined" disabled={!checkedItems[REMOVING_A_LOCATION]} onClick={() => handleEditClick(REMOVING_A_LOCATION)}>
                 Edit
               </Button>
@@ -324,7 +324,7 @@ const CheckBoxList: React.FC = () => {
             label={AMEND_COVERAGE}
             sx={{ flexGrow: 1, marginRight: 10 }}
           />
-          <Box sx={{ width: '100px', textAlign: 'center' }}>
+          <Box sx={{ width: '100px', textAlign: 'left' }}>
             <Button variant="outlined" disabled={!checkedItems[AMEND_COVERAGE]} onClick={() => handleEditClick(AMEND_COVERAGE)}>
               Edit
             </Button>
@@ -336,7 +336,7 @@ const CheckBoxList: React.FC = () => {
             label={ADD_REMOVE_AMEND_MORTAGEE}
             sx={{ flexGrow: 1, marginRight: 10 }}
           />
-          <Box sx={{ width: '100px', textAlign: 'center' }}>
+          <Box sx={{ width: '100px', textAlign: 'left' }}>
             <Button variant="outlined" disabled={!checkedItems[ADD_REMOVE_AMEND_MORTAGEE]} onClick={() => handleEditClick(ADD_REMOVE_AMEND_MORTAGEE)}>
               Edit
             </Button>
@@ -348,7 +348,7 @@ const CheckBoxList: React.FC = () => {
             label={ADD_DISCOUNT}
             sx={{ flexGrow: 1, marginRight: 10 }}
           />
-          <Box sx={{ width: '100px', textAlign: 'center' }}>
+          <Box sx={{ width: '100px', textAlign: 'left' }}>
             <Button variant="outlined" disabled={!checkedItems[ADD_DISCOUNT]} onClick={() => handleEditClick(ADD_DISCOUNT)}>
               Edit
             </Button>
