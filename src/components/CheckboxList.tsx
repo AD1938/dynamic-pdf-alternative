@@ -24,7 +24,7 @@ const REMOVING_VEHICLE = 'Removing a Vehicle';
 const ADDING_A_DRIVER = 'Adding a Driver';
 const REMOVING_A_DRIVER = 'Removing a Driver';
 const ADD_REMOVE_AMEND_INTERESTED_PARTY = 'Add, Remove, Amend Interested Party';
-const AMEND_COVERAGE = 'Amend Coverage - in progress';
+const AMEND_COVERAGE = 'Amend Coverage';
 
 // Property Change  
 const ADDING_A_NAMED_INSURED = "Adding a Named Insured";

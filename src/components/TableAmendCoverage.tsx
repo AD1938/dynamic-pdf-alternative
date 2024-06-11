@@ -53,26 +53,40 @@ const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
       localStorage.setItem(localStorageKey, JSON.stringify(dataToSave));
     };
 
+    const [vehicles, setVehicles] = useState([{ vehicleCoverage: '', selectLeasedOrFinanced: '' }]);
+    
     const handleAddVehicle = () => {
       // setNewDrivers([...newDrivers, { name: '', insuranceCarrier: '', policyNumber: '' }]);
       // setNewDriverAdded(true);
-  };
+      setVehicles([...vehicles, { vehicleCoverage: '', selectLeasedOrFinanced: '' }]);
+    };
+
+    const handleRemoveVehicle = (index: number) => {
+      const newVehicles = [...vehicles];
+      newVehicles.splice(index, 1);
+      setVehicles(newVehicles);
+    };
 
     const handleGenerate = () => {
-        let message = `Who called/emailed and when: ${displayName} at ` + new Date().toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' }) + ' on ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-        message += `\nEffective date of change: ${selectedEffectiveDate}`;
-        
-        message += `\nDetails of coverage being amended: ${coverageDetails}`;
-        message += `\nWhat's the reason for this coverage change?: ${coverageReason}`;
-        message += `\nAdditional Notes: ${additionalNotes}`;
+      let message = `Who called/emailed and when: ${displayName} at ` + new Date().toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' }) + ' on ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      message += `\nEffective date of change: ${selectedEffectiveDate}`;
+      message += `\nVehicle(s) which coverages are being amended on: `;
+      vehicles.forEach((vehicle, index) => {
+        message += `\nVehicle ${index + 1}: ${vehicle.vehicleCoverage}`;
+        message += `\nIs this vehicle leased or financed?: ${vehicle.selectLeasedOrFinanced}`;
+      });
+      
+      message += `\nDetails of coverage being amended: ${coverageDetails}`;
+      message += `\nWhat's the reason for this coverage change?: ${coverageReason}`;
+      message += `\nAdditional Notes: ${additionalNotes}`;
 
-        setMessage(message);
-        saveData();
-        try {
-            navigator.clipboard.writeText(message);
-        } catch (err) {
-            console.error('Failed to copy message: ', err);
-        }
+      setMessage(message);
+      saveData();
+      try {
+          navigator.clipboard.writeText(message);
+      } catch (err) {
+          console.error('Failed to copy message: ', err);
+      }
     };
 
     const handleClear = () => {
@@ -115,31 +129,52 @@ const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
           </FormGroup>
         </FormControl>
 
-        {/* Add a new vehicle dynamically form here */}
-        {/* -------------------------------------------------------------------------- */}
-        <FormControl component="fieldset" fullWidth margin="normal">
-          <FormGroup>
-            <FormLabel className='titleStyle'>Vehicle:</FormLabel>
-            <TextField variant="outlined" value={vehicleCoverage} onChange={(e) => setVehicleCoverage(e.target.value)} fullWidth/>
-          </FormGroup>
-        </FormControl>
+        {vehicles.map((vehicle, index) => (
+          <div key={index}>
+            <FormControl component="fieldset" fullWidth margin="normal">
+              <FormGroup>
+                <FormLabel className='titleStyle'>Vehicle:</FormLabel>
+                <TextField
+                  variant="outlined"
+                  value={vehicle.vehicleCoverage}
+                  onChange={(e) => {
+                    const newVehicles = [...vehicles];
+                    newVehicles[index].vehicleCoverage = e.target.value;
+                    setVehicles(newVehicles);
+                  }}
+                  fullWidth
+                />
+              </FormGroup>
+            </FormControl>
 
-        <FormControl component="fieldset" margin="normal">
-          <FormGroup>
-            <FormLabel className='titleStyle'>Is this vehicle leased or financed?</FormLabel>
-            <RadioGroup row name="selectLeasedOrFinanced" onChange={(e) => setSelectLeasedOrFinanced(e.target.value)}>
-              <FormControlLabel value="leased" control={<Radio />} label="Leased" />
-              <FormControlLabel value="financed" control={<Radio />} label="Financed" />
-            </RadioGroup>
-            {(selectLeasedOrFinanced === 'leased' || selectLeasedOrFinanced === 'financed') && (
-              <FormLabel className='titleStyle' style={{color:'red'}}>FULL COVERAGE IS REQUIRED!</FormLabel>
-            )}
-          </FormGroup>
-        </FormControl>
-        <Button variant="contained" color="primary" onClick={handleAddVehicle} style={{ marginTop: '10px' }}>
+            <FormControl component="fieldset" margin="normal">
+              <FormGroup>
+                <FormLabel className='titleStyle'>Is this vehicle leased or financed?</FormLabel>
+                <RadioGroup
+                  row
+                  name={`selectLeasedOrFinanced${index}`}
+                  onChange={(e) => {
+                    const newVehicles = [...vehicles];
+                    newVehicles[index].selectLeasedOrFinanced = e.target.value;
+                    setVehicles(newVehicles);
+                  }}
+                >
+                  <FormControlLabel value="leased" control={<Radio />} label="Leased" />
+                  <FormControlLabel value="financed" control={<Radio />} label="Financed" />
+                </RadioGroup>
+                {(vehicle.selectLeasedOrFinanced === 'leased' || vehicle.selectLeasedOrFinanced === 'financed') && (
+                  <FormLabel className='titleStyle' style={{color:'red'}}>FULL COVERAGE IS REQUIRED!</FormLabel>
+                )}
+              </FormGroup>
+            </FormControl>
+            <Button variant="contained" color="error" onClick={() => handleRemoveVehicle(index)} style={{ marginTop: '40px', marginLeft: '40px' }}>
+              Remove Vehicle
+            </Button>
+          </div>
+        ))}
+        <Button variant="contained" color="primary" onClick={handleAddVehicle}>
           Add another Vehicle
-        </Button> 
-        {/* -------------------------------------------------------------------------- */}
+        </Button>
         
 
         <FormControl fullWidth margin="normal">
