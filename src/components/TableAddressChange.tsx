@@ -226,7 +226,6 @@ const TableAddressChange: React.FC<ItemTableProps> = ({ itemId }) => {
           </RadioGroup>
         </FormGroup>
       </FormControl>
-          
       {selectAddressChangeEffect === 'yes' && (
         <FormControl>
           <FormLabel className='titleStyle'>Note any change in use (i.e., pleasure, commute, business) and distance driven for all vehicles on the policy:</FormLabel>
@@ -241,21 +240,9 @@ const TableAddressChange: React.FC<ItemTableProps> = ({ itemId }) => {
 
       <FormControl margin="normal">
         <FormLabel className='titleStyle'>Are there any new drivers in the household?</FormLabel>
-        <RadioGroup 
-          row name="selectNewDrivers"
-          onChange={(e) => handleNewDriverSelection(e.target.value)}
-          >
-          <FormControlLabel
-            value="yes"
-            control={<Radio />}
-            label="Yes"
-          />
-          <FormControlLabel
-            value="no"
-            control={<Radio />}
-            label="No"
-            // defaultChecked
-          />
+        <RadioGroup row name="selectNewDrivers" onChange={(e) => handleNewDriverSelection(e.target.value)}>
+          <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+          <FormControlLabel value="no" control={<Radio />} label="No" />
         </RadioGroup>
       </FormControl>
       
@@ -322,12 +309,7 @@ const TableAddressChange: React.FC<ItemTableProps> = ({ itemId }) => {
                  ))}
                </TableBody>
              </Table>
-             <Button
-              variant="contained"
-              color="primary"
-              onClick={handleAddDriver}
-              style={{ marginTop: '10px' }}
-             >
+             <Button variant="contained" color="primary" onClick={handleAddDriver} style={{ marginTop: '10px' }}>
               Add New Driver
             </Button> 
            </TableContainer>

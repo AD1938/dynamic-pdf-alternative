@@ -10,12 +10,11 @@ interface ItemTableProps {
 const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
     const [displayName, setDisplayName] = useState('');
     const [selectedEffectiveDate, setSelectedEffectiveDate] = useState('');
-    const [selectAdditionRemovalOrAmendment, setSelectAdditionRemovalOrAmendment] = useState('');
-    const [selectFinancialInterestDetails, setSelectFinancialInterestDetails] = useState('');
-    const [lienholder, setLienholder] = useState('');
-    const [lessor, setLessor] = useState('');
-    const [financialInterestNameAndMailingAddress, setFinancialInterestNameAndMailingAddress] = useState('');
-    const [removalDetails, setRemovalDetails] = useState('');
+    const [vehicleCoverage, setVehicleCoverage] = useState('');
+    const [selectLeasedOrFinanced, setSelectLeasedOrFinanced] = useState('');
+
+    const [coverageDetails, setCoverageDetails] = useState('');
+    const [coverageReason, setCoverageReason] = useState('');
     const [additionalNotes, setAdditionalNotes] = useState('');
     const [message, setMessage] = useState('');
     const localStorageKey = `key-${itemId}`;
@@ -26,13 +25,11 @@ const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
         const savedData = JSON.parse(data);
         setDisplayName(savedData.displayName || '');
         setSelectedEffectiveDate(savedData.selectedEffectiveDate || '');
-        setSelectAdditionRemovalOrAmendment(savedData.selectAdditionRemovalOrAmendment || '');
-        setSelectFinancialInterestDetails(savedData.selectFinancialInterestDetails || '');
-        setLienholder(savedData.lienholder || '');
-        setLessor(savedData.lessor || '');
-        setFinancialInterestNameAndMailingAddress(savedData.financialInterestNameAndMailingAddress || '');
-        setRemovalDetails(savedData.removalDetails || '');
+        setVehicleCoverage(savedData.vehicleCoverage || '');
+        setSelectLeasedOrFinanced(savedData.selectLeasedOrFinanced || '');
 
+        setCoverageDetails(savedData.coverageDetails || '');
+        setCoverageReason(savedData.coverageReason || '');
         setAdditionalNotes(savedData.additionalNotes || '');
       }
     }, [itemId, localStorageKey]);
@@ -46,27 +43,27 @@ const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
       const dataToSave = {
         displayName,
         selectedEffectiveDate,
-        selectAdditionRemovalOrAmendment,
-        financialInterestNameAndMailingAddress,
-        selectFinancialInterestDetails,
-        lienholder,
-        lessor,
-        removalDetails,
+        vehicleCoverage,
+        selectLeasedOrFinanced,
+
+        coverageDetails,
+        coverageReason,        
         additionalNotes,
       };
       localStorage.setItem(localStorageKey, JSON.stringify(dataToSave));
     };
 
+    const handleAddVehicle = () => {
+      // setNewDrivers([...newDrivers, { name: '', insuranceCarrier: '', policyNumber: '' }]);
+      // setNewDriverAdded(true);
+  };
+
     const handleGenerate = () => {
         let message = `Who called/emailed and when: ${displayName} at ` + new Date().toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' }) + ' on ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
         message += `\nEffective date of change: ${selectedEffectiveDate}`;
-        message += `\nIs this an addition, removal or amendment: ${selectAdditionRemovalOrAmendment}`;
-        if (selectAdditionRemovalOrAmendment === 'addition' || selectAdditionRemovalOrAmendment === 'amendment') {
-          message += `\nIf addition / amendment, what are the details of the new financial interest: ${selectFinancialInterestDetails}`;
-          message += `\nFinancial Interest name and mailing address: ${financialInterestNameAndMailingAddress}`;
-        } else if (selectAdditionRemovalOrAmendment === 'removal') {
-          message += `\nPlease provide removal details: ${removalDetails}`;
-        }
+        
+        message += `\nDetails of coverage being amended: ${coverageDetails}`;
+        message += `\nWhat's the reason for this coverage change?: ${coverageReason}`;
         message += `\nAdditional Notes: ${additionalNotes}`;
 
         setMessage(message);
@@ -97,108 +94,92 @@ const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
         }}
       >
 
-      <Grid container spacing={3}>
-        <Grid item xs={6}>
-          <FormControl fullWidth margin="normal">
-            <FormLabel className='titleStyle'>Who called/emailed:</FormLabel>
-            <TextField
-              variant="outlined"
-              value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
-              fullWidth
-            />
-          </FormControl>
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <FormControl fullWidth margin="normal">
+              <FormLabel className='titleStyle'>Who called/emailed:</FormLabel>
+              <TextField variant="outlined" value={displayName} onChange={(e) => setDisplayName(e.target.value)} fullWidth/>
+            </FormControl>
+          </Grid>
+          <Grid item xs={6}>
+            <FormControl fullWidth margin="normal">
+              <FormLabel className='titleStyle'>Effective date of change:</FormLabel>
+                <TextField type="date" variant="outlined" value={selectedEffectiveDate.split('T')[0]} onChange={(e) => setSelectedEffectiveDate(e.target.value)} fullWidth/>
+            </FormControl>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <FormControl fullWidth margin="normal">
-            <FormLabel className='titleStyle'>Effective date of change:</FormLabel>
-              <TextField
-                type="date"
-                variant="outlined"
-                value={selectedEffectiveDate.split('T')[0]}
-                onChange={(e) => setSelectedEffectiveDate(e.target.value)}
-                fullWidth
-              />
-          </FormControl>
-        </Grid>
-      </Grid>
 
-      <FormControl component="fieldset" fullWidth margin="normal">
-        <FormGroup>
-          <FormLabel className='titleStyle'>Is this an addition, removal or amendment?</FormLabel>
-          <RadioGroup row name="selectAdditionRemovalOrAmendment" onChange={(e) => setSelectAdditionRemovalOrAmendment(e.target.value)}>
-            <FormControlLabel value="addition" control={<Radio />} label="Addition" />
-            <FormControlLabel value="removal" control={<Radio />} label="Removal" />
-            <FormControlLabel value="amendment" control={<Radio />} label="Amendment" />
-          </RadioGroup>
-        </FormGroup>
-      </FormControl>
-      {(selectAdditionRemovalOrAmendment === 'addition' || selectAdditionRemovalOrAmendment === 'amendment') && (
-        <FormControl fullWidth margin="normal">
+        <FormControl component="fieldset" fullWidth margin="normal">
           <FormGroup>
-            <FormLabel className='titleStyle'>If addition / amendment, what are the details of the new financial interest?</FormLabel>
-            <RadioGroup row name="selectFinancialInterestDetails" onChange={(e) => setSelectFinancialInterestDetails(e.target.value)}>
-              <FormControlLabel value="lienholder" control={<Radio />} label="Lienholder" />
-              <FormControlLabel value="lessor" control={<Radio />} label="Lessor" />
-            </RadioGroup>
+            <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>Vehicle(s) which coverages are being amended on:</FormLabel>
           </FormGroup>
-          <FormLabel className='titleStyle'>Financial Interest name and mailing address:</FormLabel>
-          <TextareaAutosize
-            minRows={4}
-            value={financialInterestNameAndMailingAddress}
-            onChange={(e) => setFinancialInterestNameAndMailingAddress(e.target.value)}
-            style={{ width: '100%'}}
-          />
         </FormControl>
-      )}
-      {selectAdditionRemovalOrAmendment === 'removal' && (
+
+        {/* Add a new vehicle dynamically form here */}
+        {/* -------------------------------------------------------------------------- */}
+        <FormControl component="fieldset" fullWidth margin="normal">
+          <FormGroup>
+            <FormLabel className='titleStyle'>Vehicle:</FormLabel>
+            <TextField variant="outlined" value={vehicleCoverage} onChange={(e) => setVehicleCoverage(e.target.value)} fullWidth/>
+          </FormGroup>
+        </FormControl>
+
+        <FormControl component="fieldset" margin="normal">
+          <FormGroup>
+            <FormLabel className='titleStyle'>Is this vehicle leased or financed?</FormLabel>
+            <RadioGroup row name="selectLeasedOrFinanced" onChange={(e) => setSelectLeasedOrFinanced(e.target.value)}>
+              <FormControlLabel value="leased" control={<Radio />} label="Leased" />
+              <FormControlLabel value="financed" control={<Radio />} label="Financed" />
+            </RadioGroup>
+            {(selectLeasedOrFinanced === 'leased' || selectLeasedOrFinanced === 'financed') && (
+              <FormLabel className='titleStyle' style={{color:'red'}}>FULL COVERAGE IS REQUIRED!</FormLabel>
+            )}
+          </FormGroup>
+        </FormControl>
+        <Button variant="contained" color="primary" onClick={handleAddVehicle} style={{ marginTop: '10px' }}>
+          Add another Vehicle
+        </Button> 
+        {/* -------------------------------------------------------------------------- */}
+        
+
         <FormControl fullWidth margin="normal">
-          <FormLabel className='titleStyle'>Please provide removal details:</FormLabel>
-          <TextareaAutosize
-            minRows={4}
-            value={removalDetails}
-            onChange={(e) => setRemovalDetails(e.target.value)}
-            style={{ width: '100%'}}
-          />
+          <FormLabel className='titleStyle'>Details of coverage being amended:</FormLabel>
+          <TextareaAutosize minRows={4} value={coverageDetails} onChange={(e) => setCoverageDetails(e.target.value)} style={{ width: '100%'}} />
         </FormControl>
-      )}
 
-      <FormControl fullWidth margin="normal">
-        <FormLabel className='titleStyle'>Additional Notes</FormLabel>
-        <TextareaAutosize
-          minRows={4}
-          value={additionalNotes}
-          onChange={(e) => setAdditionalNotes(e.target.value)}
-          style={{ width: '100%'}}
-        />
-      </FormControl>
+        <FormControl fullWidth margin="normal">
+          <FormLabel className='titleStyle'>What's the reason for this coverage change?</FormLabel>
+          <TextareaAutosize minRows={4} value={coverageReason} onChange={(e) => setCoverageReason(e.target.value)} style={{ width: '100%'}} />
+        </FormControl>
 
-      <FormControl fullWidth margin="normal">
-        <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>ATTACH TO FILE:</FormLabel>
-        <br />
-        <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>• Emails to and from client</FormLabel>
-        <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>• If removal of lessor: request copy of ownership as proof that registration is in insureds name only.</FormLabel>
-        <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>• If removal of a lienholder: request a copy of the release documents</FormLabel>
-        <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>• If amendment: request a copy of the release documents for the party being removed</FormLabel>
-      </FormControl>
 
-      <Button onClick={handleGenerate} variant="contained" color="primary" style={{ marginRight: '50px',  marginTop:'20px'}}>Generate & Copy</Button>
-      { message && (
-      <Box
-        sx={{
-          backgroundColor: '#e8f5e9', // Light blue background color
-          color: 'black', // White text color
-          // borderLeft: '5px solid #0056b3', // Solid blue border on the left
-          padding: '15px', // Padding around the content
-          fontFamily: 'monospace', // Monospace font for the content
-          whiteSpace: 'pre-wrap' // Preserves formatting and allows wrapping
-        }}
-      >
-        {message}
-      </Box>)}
-      <Button onClick={handleClear} variant="contained" color="primary" style={{marginTop: '20px'}}>Clear</Button>
+        <FormControl fullWidth margin="normal">
+          <FormLabel className='titleStyle'>Additional Notes</FormLabel>
+          <TextareaAutosize minRows={4} value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)} style={{ width: '100%'}} />
+        </FormControl>
 
-    </Paper>
+        <FormControl fullWidth margin="normal">
+          <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>ATTACH TO FILE:</FormLabel>
+          <br />
+          <FormLabel className='titleStyle' style={{fontWeight:'bold'}}>• Emails to and from client</FormLabel>
+        </FormControl>
+
+        <Button onClick={handleGenerate} variant="contained" color="primary" style={{ marginRight: '50px',  marginTop:'20px'}}>Generate & Copy</Button>
+        { message && (
+        <Box
+          sx={{
+            backgroundColor: '#e8f5e9', // Light blue background color
+            color: 'black', // White text color
+            // borderLeft: '5px solid #0056b3', // Solid blue border on the left
+            padding: '15px', // Padding around the content
+            fontFamily: 'monospace', // Monospace font for the content
+            whiteSpace: 'pre-wrap' // Preserves formatting and allows wrapping
+          }}
+        >
+          {message}
+        </Box>)}
+        <Button onClick={handleClear} variant="contained" color="primary" style={{marginTop: '20px'}}>Clear</Button>
+      </Paper>
     );
 };
 
