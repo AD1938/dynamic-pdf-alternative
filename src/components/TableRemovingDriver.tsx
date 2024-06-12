@@ -7,7 +7,7 @@ interface ItemTableProps {
   itemId: string;
 }
 
-const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
+const TableRemovingDriver: React.FC<ItemTableProps> = ({ itemId }) => {
     const [displayName, setDisplayName] = useState('');
     const [selectedEffectiveDate, setSelectedEffectiveDate] = useState('');
     const [driverLegalName, setDriverLegalName] = useState('');
@@ -274,4 +274,4 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
     );
 };
 
-export default TableAddingVehicle;
+export default TableRemovingDriver;

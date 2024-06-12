@@ -7,7 +7,7 @@ interface ItemTableProps {
   itemId: string;
 }
 
-const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
+const TableAmendRatingOrLicenseClass: React.FC<ItemTableProps> = ({ itemId }) => {
     const [displayName, setDisplayName] = useState('');
     const [selectedEffectiveDate, setSelectedEffectiveDate] = useState('');
     const [selectAmendReason, setSelectAmendReason] = useState('');
@@ -178,4 +178,4 @@ const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
     );
 };
 
-export default TableNameChange;
+export default TableAmendRatingOrLicenseClass;

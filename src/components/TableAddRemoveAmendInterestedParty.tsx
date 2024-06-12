@@ -7,7 +7,7 @@ interface ItemTableProps {
   itemId: string;
 }
 
-const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
+const TableAddRemoveAmendInterestedParty: React.FC<ItemTableProps> = ({ itemId }) => {
     const [displayName, setDisplayName] = useState('');
     const [selectedEffectiveDate, setSelectedEffectiveDate] = useState('');
     const [selectAdditionRemovalOrAmendment, setSelectAdditionRemovalOrAmendment] = useState('');
@@ -202,4 +202,4 @@ const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
     );
 };
 
-export default TableNameChange;
+export default TableAddRemoveAmendInterestedParty;

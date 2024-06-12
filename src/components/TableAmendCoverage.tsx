@@ -7,7 +7,7 @@ interface ItemTableProps {
   itemId: string;
 }
 
-const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
+const TableAmendCoverage: React.FC<ItemTableProps> = ({ itemId }) => {
     const [displayName, setDisplayName] = useState('');
     const [selectedEffectiveDate, setSelectedEffectiveDate] = useState('');
     const [vehicleCoverage, setVehicleCoverage] = useState('');
@@ -168,11 +168,11 @@ const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
               </FormGroup>
             </FormControl>
             <Button variant="contained" color="error" onClick={() => handleRemoveVehicle(index)} style={{ marginTop: '40px', marginLeft: '40px' }}>
-              Remove Vehicle
+              Remove
             </Button>
           </div>
         ))}
-        <Button variant="contained" color="primary" onClick={handleAddVehicle}>
+        <Button variant="contained" color="success" onClick={handleAddVehicle}>
           Add another Vehicle
         </Button>
         
@@ -218,4 +218,4 @@ const TableNameChange: React.FC<ItemTableProps> = ({ itemId }) => {
     );
 };
 
-export default TableNameChange;
+export default TableAmendCoverage;

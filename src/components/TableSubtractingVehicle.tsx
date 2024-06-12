@@ -8,7 +8,7 @@ interface ItemTableProps {
   itemId: string;
 }
 
-const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
+const TableSubtractingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
     const [displayName, setDisplayName] = useState('');
     const [selectedEffectiveDate, setSelectedEffectiveDate] = useState('');
     const [year, setYear] = useState('');
@@ -865,4 +865,4 @@ Please note transportation network, names of drivers, number of hours worked and
     );
 };
 
-export default TableAddingVehicle;
+export default TableSubtractingVehicle;
