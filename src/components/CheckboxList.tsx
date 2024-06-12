@@ -9,6 +9,7 @@ import TableAddingDriver from './TableAddingDriver';
 import TableRemovingDriver from './TableRemovingDriver';
 import TableAddRemoveAmendInterestedParty from './TableAddRemoveAmendInterestedParty';
 import TableAmendCoverage from './TableAmendCoverage';
+import TableAmendRatingOrLicenseClass from './TableAmendRatingOrLicenseClass';
 import './Checkout.css';
 import { Container, Typography, Checkbox, Button, Box, FormControlLabel, Grid } from '@mui/material';
 
@@ -25,6 +26,7 @@ const ADDING_A_DRIVER = 'Adding a Driver';
 const REMOVING_A_DRIVER = 'Removing a Driver';
 const ADD_REMOVE_AMEND_INTERESTED_PARTY = 'Add, Remove, Amend Interested Party';
 const AMEND_COVERAGE = 'Amend Coverage';
+const AMEND_RATING_OR_LICENSE_CLASS = 'Amend Rating or License Class';
 
 // Property Change  
 const ADDING_A_NAMED_INSURED = "Adding a Named Insured";
@@ -48,6 +50,8 @@ const CheckBoxList: React.FC = () => {
       [REMOVING_A_DRIVER]: false,
       [ADD_REMOVE_AMEND_INTERESTED_PARTY]: false,
       [AMEND_COVERAGE]: false,
+      [AMEND_RATING_OR_LICENSE_CLASS]: false,
+      
       [ADDING_A_NAMED_INSURED]: false,
       [ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS]: false,
       [ADDING_OR_SUBBING_A_LOCATION_CONDO]: false,
@@ -106,6 +110,8 @@ const CheckBoxList: React.FC = () => {
                 return <TableAddRemoveAmendInterestedParty itemId="addRemoveAmendInterestedParty" />;
             case AMEND_COVERAGE:
                 return <TableAmendCoverage itemId="amendCoverage" />;
+            case AMEND_RATING_OR_LICENSE_CLASS:
+                return <TableAmendRatingOrLicenseClass itemId="amendRatingOrLicenseClass" />;
             default:
            return <div>Item not found.</div>;
         }
@@ -246,6 +252,18 @@ const CheckBoxList: React.FC = () => {
                 />
                 <Box sx={{ width: '100px', textAlign: 'left' }}>
                   <Button variant="outlined" disabled={!checkedItems[AMEND_COVERAGE]} onClick={() => handleEditClick(AMEND_COVERAGE)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[AMEND_RATING_OR_LICENSE_CLASS]} onChange={() => handleCheckboxChange(AMEND_RATING_OR_LICENSE_CLASS)} id="checkbox-removing-vehicle" />}
+                  label={AMEND_RATING_OR_LICENSE_CLASS}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[AMEND_RATING_OR_LICENSE_CLASS]} onClick={() => handleEditClick(AMEND_RATING_OR_LICENSE_CLASS)}>
                     Edit
                   </Button>
                 </Box>
