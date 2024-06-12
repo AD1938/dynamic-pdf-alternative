@@ -113,7 +113,7 @@ const CheckBoxList: React.FC = () => {
 
     return (
       <Container maxWidth="xl" sx={{ marginTop: 2 }}>
-        <Grid container spacing={3} justifyContent="center"> 
+        <Grid container spacing={3} justifyContent="center" sx={{ boxShadow: 5, paddingBottom: '20px' }}> 
           <Grid item xs={6}>
             <Typography variant="h4" gutterBottom marginTop='30px'>
               General Note Change
@@ -135,228 +135,227 @@ const CheckBoxList: React.FC = () => {
           </Grid>
           <Grid item xs={6}></Grid>
         </Grid>
-        <Grid container spacing={3} justifyContent="center"> 
-          <Grid item xs={6}>
-        <Typography variant="h4" gutterBottom marginTop='25px'>
-          Auto Policy Change
-        </Typography>
-        <Box display="flex" flexDirection="column" gap={1}>
-        <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[ADDRESS_CHANGE]} onChange={() => handleCheckboxChange(ADDRESS_CHANGE)} id="checkbox-address-change" />}
-              label={ADDRESS_CHANGE}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[ADDRESS_CHANGE]} onClick={() => handleEditClick(ADDRESS_CHANGE)}>
-                Edit
-              </Button>
+        <br></br><br></br>
+        <Grid container spacing={3} justifyContent="center" sx={{ boxShadow: 5, paddingBottom: '20px' }}> 
+          <Grid item xs={6} >
+            <Typography variant="h4" gutterBottom marginTop='25px'>
+              Auto Policy Change
+            </Typography>
+            <Box display="flex" flexDirection="column" gap={1}>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[ADDRESS_CHANGE]} onChange={() => handleCheckboxChange(ADDRESS_CHANGE)} id="checkbox-address-change" />}
+                  label={ADDRESS_CHANGE}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[ADDRESS_CHANGE]} onClick={() => handleEditClick(ADDRESS_CHANGE)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[NAME_CHANGE]} onChange={() => handleCheckboxChange(NAME_CHANGE)} id="checkbox-name-change" />}
+                  label={NAME_CHANGE}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[NAME_CHANGE]} onClick={() => handleEditClick(NAME_CHANGE)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[ADDING_A_VEHICLE]} onChange={() => handleCheckboxChange(ADDING_A_VEHICLE)} id="checkbox-name-change" />}
+                  label={ADDING_A_VEHICLE}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[ADDING_A_VEHICLE]} onClick={() => handleEditClick(ADDING_A_VEHICLE)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[SUBTRACTING_VEHICLE]} onChange={() => handleCheckboxChange(SUBTRACTING_VEHICLE)} id="checkbox-name-change" />}
+                  label={SUBTRACTING_VEHICLE}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[SUBTRACTING_VEHICLE]} onClick={() => handleEditClick(SUBTRACTING_VEHICLE)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[REMOVING_VEHICLE]} onChange={() => handleCheckboxChange(REMOVING_VEHICLE)} id="checkbox-removing-vehicle" />}
+                  label={REMOVING_VEHICLE}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[REMOVING_VEHICLE]} onClick={() => handleEditClick(REMOVING_VEHICLE)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[ADDING_A_DRIVER]} onChange={() => handleCheckboxChange(ADDING_A_DRIVER)} id="checkbox-removing-vehicle" />}
+                  label={ADDING_A_DRIVER}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[ADDING_A_DRIVER]} onClick={() => handleEditClick(ADDING_A_DRIVER)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[REMOVING_A_DRIVER]} onChange={() => handleCheckboxChange(REMOVING_A_DRIVER)} id="checkbox-removing-vehicle" />}
+                  label={REMOVING_A_DRIVER}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[REMOVING_A_DRIVER]} onClick={() => handleEditClick(REMOVING_A_DRIVER)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[ADD_REMOVE_AMEND_INTERESTED_PARTY]} onChange={() => handleCheckboxChange(ADD_REMOVE_AMEND_INTERESTED_PARTY)} id="checkbox-removing-vehicle" />}
+                  label={ADD_REMOVE_AMEND_INTERESTED_PARTY}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[ADD_REMOVE_AMEND_INTERESTED_PARTY]} onClick={() => handleEditClick(ADD_REMOVE_AMEND_INTERESTED_PARTY)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[AMEND_COVERAGE]} onChange={() => handleCheckboxChange(AMEND_COVERAGE)} id="checkbox-removing-vehicle" />}
+                  label={AMEND_COVERAGE}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[AMEND_COVERAGE]} onClick={() => handleEditClick(AMEND_COVERAGE)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
             </Box>
-          </Box>
-          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[NAME_CHANGE]} onChange={() => handleCheckboxChange(NAME_CHANGE)} id="checkbox-name-change" />}
-              label={NAME_CHANGE}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[NAME_CHANGE]} onClick={() => handleEditClick(NAME_CHANGE)}>
-                Edit
-              </Button>
+          </Grid> 
+          <Grid item xs={6} >
+            <Typography variant="h4" gutterBottom marginTop='25px'>
+              Property Policy Change
+            </Typography>
+            <Box display="flex" flexDirection="column" gap={1}>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[ADDING_A_NAMED_INSURED]} onChange={() => handleCheckboxChange(ADDING_A_NAMED_INSURED)} id="checkbox-adding-a-named-insured" />}
+                  label={ADDING_A_NAMED_INSURED}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[ADDING_A_NAMED_INSURED]} onClick={() => handleEditClick(ADDING_A_NAMED_INSURED)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS]} onChange={() => handleCheckboxChange(ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS)} id="checkbox-adding-or-subbing-a-location-homeowners" />}
+                  label={ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS]} onClick={() => handleEditClick(ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[ADDING_OR_SUBBING_A_LOCATION_CONDO]} onChange={() => handleCheckboxChange(ADDING_OR_SUBBING_A_LOCATION_CONDO)} id="checkbox-adding-or-subbing-a-location-condo" />}
+                  label={ADDING_OR_SUBBING_A_LOCATION_CONDO}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[ADDING_OR_SUBBING_A_LOCATION_CONDO]} onClick={() => handleEditClick(ADDING_OR_SUBBING_A_LOCATION_CONDO)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[ADDING_OR_SUBBING_A_LOCATION_TENATNS]} onChange={() => handleCheckboxChange(ADDING_OR_SUBBING_A_LOCATION_TENATNS)} id="checkbox-adding-or-subbing-a-location-tenants" />}
+                  label={ADDING_OR_SUBBING_A_LOCATION_TENATNS}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[ADDING_OR_SUBBING_A_LOCATION_TENATNS]} onClick={() => handleEditClick(ADDING_OR_SUBBING_A_LOCATION_TENATNS)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[REMOVING_A_LOCATION]} onChange={() => handleCheckboxChange(REMOVING_A_LOCATION)} id="checkbox-removing-a-location" />}
+                  label={REMOVING_A_LOCATION}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[REMOVING_A_LOCATION]} onClick={() => handleEditClick(REMOVING_A_LOCATION)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[AMEND_COVERAGE]} onChange={() => handleCheckboxChange(AMEND_COVERAGE)} id="checkbox-amend-coverage" />}
+                  label={AMEND_COVERAGE}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[AMEND_COVERAGE]} onClick={() => handleEditClick(AMEND_COVERAGE)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[ADD_REMOVE_AMEND_MORTAGEE]} onChange={() => handleCheckboxChange(ADD_REMOVE_AMEND_MORTAGEE)} id="checkbox-add-remove-amend-mortagee" />}
+                  label={ADD_REMOVE_AMEND_MORTAGEE}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[ADD_REMOVE_AMEND_MORTAGEE]} onClick={() => handleEditClick(ADD_REMOVE_AMEND_MORTAGEE)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
+                <FormControlLabel
+                  control={<Checkbox checked={checkedItems[ADD_DISCOUNT]} onChange={() => handleCheckboxChange(ADD_DISCOUNT)} id="checkbox-add-discount" />}
+                  label={ADD_DISCOUNT}
+                  sx={{ flexGrow: 1, marginRight: 10 }}
+                />
+                <Box sx={{ width: '100px', textAlign: 'left' }}>
+                  <Button variant="outlined" disabled={!checkedItems[ADD_DISCOUNT]} onClick={() => handleEditClick(ADD_DISCOUNT)}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
             </Box>
-          </Box>
-          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[ADDING_A_VEHICLE]} onChange={() => handleCheckboxChange(ADDING_A_VEHICLE)} id="checkbox-name-change" />}
-              label={ADDING_A_VEHICLE}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[ADDING_A_VEHICLE]} onClick={() => handleEditClick(ADDING_A_VEHICLE)}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[SUBTRACTING_VEHICLE]} onChange={() => handleCheckboxChange(SUBTRACTING_VEHICLE)} id="checkbox-name-change" />}
-              label={SUBTRACTING_VEHICLE}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[SUBTRACTING_VEHICLE]} onClick={() => handleEditClick(SUBTRACTING_VEHICLE)}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[REMOVING_VEHICLE]} onChange={() => handleCheckboxChange(REMOVING_VEHICLE)} id="checkbox-removing-vehicle" />}
-              label={REMOVING_VEHICLE}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[REMOVING_VEHICLE]} onClick={() => handleEditClick(REMOVING_VEHICLE)}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[ADDING_A_DRIVER]} onChange={() => handleCheckboxChange(ADDING_A_DRIVER)} id="checkbox-removing-vehicle" />}
-              label={ADDING_A_DRIVER}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[ADDING_A_DRIVER]} onClick={() => handleEditClick(ADDING_A_DRIVER)}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[REMOVING_A_DRIVER]} onChange={() => handleCheckboxChange(REMOVING_A_DRIVER)} id="checkbox-removing-vehicle" />}
-              label={REMOVING_A_DRIVER}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[REMOVING_A_DRIVER]} onClick={() => handleEditClick(REMOVING_A_DRIVER)}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[ADD_REMOVE_AMEND_INTERESTED_PARTY]} onChange={() => handleCheckboxChange(ADD_REMOVE_AMEND_INTERESTED_PARTY)} id="checkbox-removing-vehicle" />}
-              label={ADD_REMOVE_AMEND_INTERESTED_PARTY}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[ADD_REMOVE_AMEND_INTERESTED_PARTY]} onClick={() => handleEditClick(ADD_REMOVE_AMEND_INTERESTED_PARTY)}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[AMEND_COVERAGE]} onChange={() => handleCheckboxChange(AMEND_COVERAGE)} id="checkbox-removing-vehicle" />}
-              label={AMEND_COVERAGE}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[AMEND_COVERAGE]} onClick={() => handleEditClick(AMEND_COVERAGE)}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-        </Box>
-        </Grid> 
-        <Grid item xs={6}>
-        <Typography variant="h4" gutterBottom marginTop='25px'>
-          Property Policy Change
-        </Typography>
-        <Box display="flex" flexDirection="column" gap={1}>
-        <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[ADDING_A_NAMED_INSURED]} onChange={() => handleCheckboxChange(ADDING_A_NAMED_INSURED)} id="checkbox-adding-a-named-insured" />}
-              label={ADDING_A_NAMED_INSURED}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[ADDING_A_NAMED_INSURED]} onClick={() => handleEditClick(ADDING_A_NAMED_INSURED)}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS]} onChange={() => handleCheckboxChange(ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS)} id="checkbox-adding-or-subbing-a-location-homeowners" />}
-              label={ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS]} onClick={() => handleEditClick(ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS)}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[ADDING_OR_SUBBING_A_LOCATION_CONDO]} onChange={() => handleCheckboxChange(ADDING_OR_SUBBING_A_LOCATION_CONDO)} id="checkbox-adding-or-subbing-a-location-condo" />}
-              label={ADDING_OR_SUBBING_A_LOCATION_CONDO}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[ADDING_OR_SUBBING_A_LOCATION_CONDO]} onClick={() => handleEditClick(ADDING_OR_SUBBING_A_LOCATION_CONDO)}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[ADDING_OR_SUBBING_A_LOCATION_TENATNS]} onChange={() => handleCheckboxChange(ADDING_OR_SUBBING_A_LOCATION_TENATNS)} id="checkbox-adding-or-subbing-a-location-tenants" />}
-              label={ADDING_OR_SUBBING_A_LOCATION_TENATNS}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[ADDING_OR_SUBBING_A_LOCATION_TENATNS]} onClick={() => handleEditClick(ADDING_OR_SUBBING_A_LOCATION_TENATNS)}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-          <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-            <FormControlLabel
-              control={<Checkbox checked={checkedItems[REMOVING_A_LOCATION]} onChange={() => handleCheckboxChange(REMOVING_A_LOCATION)} id="checkbox-removing-a-location" />}
-              label={REMOVING_A_LOCATION}
-              sx={{ flexGrow: 1, marginRight: 10 }}
-            />
-            <Box sx={{ width: '100px', textAlign: 'left' }}>
-              <Button variant="outlined" disabled={!checkedItems[REMOVING_A_LOCATION]} onClick={() => handleEditClick(REMOVING_A_LOCATION)}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-
-        
-        <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-          <FormControlLabel
-            control={<Checkbox checked={checkedItems[AMEND_COVERAGE]} onChange={() => handleCheckboxChange(AMEND_COVERAGE)} id="checkbox-amend-coverage" />}
-            label={AMEND_COVERAGE}
-            sx={{ flexGrow: 1, marginRight: 10 }}
-          />
-          <Box sx={{ width: '100px', textAlign: 'left' }}>
-            <Button variant="outlined" disabled={!checkedItems[AMEND_COVERAGE]} onClick={() => handleEditClick(AMEND_COVERAGE)}>
-              Edit
-            </Button>
-          </Box>
-        </Box>
-        <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-          <FormControlLabel
-            control={<Checkbox checked={checkedItems[ADD_REMOVE_AMEND_MORTAGEE]} onChange={() => handleCheckboxChange(ADD_REMOVE_AMEND_MORTAGEE)} id="checkbox-add-remove-amend-mortagee" />}
-            label={ADD_REMOVE_AMEND_MORTAGEE}
-            sx={{ flexGrow: 1, marginRight: 10 }}
-          />
-          <Box sx={{ width: '100px', textAlign: 'left' }}>
-            <Button variant="outlined" disabled={!checkedItems[ADD_REMOVE_AMEND_MORTAGEE]} onClick={() => handleEditClick(ADD_REMOVE_AMEND_MORTAGEE)}>
-              Edit
-            </Button>
-          </Box>
-        </Box>
-        <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
-          <FormControlLabel
-            control={<Checkbox checked={checkedItems[ADD_DISCOUNT]} onChange={() => handleCheckboxChange(ADD_DISCOUNT)} id="checkbox-add-discount" />}
-            label={ADD_DISCOUNT}
-            sx={{ flexGrow: 1, marginRight: 10 }}
-          />
-          <Box sx={{ width: '100px', textAlign: 'left' }}>
-            <Button variant="outlined" disabled={!checkedItems[ADD_DISCOUNT]} onClick={() => handleEditClick(ADD_DISCOUNT)}>
-              Edit
-            </Button>
-          </Box>
-          </Box>
-       </Box>
           </Grid>
-          </Grid>
+        </Grid>
         <br />
         <Button variant="contained" color="primary" onClick={handleResetAll} sx={{ margintop: 2 }}>
           Reset All

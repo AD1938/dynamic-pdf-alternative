@@ -110,7 +110,7 @@ const TableAddingVehicle: React.FC<ItemTableProps> = ({ itemId }) => {
         backgroundColor: '#white',
         borderRadius: '8px',
         p: '30px', // shorthand for padding
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        boxShadow: 24,
         fontFamily: 'Arial, sans-serif',
         maxWidth: '800px',
         mx: 'auto', // shorthand for margin left and right auto
