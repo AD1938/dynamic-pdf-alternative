@@ -120,7 +120,7 @@ const CheckBoxList: React.FC = () => {
             case ADDING_DISCOUNT:
                 return <TableAddingDiscount itemId="addingDiscount" />;
             default:
-           return <div>Item not found.</div>;
+           return <Typography variant="h5" sx={{ color: 'blue', textAlign: 'center' }}>Work in progress...</Typography>;
         }
     };
 
