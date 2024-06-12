@@ -36,6 +36,7 @@ const ADDING_OR_SUBBING_A_LOCATION_HOMEOWNERS = "Adding or Subbing a Location - 
 const ADDING_OR_SUBBING_A_LOCATION_CONDO = "Adding or Subbing a Location - Condo"; 
 const ADDING_OR_SUBBING_A_LOCATION_TENATNS = "Adding or Subbing a Location - Tenants"; 
 const REMOVING_A_LOCATION = "Removing a Location";
+const AMEND_COVERAGE_PROPERTY = 'Amend Coverage Property';
 const ADD_REMOVE_AMEND_MORTAGEE = "Add, Remove, Amend Mortgagee"; 
 const ADD_DISCOUNT = "Add Discount";
 
@@ -60,6 +61,7 @@ const CheckBoxList: React.FC = () => {
       [ADDING_OR_SUBBING_A_LOCATION_CONDO]: false,
       [ADDING_OR_SUBBING_A_LOCATION_TENATNS]: false,
       [REMOVING_A_LOCATION]: false,
+      [AMEND_COVERAGE_PROPERTY]: false,
       [ADD_REMOVE_AMEND_MORTAGEE]: false,
       [ADD_DISCOUNT]: false
     };
@@ -354,12 +356,12 @@ const CheckBoxList: React.FC = () => {
               </Box>
               <Box display="flex" alignItems="center" sx={{ '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }}}>
                 <FormControlLabel
-                  control={<Checkbox checked={checkedItems[AMEND_COVERAGE]} onChange={() => handleCheckboxChange(AMEND_COVERAGE)} id="checkbox-amend-coverage" />}
-                  label={AMEND_COVERAGE}
+                  control={<Checkbox checked={checkedItems[AMEND_COVERAGE_PROPERTY]} onChange={() => handleCheckboxChange(AMEND_COVERAGE_PROPERTY)} id="checkbox-amend-coverage" />}
+                  label={AMEND_COVERAGE_PROPERTY}
                   sx={{ flexGrow: 1, marginRight: 10 }}
                 />
                 <Box sx={{ width: '100px', textAlign: 'left' }}>
-                  <Button variant="outlined" disabled={!checkedItems[AMEND_COVERAGE]} onClick={() => handleEditClick(AMEND_COVERAGE)}>
+                  <Button variant="outlined" disabled={!checkedItems[AMEND_COVERAGE_PROPERTY]} onClick={() => handleEditClick(AMEND_COVERAGE_PROPERTY)}>
                     Edit
                   </Button>
                 </Box>

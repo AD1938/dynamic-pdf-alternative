@@ -91,7 +91,8 @@ const TableAmendCoverage: React.FC<ItemTableProps> = ({ itemId }) => {
 
     const handleClear = () => {
       localStorage.removeItem(localStorageKey);
-      window.location.reload();
+      
+      // window.location.reload();
     };
     
     return (

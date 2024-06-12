@@ -7,7 +7,9 @@ function App() {
     <>
        <Container>
         <header className="checkout-header">
-          <img src="https://wellcareinsurance.ca/wp-content/uploads/2021/05/cropped-cropped-cropped-well-care-log1-e1622044439563.jpg" alt="Logo" className="logo"/>
+          <a href="https://wellcareinsurance.ca" target="_blank" rel="noopener noreferrer">
+            <img src="https://wellcareinsurance.ca/wp-content/uploads/2021/05/cropped-cropped-cropped-well-care-log1-e1622044439563.jpg" alt="Logo" className="logo"/>
+          </a>
           <nav className="menu">
             <label className="menu-label">WellCare Gen AI</label>
           </nav>
